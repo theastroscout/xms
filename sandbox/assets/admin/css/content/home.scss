@@ -1,0 +1,46 @@
+#home {
+	>.manage {
+		max-width: 520px;
+		padding: 20px;
+
+		>.n {
+			font-size: 12px;
+			color: $fadeBlue;
+		}
+
+		>.list {
+			>.item {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 10px 0;
+
+				>.info {
+					>.n {
+
+					}
+					>.d {
+
+					}
+				}
+
+				>.go {
+					flex-grow: 0;
+					padding: 8px 12px;
+					border-radius: 3px;
+					background: $black;
+					font-size: 13px;
+					color: $white;
+					cursor: pointer;
+					transition: background .5s, color .5s;
+
+					&.hover {
+						background: $green;
+						color: $black;
+						transition: background .2s, color .2s;
+					}
+				}
+			}
+		}
+	}
+}

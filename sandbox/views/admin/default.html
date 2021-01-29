@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{lang/name}">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<title>{seo/title}</title>
+
+	<meta name="viewport" content="initial-scale=1, maximum-scale=5, minimum-scale=1, width=device-width, viewport-fit=cover" />
+
+	<link data-theme rel="apple-touch-icon" sizes="180x180" href="{FAVICON_URL}/apple-touch-icon.png">
+	<link data-theme rel="icon" type="image/png" sizes="32x32" href="{FAVICON_URL}/favicon-32x32.png">
+	<link data-theme rel="icon" type="image/png" sizes="16x16" href="{FAVICON_URL}/favicon-16x16.png">
+	<link data-theme rel="manifest" href="{FAVICON_URL}/site.webmanifest">
+	<link data-theme rel="mask-icon" href="{FAVICON_URL}/safari-pinned-tab.svg" color="#f41e1e">
+	<meta name="msapplication-TileColor" content="#00a300">
+	<meta name="theme-color" content="#ffffff">
+
+	{assets/css}
+	{assets/js}
+</head>
+<body>
+	<div id="view">
+		<div id="aside">
+			<a href="/admin" class="logo" title="youmake">
+				<span class="n">{site/name}</span>
+				<span class="d">{site/desc}</span>
+			</a>
+			{menu}
+		</div>
+		<div id="content">
+			<h1>{title}</h1>
+			{content}
+		</div>
+	</div>
+	<div id="notify">
+		<div class="wrap"></div>
+	</div>
+</body>
+</html>

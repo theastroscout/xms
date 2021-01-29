@@ -1,0 +1,42 @@
+{
+  "name": "@hqdaemon/xms",
+  "version": "1.0.0",
+  "description": "Lightweight CMS powered by Node.js & Nginx",
+  "main": "index.js",
+  "dependencies": {
+    "@hqdaemon/db": "^1.0.1",
+    "@hqdaemon/jscompose": "^1.0.5",
+    "@hqdaemon/minify": "^1.0.5",
+    "@hqdaemon/qx": "^1.0.4",
+    "@hqdaemon/translit": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "chalk": "^4.1.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "geoip-lite": "^1.4.2",
+    "marked": "^1.2.8",
+    "md5": "^2.3.0",
+    "moment-timezone": "^0.5.32",
+    "sharp": "^0.27.1",
+    "ws": "^7.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build/restore & node build/go",
+    "restore": "node build/restore"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hqdaemon/xms.git"
+  },
+  "author": {
+    "name": "HQ",
+    "url": "https://hqmode.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hqdaemon/xms/issues"
+  },
+  "homepage": "https://github.com/hqdaemon/xms#readme"
+}

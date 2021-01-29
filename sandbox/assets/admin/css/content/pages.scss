@@ -1,0 +1,154 @@
+#pages {
+	>.languages {
+		display: flex;
+		align-items: stretch;
+		padding: 0 20px;
+
+		>a {
+			margin-right: 2px;
+			text-decoration: none;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	>.add {
+		max-width: 420px;
+		padding: 20px;
+
+		>.open {
+		}
+
+		>.wrap {
+			box-sizing: border-box;
+			display: none;
+			padding: 20px;
+			border-radius: 6px;
+			background: $gWhite;
+			border: 0;
+
+			>form {
+				display: flex;
+				align-items: stretch;
+
+				>input {
+					margin-right: 6px;
+				}
+
+				>button {
+					margin-right: 6px;
+				}
+			}
+		}
+	}
+
+	>.list {
+		max-width: 720px;
+		padding: 0 20px;
+
+		>.empty {
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		.item {
+			position: relative;
+			padding: 2px 0;
+			
+			>.page {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				padding: 20px;
+				border-radius: 6px;
+				background: $white;
+				transition: background .5s;
+
+				>a{
+					flex: 1;
+					display: block;
+					color: $black;
+					text-decoration: none;
+
+					>.n {
+						display: block;
+						font-size: 22px;
+					}
+
+					>.u {
+						display: block;
+						font-size: 12px;
+						color: $grayBlue;
+					}
+				}
+
+				>.fn {
+
+				}
+
+				&.dragover {
+					background: $green;
+				}
+			}
+
+			>.add {
+				display: none;
+
+				>form {
+					margin-top: 2px;
+					display: flex;
+					align-items: center;
+					padding: 20px;
+					border-radius: 3px;
+					background: $white;
+
+					>input {
+						margin-right: 6px;
+					}
+					>button {
+						margin-right: 6px;
+					}
+				}
+			}
+
+			>.pages {
+				padding: 0 0 40px 40px;
+			}
+
+			&:before {
+				content: "►";
+				position: absolute;
+				left: -10px;
+				display: flex;
+				align-items: center;
+				width: 20px;
+				height: 20px;
+				transform: translate3d(-10px,-50%,0);
+				opacity: 0;				
+			}
+			&[data-position="inside"]:before {
+				opacity: 1;
+				top: 47px;
+				transform: translate3d(-5px,-50%,0);
+				transition: top .5s, transform .5s, opacity .5s;
+			}
+
+			&[data-position="before"]:before {
+				opacity: 1;
+				top: 0;
+				transform: translate3d(0,-50%,0);
+				transition: top .5s, transform .5s, opacity .5s;
+			}
+
+			&[data-position="after"]:before {
+				opacity: 1;
+				top: 100%;
+				transform: translate3d(0,-50%,0);
+				transition: top .5s, transform .5s, opacity .5s;
+			}
+		}
+	}
+}

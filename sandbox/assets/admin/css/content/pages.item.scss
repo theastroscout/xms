@@ -1,0 +1,108 @@
+#page {
+	>form {
+		max-width: 720px;
+
+		>.settings {
+			padding: 20px;
+
+			>.tit {
+				>.n {
+					font-size: 22px;
+					font-weight: bold;
+				}
+
+				>.d {
+					font-size: 12px;
+					color: $gray;
+				}
+			}
+
+			>.fields {
+				margin-top: 10px;
+				padding: 10px 20px;
+				border-radius: 3px;
+				background: $white;
+
+				>.item {
+					padding: 10px 0;
+				}
+			}
+		}
+
+		>.block {
+			padding: 20px;
+
+			>.tit {
+				>.n {
+					font-size: 22px;
+					font-weight: bold;
+				}
+
+				>.d {
+					font-size: 12px;
+					color: $gray;
+				}
+			}
+
+			>.fields {
+				margin-top: 10px;
+				padding: 10px 20px;
+				border-radius: 3px;
+				background: $white;
+
+				>label {
+					display: block;
+					padding: 10px 0;
+
+					>.n {
+						font-size: 16px;
+						font-weight: bold;
+					}
+
+					>.d {
+						font-size: 12px;
+						color: $gray;
+					}
+
+					>input, >textarea {
+						margin-top: 6px;
+					}
+				}
+			}
+
+			>.fn {
+				margin-top: 10px;
+			}
+		}
+
+		>.content {
+			padding: 20px;
+
+			>.tit {
+				>.n {
+					font-size: 22px;
+					font-weight: bold;
+				}
+
+				>.d {
+					font-size: 12px;
+					color: $gray;
+
+					a {
+						padding: 4px 8px;
+						background: $black;
+						border-radius: 3px;
+						color: $white;
+						text-decoration: none;
+					}
+				}
+			}
+
+			>textarea {
+				margin-top: 10px;
+				max-width: 720px;
+				min-height: 320px;
+			}
+		}
+	}
+}

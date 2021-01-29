@@ -1,0 +1,5 @@
+#!/bin/bash
+cd ROOT_PATH
+export NODE_PATH=ROOT_PATH/node_modules
+screen -XS PRODUCTION_SCREEN_NAME quit
+screen -S PRODUCTION_SCREEN_NAME -d -m bash -c "node prod/app/init"

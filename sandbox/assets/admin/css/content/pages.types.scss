@@ -1,0 +1,71 @@
+#pageTypes {
+	>.add {
+		max-width: 420px;
+		padding: 20px;
+
+		>.open {
+		}
+
+		>.wrap {
+			box-sizing: border-box;
+			display: none;
+			padding: 20px;
+			border-radius: 6px;
+			background: $gWhite;
+			border: 0;
+
+			>form {
+				display: flex;
+				align-items: stretch;
+
+				>input {
+					margin-right: 6px;
+				}
+
+				>button {
+					margin-right: 6px;
+				}
+			}
+		}
+	}
+
+	>form {
+		padding: 0 20px 20px 20px;
+		>.list {
+
+			>.item {
+				margin: 2px 0;
+				padding: 10px;
+				background: $white;
+				border-radius: 6px;
+
+				>.tit {
+					>.n {
+						font-size: 16px;
+					}
+					>.d {
+						font-size: 12px;
+						color: $gray;
+					}
+				}
+
+				>.input {
+					margin-top: 6px;
+					display: flex;
+					align-items: stretch;
+					justify-content: space-between;
+
+					>.l {
+						flex: 0 0 20px;
+						width: 20px;
+						height: 20px;
+					}
+				}
+			}
+		}
+
+		>.fn {
+			margin-top: 10px;
+		}
+	}
+}
