@@ -1,0 +1,64 @@
+#aside {
+	flex: 0 0 300px;
+	padding: 10px;
+	background: $white;
+	text-align: right;
+
+	>.logo {
+		display: block;
+		color: $black;
+		text-decoration: none;
+
+		>.n {
+			display: block;
+			font-size: 32px;
+			font-weight: bold;
+		}
+
+		>.d {
+			display: block;
+			font-size: 12px;
+		}
+	}
+
+	>.block {
+		padding: 20px 0;
+		>.n {
+			font-size: 12px;
+			color: $fadeBlue;
+		}
+
+		>.list {
+			>.item {
+				>a {
+					display: block;
+					padding: 6px 0;
+					font-size: 16px;
+					color: $black;
+					text-decoration: none;
+					transition: opacity .5s;
+
+					&.hover{
+						opacity: .6;
+						transition: opacity .2s;
+					}
+					&.active {
+						opacity: 1;
+						font-weight: bold;
+					}
+				}
+
+				>.sub {
+					padding-bottom: 20px;
+					>a {
+						display: block;
+						padding: 3px 0;
+						font-size: 12px;
+						color: $black;
+						text-decoration: none;
+					}
+				}
+			}
+		}
+	}
+}

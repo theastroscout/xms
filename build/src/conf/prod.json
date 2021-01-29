@@ -1,0 +1,45 @@
+{
+	"name": "Prod",
+	"sys": {
+		"host": "FULL_DOMAIN_NAME",
+		"port": "PORT",
+		"cpu": false,
+		"db": {
+			"host": "localhost",
+			"port": 27017,
+			"name": "DB_NAME"
+		},
+		"ssl": {
+			"privateKey": "/etc/letsencrypt/live/SSL_DOMAIN_NAME/privkey.pem",
+			"certificate": "/etc/letsencrypt/live/SSL_DOMAIN_NAME/fullchain.pem"
+		},
+		"express": {
+			"session": {
+				"secret": "Please Stop Do It Wrong",
+				"cookie": {
+					"secure": true,
+					"expires": 2145906000000
+				},
+				"proxy": false,
+				"resave": false,
+				"saveUninitialized": false
+			}
+		}
+	},
+	"assets": {
+		"i18n": {
+			"default": "en"
+		},
+		"web": {
+			"css": [
+				"/app.css"
+			],
+			"js": [
+				"/app.js"
+			]
+		},
+		"ui": {
+			"url": "IMG_PATH"
+		}
+	}
+}

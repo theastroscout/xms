@@ -1,0 +1,12 @@
+{
+	"pages": {
+		"notfound": {
+			"name": "Page Not Found",
+			"seo": {
+				"title": "Page Not Found",
+				"description": "",
+				"keywords": ""
+			}
+		}
+	}
+}

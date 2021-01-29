@@ -1,0 +1,12 @@
+{
+	"pages": {
+		"notfound": {
+			"name": "Страница не найдена",
+			"seo": {
+				"title": "Страница не найдена",
+				"description": "",
+				"keywords": ""
+			}
+		}
+	}
+}

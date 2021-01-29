@@ -1,0 +1,27 @@
+#notify {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	pointer-events: none;
+
+	>.wrap {
+		margin: auto;
+		padding: 10px 16px;
+		border-radius: 30px;
+		background: rgba(0,0,0,.9);
+		color: $white;
+		text-align: center;
+		transform: translate3d(0,-100%,0);
+		transition: transform .5s;
+	}
+}
+body.notify {
+	#notify {
+		>.wrap {
+			transform: translate3d(0,10px,0);
+		}
+	}
+}
