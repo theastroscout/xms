@@ -1,0 +1,9 @@
+/node_modules
+/nginx
+/conf
+note
+init
+restart
+.DS_Store
+*.sublime-project
+*.sublime-workspace
