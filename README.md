@@ -75,12 +75,12 @@ npm run restore
 <br/>
 
 # Usage
-
-## Common
 1. Control your web site: https://sandbox.yourdomain.com/admin
 2. Testing your web site: https://sandbox.yourdomain.com
 3. Store images - img directory of https://img.yourdomain.com
 4. Minified & Optimized Production - https://yourdomain.com
+
+<br/>
 
 ## Launch
 1. Go to folder with your project
@@ -102,6 +102,8 @@ screen -dr YOUR_SCREEN_NAME
 ```
 screen -XS YOUR_SCREEN_NAME quit
 ```
+
+<br/>
 
 ## Modules
 Put your module into ```/sandbox/modules/``` directory.
@@ -133,7 +135,10 @@ Call module by putting next code to your template.
 {{moduleName}}
 ```
 
-## Structure
+<br/>
+<br/>
+
+# Package Structure
 - build
 	- src
 		- conf
