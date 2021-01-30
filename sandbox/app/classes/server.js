@@ -27,25 +27,28 @@ var server = {
 		var ip = req.header("x-forwarded-for") || req.connection.remoteAddress;
 		let url = req.path;
 
-		if(DEV && url.match(/^\/assets/)){
-			let ext = url.match(/\.([^/]+)$/)[1];
-			url = "sandbox"+url;
-			let file;
-			if(ext == "js"){
-				file = jscompose(url.replace(/^\//,""));
-			} else {
-				file = await minify(url.replace(/^\//,""));
-			}
-			if(file){
-				let header = (ext === "js")?"text/javascript":"text/css";
-				res.setHeader("Content-Type", header);
-				res.end(Buffer.from(file, "utf8"));
+		if(DEV){
+			if(conf.restricted && !conf.restricted.includes(ip)){
+				res.redirect(prodConf.sys.host);
 				return false;
 			}
-		}
-		if(DEV && conf.restricted && !conf.restricted.includes(ip)){
-			res.redirect(prodConf.sys.host);
-			return false;
+
+			if(url.match(/^\/(assets|admin)/)){
+				let ext = url.match(/\.([^/]+)$/)[1];
+				url = "sandbox"+url;
+				let file;
+				if(ext == "js"){
+					file = jscompose(url.replace(/^\//,""));
+				} else {
+					file = await minify(url.replace(/^\//,""));
+				}
+				if(file){
+					let header = (ext === "js")?"text/javascript":"text/css";
+					res.setHeader("Content-Type", header);
+					res.end(Buffer.from(file, "utf8"));
+					return false;
+				}
+			}
 		}
 
 		// Fix /en/ prefix

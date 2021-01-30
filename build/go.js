@@ -65,6 +65,10 @@ var go = {
 			// Favicon
 			let FAVICON_URL = "https://"+imgDomainName+"/favicon/v1";
 
+			let headAdminModule = fs.readFileSync("build/src/sandbox/admin/views/modules/head.html").toString();
+			headAdminModule = headAdminModule.replace(/FAVICON_URL/g,FAVICON_URL);
+			fs.writeFileSync("sandbox/admin/views/modules/head.html",headAdminModule);
+
 			let headModule = fs.readFileSync("build/src/sandbox/views/modules/head.html").toString();
 			headModule = headModule.replace(/FAVICON_URL/g,FAVICON_URL);
 			fs.writeFileSync("sandbox/views/modules/head.html",headModule);

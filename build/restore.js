@@ -3,7 +3,9 @@ var restore = {
 	list: {
 		files: [
 			"init",
-			"restart"
+			"restart",
+			"sandbox/admin/views/modules/head.html",
+			"sandbox/views/modules/head.html"
 		],
 		dirs: [
 			"conf",
