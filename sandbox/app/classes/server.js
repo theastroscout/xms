@@ -33,7 +33,7 @@ var server = {
 				return false;
 			}
 
-			if(url.match(/^\/(assets|admin)/)){
+			if(url.match(/^\/(assets|admin\/assets)/)){
 				let ext = url.match(/\.([^/]+)$/)[1];
 				url = "sandbox"+url;
 				let file;

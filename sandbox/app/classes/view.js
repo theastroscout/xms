@@ -59,6 +59,7 @@ var view = {
 			currentPage = await admin.control.getCurrentPage(clearURL);
 
 			if(currentPage){
+				pageData.site = conf.project;
 				pageData.assets = view.getAssets(true);
 				pageData.seo = currentPage.seo;
 				pageData.title = currentPage.title;

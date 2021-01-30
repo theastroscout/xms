@@ -8,6 +8,7 @@ const readline = require("readline").createInterface({
 
 let rootPath = __dirname.replace("/build","");
 let projectName;
+let projectDesc;
 let domainName;
 let sandboxDomainName;
 let imgDomainName;
@@ -86,6 +87,8 @@ var go = {
 
 
 			// Write Conf files
+			devConf = devConf.replace("PROJECT_NAME",projectName);
+			devConf = devConf.replace("PROJECT_DESC",projectDesc);
 			fs.writeFileSync("conf/dev.json",devConf);
 			fs.writeFileSync("conf/prod.json",prodConf);
 			console.log(chalk.yellow(`\n
@@ -134,6 +137,13 @@ ${go.currentStep+1}. Project Name: `, input => {
 				}
 			});
 		},
+		projectDesc: () => {
+			readline.question(`
+${go.currentStep+1}. Project Description: `, input => {
+				projectDesc = input || "Really cool stuff";
+				go.next();
+			});
+		},
 		setDomain: () => {
 			readline.question(`
 ${go.currentStep+1}. Domain Name without http(s)://: `, input => {
@@ -142,7 +152,7 @@ ${go.currentStep+1}. Domain Name without http(s)://: `, input => {
 					go.steps.setSandboxDomain();
 				} else {
 					domainName = input;
-					prodConf = prodConf.replace(/FULL_DOMAIN_NAME/g,"https://"+domainName);
+					prodConf = prodConf.replace(/FULL_DOMAIN_NAME/g,domainName);
 					prodConf = prodConf.replace(/SSL_DOMAIN_NAME/g,domainName);
 					go.next();
 				}
@@ -154,7 +164,7 @@ ${go.currentStep+1}. Domain Name without http(s)://: `, input => {
 ${go.currentStep+1}. Sandbox Domain Name
 Press Enter to use ${chalk.bold(sandboxDomainName)} or type another: `, input => {
 				sandboxDomainName = input || sandboxDomainName;
-				devConf = devConf.replace(/FULL_DOMAIN_NAME/g,"https://"+sandboxDomainName);
+				devConf = devConf.replace(/FULL_DOMAIN_NAME/g,sandboxDomainName);
 				devConf = devConf.replace(/SSL_DOMAIN_NAME/g,sandboxDomainName);
 				go.next();
 			});
