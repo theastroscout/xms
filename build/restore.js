@@ -7,7 +7,8 @@ var restore = {
 		],
 		dirs: [
 			"conf",
-			"nginx"
+			"nginx",
+			"img/favicon"
 		]
 	},
 	init: async () => {
