@@ -29,7 +29,7 @@ var server = {
 
 		if(DEV && url.match(/^\/assets/)){
 			let ext = url.match(/\.([^/]+)$/)[1];
-			// "assets/dev/js/../../../"
+			url = "sandbox"+url;
 			let file;
 			if(ext == "js"){
 				file = jscompose(url.replace(/^\//,""));
@@ -42,6 +42,10 @@ var server = {
 				res.end(Buffer.from(file, "utf8"));
 				return false;
 			}
+		}
+		if(DEV && conf.restricted && !conf.restricted.includes(ip)){
+			res.redirect(prodConf.sys.host);
+			return false;
 		}
 
 		// Fix /en/ prefix

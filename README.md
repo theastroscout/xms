@@ -1,5 +1,6 @@
 # XMS
-Lightweight CMS powered by Node.js, MongoDB & Nginx
+Lightweight Multi Thread CMS powered with WebSockets, Node.js, MongoDB & Nginx.
+[Comet](https://en.wikipedia.org/wiki/Comet_(programming)) engine on board.
 
 <br/>
 
@@ -92,11 +93,14 @@ screen -S YOUR_SCREEN_NAME
 # Maybe you will need to change init file permissions (sudo chmod u+x init)
 ./init
 ```
-```
 4. Close screen ctrl + A + D
 5. Open screen
 ```
 screen -dr YOUR_SCREEN_NAME
+```
+6. Kill screen
+```
+screen -XS YOUR_SCREEN_NAME quit
 ```
 
 ## Structure

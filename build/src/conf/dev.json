@@ -4,6 +4,7 @@
 		"root": "ROOT_PATH",
 		"host": "FULL_DOMAIN_NAME",
 		"port": "PORT",
+		"restricted": "IP_ACCESS",
 		"cpu": 1,
 		"db": {
 			"host": "localhost",
