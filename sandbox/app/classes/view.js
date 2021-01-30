@@ -9,7 +9,7 @@ var view = {
 					view.pageTypes.default = item;
 				}
 			}
-			console.log(view.pageTypes.list)
+			console.log("Page Types:",view.pageTypes.list);
 		},
 		getDefault: () => {
 			return view.pageTypes.default;

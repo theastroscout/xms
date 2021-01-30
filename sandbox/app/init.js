@@ -5,13 +5,12 @@ const cluster = require("cluster");
 global.DEV = process.env.DEV;
 var confPath = (DEV)?"dev":"prod";
 global.conf = require(`../../conf/${confPath}`);
+global.workDir = conf.sys.root+"/"+((DEV)?"sandbox":"prod");
 if(DEV){
 	global.prodConf = require(`../../conf/prod`);
 }
 
 global.fs = require("fs");
-
-global.workDir = __dirname.replace("/app","");
 global.md5 = require("md5");
 global.moment = require("moment-timezone");
 

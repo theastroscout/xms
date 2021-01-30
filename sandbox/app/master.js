@@ -34,6 +34,9 @@ var master = {
 	},
 	db: {
 		init: async () => {
+			let sys = require("./sys");
+			await sys.checkFirstLaunch();
+			
 			for(let i in master.db.methods){
 				await master.db.methods[i]();
 			}

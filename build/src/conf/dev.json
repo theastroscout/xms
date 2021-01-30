@@ -1,6 +1,7 @@
 {
 	"name": "Dev",
 	"sys": {
+		"root": "ROOT_PATH",
 		"host": "FULL_DOMAIN_NAME",
 		"port": "PORT",
 		"cpu": 1,

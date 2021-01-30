@@ -1,6 +1,7 @@
 /node_modules
 /nginx
 /conf
+/sandbox/app/custom
 note
 init
 restart
