@@ -5,19 +5,32 @@ Lightweight CMS powered by Node.js & Nginx
 
 ## Installation
 ```
-npm install @hqdaemon/xms
+# Clone repository to your directory
+git clone https://github.com/hqdaemon/xms
+
+# Go to your catalog
+cd xms
+
+# Install all dependencies
+npm install
 ```
 
 ## Build
 Run build command and follow instructions
 ```
-npm run build
+npm run build # Setup your website
 ```
 
 ## Restore to Default
 ```
 npm run restore
 ```
+
+## Usage
+1. Control your web site: https://sandbox.yourdomain.com/admin
+2. Testing your web site: https://sandbox.yourdomain.com
+3. Store images - img directory & https://img.yourdomain.com
+4. Minified & Optimized Production - https://yourdomain.com
 
 ## Structure
 - build
@@ -51,9 +64,16 @@ npm run restore
 		- master.js # Master
 		- utils.js
 	- assets
-		- admin
-		- dev
+		- admin # FrontEnd of the Control Panel
+			- css # Style files
+			- js # JavaScript files
+		- dev  # FrontEnd of the Web Site
+			- css # Style files
+			- js # JavaScript files
 	- public # Folder with external access from http, e.g. https://youdomain.com/ui.svg
+		- app.css # Composed and minified styles after deploying
+		- app.js # Composed and minified scripts after deploying
+		- ui.svg # Sprites Bundle
 	- views # HTML Templates
 
 
