@@ -1,0 +1,147 @@
+#i18n {
+	>.languages {
+		display: flex;
+		align-items: stretch;
+		padding: 0 20px;
+
+		>a {
+			margin-right: 2px;
+			text-decoration: none;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	>form {
+		margin-top: 10px;
+		max-width: 780px;
+
+		.list {
+			display: none;
+			margin: 1px;
+			padding: 0 0 20px 20px;
+
+			>.item {
+				margin-top: 1px;
+				transition: padding .6s;
+
+				>.info {
+					display: flex;
+					align-items: center;
+					padding: 12px;
+					border-radius: 3px;
+					background: $white;
+
+					>.i {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 40px;
+						height: 40px;
+						border-radius: 50%;
+						transition: background .5s, transform 1s;
+						cursor: pointer;
+
+						&:after {
+							content: "";
+							display: block;
+							width: 40px;
+							height: 40px;
+							background: $darkBlue;
+							mask: url(/ui.svg#plus) no-repeat center center/12px;
+							transition: transform .6s, background .5s;
+						}
+
+						&.hover {
+							background: $fadeBlue;
+							transition: background .2s, transform 1s;
+							&:after {
+								background: $white;
+								transition: transform .6s, background .2s;
+							}
+						}
+					}
+
+					>.n {
+						padding: 8px 14px;
+						text-transform: capitalize;
+					}
+				}
+
+				>input, >textarea {
+					margin-top: 3px;
+				}
+
+				&:nth-child(even) {
+					>.info {
+						background: $evenRow;
+					}
+				}
+
+				&.endPoint {
+					padding: 20px;
+					border-radius: 3px;
+					background: $white;
+
+					>.info {
+						background: transparent;
+						padding: 0;
+
+						>.i {
+							display: none;
+						}
+						>.n {
+							padding: 0;
+							font-size: 14px;
+						}
+					}
+				}
+
+				&.open {
+					padding: 10px 0;
+
+					>.info {
+						>.i {
+							&:after {
+								transform: rotate(-45deg);
+							}
+						}
+					}
+				}
+			}
+
+			&:first-child {
+				display: block;
+			}
+		}
+
+		>.fn {
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			left: 260px;
+			background: $white;
+			>.wrap {
+				padding: 20px;
+
+				>button {
+					padding: 12px 20px;
+					border-radius: 3px;
+					border: 0;
+					background: $darkBlue;
+					color: $white;
+					cursor: pointer;
+					transition: background .5s, color .5s;
+
+					&.hover {
+						background: $white;
+						color: $black;
+						transition: background .2s, color .2s;
+					}
+				}
+			}
+		}
+	}
+}

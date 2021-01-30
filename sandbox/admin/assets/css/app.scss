@@ -8,6 +8,8 @@ $black: #171717;
 $grayBlue: #2a363c;
 $fadeBlue: #607d8b;
 $green: #8bc34a;
+$darkBlue: #242a33;
+$evenRow: #f5f7f9;
 
 $gray: #565656;
 $lightGray: #cccccc;
@@ -132,3 +134,4 @@ textarea:focus{
 @import "content/pages";
 @import "content/pages.types";
 @import "content/pages.item";
+@import "content/i18n";

@@ -1,4 +1,5 @@
 import "../../../../node_modules/@hqdaemon/qx/src/qx.js";
+import "utils/db";
 import "utils/utils";
 import "utils/ui";
 import "utils/notify";
@@ -10,9 +11,11 @@ import "content/home";
 import "content/pages";
 import "content/pages.types";
 import "content/pages.item";
+import "content/i18n";
 
 var app = {
 	init: () => {
+		db.init();
 		ui.init();
 		notify.init();
 		ws.init();
