@@ -1,0 +1,93 @@
+<div id="page" data-id="{id}">
+	<form novalidate="true">
+
+		<!-- Settings -->
+
+		<div class="settings">
+			<div class="tit">
+				<div class="n">Settings</div>
+			</div>
+			<div class="fields">
+				<div class="item switch {menu}" data-type="menu">
+					<div class="touch"></div>
+					<div class="n">Display In Menu</div>
+				</div>
+				<div class="item switch {default}" data-type="default">
+					<div class="touch"></div>
+					<div class="n">Default Page</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Common -->
+
+		<div class="block" data-type="common">
+			<div class="tit">
+				<div class="n">Common</div>
+				<div class="d">Common page settings that affect its display on the site.</div>
+			</div>
+			<div class="fields">
+				<label>
+					<div class="n">Page Name</div>
+					<div class="d">Also displayed in the menu.</div>
+					<input type="text" name="name" value="{name}">
+				</label>
+				<label>
+					<div class="n">H1</div>
+					<div class="d">The main title of the page displays if available in the template.</div>
+					<input type="text" name="h1" value="{h1}">
+				</label>
+				<label>
+					<div class="n">URL</div>
+					<div class="d">Page Address: {fullURL}</div>
+					<input type="text" name="url" value="{url}">
+				</label>
+			</div>
+			<div class="fn">
+				<button type="submit" data-btn>Save</button>
+			</div>
+		</div>
+
+		<!-- SEO -->
+
+		<div class="block" data-type="seo">
+			<div class="tit">
+				<div class="n">SEO</div>
+				<div class="d">Set title, description, and keywords, also known as Meta Tags. <b>Note:</b> All Titles and Descriptions must be unique.</div>
+			</div>
+			<div class="fields">
+				<label>
+					<div class="n">Title</div>
+					<div class="d">A Page Title, also known as a title tag, is a short description of a webpage and appears at the top of a browser window.</div>
+					<input type="text" name="title" value="{seo/title}">
+				</label>
+				<label>
+					<div class="n">Description</div>
+					<div class="d">The meta description is a snippet of up to about 155 characters.</div>
+					<textarea name="description">{seo/description}</textarea>
+				</label>
+				<label>
+					<div class="n">Keywords</div>
+					<div class="d">Meta Keywords are primary keywords for search engines.</div>
+					<input type="text" name="keywords" value="{seo/keywords}">
+				</label>
+			</div>
+			<div class="fn">
+				<button type="submit" data-btn>Save</button>
+			</div>
+		</div>
+
+		<!-- Content -->
+
+		<div class="content">
+			<div class="tit">
+				<div class="n">Content</div>
+				<div class="d"><b>Markdown syntax</b> <a href="https://freshvale.com/ref/https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">more</a>. The display on the site depends on the type of template.</div>
+			</div>
+			<textarea name="content">{content}</textarea>
+			<div class="fn">
+				<button type="submit" data-btn>Save</button>
+			</div>
+		</div>
+	</form>
+</div>
