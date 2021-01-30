@@ -61,8 +61,11 @@ npm run restore
 # With current repository
 git pull
 
-# With your repository
+# Or With your repository
 git pull upstream master
+
+# Forced update from the upstream (@hqdaemon/xms)
+git reset --hard upstream/master
 ```
 
 
