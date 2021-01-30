@@ -144,7 +144,7 @@ let control = {
 	},
 	getPage: async (pageID) => {
 		let page = await db.collection("pages").findOne({_id: new mongodb.ObjectID(pageID)});
-		console.log(page);
+		console.log("Pages",page);
 		if(!page){
 			return false;
 		}

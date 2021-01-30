@@ -87,6 +87,8 @@ Press Enter for use this path or type another: `, input => {
 
 				let initFile = fs.readFileSync("build/src/init").toString();
 				initFile = initFile.replace(/ROOT_PATH/g,rootPath);
+				devConf = devConf.replace(/ROOT_PATH/g,rootPath);
+				prodConf = prodConf.replace(/ROOT_PATH/g,rootPath);
 				fs.writeFileSync("init",initFile);
 				go.next();
 			});
@@ -153,8 +155,7 @@ ${go.currentStep+1}. Production Server Port. Press Enter to use ${chalk.bold(pro
 		},
 		setSandboxPort: () => {
 			readline.question(`
-${go.currentStep+1}. Sandbox Server Port.
-(!) Do not use production port ${prodPort}.
+${go.currentStep+1}. Sandbox Server Port. (!) Do not use production port ${prodPort}.
 Press Enter to use ${chalk.bold(devPort)} or type another: `, input => {
 				let port = parseInt(input || devPort, 10);
 				if(port === prodPort){

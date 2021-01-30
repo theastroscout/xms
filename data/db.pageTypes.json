@@ -1,0 +1,11 @@
+[
+	{
+		"name": "Content Page",
+		"tpl": "/content/default",
+		"default": true
+	},
+	{
+		"name": "Home Page",
+		"tpl": "/content/home"
+	}
+]

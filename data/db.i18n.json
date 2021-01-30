@@ -1,0 +1,50 @@
+[
+	{
+		"name": "en",
+		"fullName": "English",
+		"switchName": "In English",
+		"prefix": "",
+		"pages": {
+			"notfound": {
+				"name": "Page Not Found",
+				"seo": {
+					"title": "Page Not Found",
+					"description": "",
+					"keywords": ""
+				}
+			}
+		}
+	},
+	{
+		"name": "de",
+		"fullName": "Deutsch",
+		"switchName": "Von Deutsch",
+		"prefix": "de",
+		"pages": {
+			"notfound": {
+				"name": "Seite nicht gefunden",
+				"seo": {
+					"title": "Seite nicht gefunden",
+					"description": "",
+					"keywords": ""
+				}
+			}
+		}
+	},
+	{
+		"name": "ru",
+		"fullName": "Русский",
+		"switchName": "На русском",
+		"prefix": "ru",
+		"pages": {
+			"notfound": {
+				"name": "Страница не найдена",
+				"seo": {
+					"title": "Страница не найдена",
+					"description": "",
+					"keywords": ""
+				}
+			}
+		}
+	}	
+]
