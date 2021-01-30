@@ -22,7 +22,22 @@ var admin = {
 			} else {
 				location.reload();
 			}
+		},
+		base: (payload) => {
+			notify.show(payload);
 		}
+	},
+	baseGo(e){
+		let t = $(this).parent(".item");
+		let post = {
+			class: "admin",
+			method: "base",
+			data: {
+				type: t.getAttr("data-type")
+			}
+		};
+		ws.req(post);
+
 	},
 	addPage(e){
 		let form = $(this);

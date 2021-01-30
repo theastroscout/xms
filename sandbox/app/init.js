@@ -26,6 +26,8 @@ global.jscompose = require("@hqdaemon/jscompose");
 global.minify = require("@hqdaemon/minify");
 global.hqDB = require("@hqdaemon/db");
 
+global.SVGSpriter = require("svg-sprite");
+
 async function init(){
 	global.mongodb = await hqDB({type:"mongo"});
 	global.mongo = mongodb.client;

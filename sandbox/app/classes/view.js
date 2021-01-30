@@ -9,13 +9,20 @@ var view = {
 					view.pageTypes.default = item;
 				}
 			}
-			console.log("Page Types:",view.pageTypes.list);
+			// console.log("Page Types:",view.pageTypes.list);
 		},
 		getDefault: () => {
 			return view.pageTypes.default;
 		},
 		getDefaultID: () => {
 			return view.pageTypes.default._id;
+		},
+		get: (typeID) => {
+			let type = view.pageTypes.list[typeID];
+			if(type === undefined){
+				type = view.pageTypes.default;
+			}
+			return type;
 		}
 	},
 	init: async () => {
@@ -44,6 +51,12 @@ var view = {
 
 		let contentData = {};
 
+
+		/*
+
+		Control Panel
+
+		*/
 		if(DEV && clearURL.match(/^\/admin/)){
 			if(urlChunks[2] === "pages" && urlChunks[3] !== undefined){
 				if(urlChunks[3] !== "types"){
@@ -107,7 +120,17 @@ var view = {
 				pageData.assets = view.getAssets();
 			}
 		} else {
+			/*
+
+			Content
+
+			*/
 			pageData.assets = view.getAssets();
+			currentPage = await db.collection("pages").findOne({hashID:md5(url)});
+			if(currentPage){
+				let pageType = view.pageTypes.get(currentPage.typeID);
+				pageData.content = view.getTpl(pageType.tpl);
+			}
 		}
 
 		if(pageData.content === undefined){
@@ -119,7 +142,7 @@ var view = {
 		}
 
 
-		tpl = view.parseModules(tpl);
+		tpl = view.parseModules(tpl, currentPage);
 		output.layout = view.parseValues(tpl,pageData);
 		return output;
 	},
@@ -166,20 +189,26 @@ var view = {
 	Parse
 
 	*/
-	parseModules: (tpl) => {
+	parseModules: (tpl, currentPage) => {
 		if(!tpl){
 			return tpl;
 		}
-		let modules = tpl.match(/\{\{([^}]*)\}\}/g);
-		if(!modules){
+		let modulesList = tpl.match(/\{\{([^}]*)\}\}/g);
+		if(!modulesList){
 			return tpl;
 		}
 
-		for(let moduleName of modules){
+		for(let moduleName of modulesList){
 			moduleName = moduleName.replace(/\{\{([^}]*)\}\}/,"$1");
-			let moduleTpl = view.getTpl(`/modules/${moduleName}`);
-			if(moduleTpl !== false){
-				tpl = tpl.replace(`{{${moduleName}}}`,moduleTpl);
+			
+			let moduleItem = modules.get(moduleName, currentPage);
+			if(moduleItem){
+				tpl = tpl.replace(`{{${moduleName}}}`, moduleItem);
+			} else {
+				let moduleTpl = view.getTpl(`/modules/${moduleName}`);
+				if(moduleTpl !== false){
+					tpl = tpl.replace(`{{${moduleName}}}`,moduleTpl);
+				}
 			}
 		}
 
