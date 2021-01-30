@@ -1,7 +1,21 @@
 #footer {
 	padding: 20px;
 
+	>.git {
+		text-align: center;
+
+		>a {
+			margin: auto;
+			display: block;
+			width: 40px;
+			height: 40px;
+			background: $black;
+			mask: url(/ui.svg#github) no-repeat center center/contain;
+		}
+	}
+
 	>.copy {
+		margin-top: 20px;
 		text-align: center;
 	}
 }
