@@ -9,6 +9,10 @@ var i18n = {
 			i18n.ids[item._id] = item.name;
 		}
 	},
+	getLangObj: (lang) => {
+		lang = i18n.getLang(lang);
+		return i18n.list[lang];
+	},
 	getLang: (str) => {
 		if(str === undefined){
 			return i18n.default;

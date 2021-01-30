@@ -106,15 +106,15 @@ screen -XS YOUR_SCREEN_NAME quit
 <br/>
 
 ## Modules
-Put your module into ```/sandbox/modules/``` directory.
+Put your module into ```/sandbox/modules/YOUR_CUSTOME_MODULE/``` directory.
 
 ### Module Structure
-sandbox > modules > yourCustomModule
+sandbox > modules > YOUR_CUSTOME_MODULE
 - app.js # Head of the module
 - assets # To store module styles and script
 - views # To store module templates
 
-### Module ```app.js``` structure
+### Module's ```app.js``` structure
 ```js
 var app = {
 	get: (currentPage) => {
@@ -132,7 +132,7 @@ module.exports = app;
 ### Call your new module
 Call module by putting next code to your template.
 ```
-{{moduleName}}
+{{YOUR_CUSTOME_MODULE}}
 ```
 
 <br/>

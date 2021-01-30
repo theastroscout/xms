@@ -168,7 +168,7 @@ let control = {
 
 		return output;
 	},
-	getPageTypes: async() => {
+	getPageTypes: async () => {
 		let output = {
 			list: []
 		};
@@ -189,6 +189,40 @@ let control = {
 
 		output.list = output.list.join("");
 		return output;
+	},
+	i18n: {
+		get: async (lang) => {
+			control.i18n.tpl = view.getTpl("/admin/views/snippets/i18n.item");
+			let dict = i18n.getLangObj(lang);
+			let list = control.i18n.list(dict);
+			return list;
+		},
+		list: (dict) => {
+			let list = [];
+			for(let name of Object.keys(dict)){
+				if(name.match(/id$/)){
+					continue;
+				}
+				let value = dict[name];
+				let subList = false;
+				let endPoint = "endPoint";
+				if(typeof value === "object"){
+					subList = control.i18n.list(value);
+					endPoint = "";
+				} else {
+					subList = (value.length < 120)?`<input type="text" value="${value}"/>`:`<textarea>${value}</textarea>`;
+				}
+
+				let tpl = view.parseValues(control.i18n.tpl,{
+					endPoint: endPoint,
+					name: name,
+					value: value,
+					list: subList
+				});
+				list.push(tpl);
+			}
+			return `<div class="list">${list.join("")}</div>`;
+		}
 	}
 };
 module.exports = control;

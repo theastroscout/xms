@@ -69,7 +69,11 @@ var view = {
 						clearURL = "/admin/pages/page";
 					}
 				}
+			} else if(urlChunks[2] === "i18n"){
+				params.push(urlChunks[3]);
+				clearURL = "/admin/i18n";				
 			}
+			let currentLang = i18n.getLang(params[0]);
 			currentPage = await admin.control.getCurrentPage(clearURL);
 
 			if(currentPage){
@@ -87,7 +91,6 @@ var view = {
 						break;
 
 					case "/admin/pages":
-						let currentLang = i18n.getLang(params[0]);
 						let pages = await admin.control.getPages(currentLang);
 						pageData.title += ` (${pages.count})`;
 						contentData = {
@@ -112,6 +115,13 @@ var view = {
 
 					case "/admin/pages/types":
 						contentData = await admin.control.getPageTypes();
+						break;
+
+					case "/admin/i18n":
+						contentData = {
+							languages: admin.control.getLanguages(clearURL, currentLang),
+							list: await admin.control.i18n.get(currentLang)
+						}
 						break;
 				}
 
