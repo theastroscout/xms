@@ -7,6 +7,7 @@ var admin = {
 			switch(payload.data.type) {
 				case "sprites":
 					await admin.createSprites();
+					db.collection("settings").updateOne({name:"assets"},{$inc: {ui:1}});
 					payload.result.msg = "Sprite created successfully to public/ui.svg";
 					break;
 				case "deploy":
@@ -274,7 +275,6 @@ var admin = {
 					svg = svg.replace(/svg width="(\d+)" height="(\d+)"/,`svg width="${size}" height="${size}"`);
 
 					fs.writeFileSync("sandbox/public/ui.svg", svg);
-
 					resolve(true);
 				});
 			});

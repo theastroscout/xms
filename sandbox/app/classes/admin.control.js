@@ -1,6 +1,6 @@
 let control = {
 	getLanguages: (url, lang) => {
-		let itemTpl = view.getTpl("/../admin/views/snippets/lang.item");
+		let itemTpl = view.getTpl("/admin/views/snippets/lang.item");
 		let list = [];
 		
 		for(let id in i18n.list){
@@ -17,8 +17,8 @@ let control = {
 		return list.join("");
 	},
 	getCurrentPage: (url) => {
-		let blockTpl = view.getTpl("/../admin/views/snippets/menu.block");
-		let itemTpl = view.getTpl("/../admin/views/snippets/menu.item");
+		let blockTpl = view.getTpl("/admin/views/snippets/menu.block");
+		let itemTpl = view.getTpl("/admin/views/snippets/menu.item");
 		let blocks = [];
 		let list = [];
 
@@ -120,7 +120,7 @@ let control = {
 	},
 	getPagesLayout: (page) => {
 		let list = [];
-		let itemTpl = view.getTpl("/../admin/views/snippets/pages.list.item");
+		let itemTpl = view.getTpl("/admin/views/snippets/pages.list.item");
 		for(var i in page.pages){
 			let item = page.pages[i];
 			let updateTime = moment.tz(item.page.updateTime,"Europe/Moscow").format("ddd, MMM Do YYYY LT");
@@ -173,7 +173,7 @@ let control = {
 			list: []
 		};
 
-		let itemTpl = view.getTpl("/../admin/views/snippets/pages.types.item");
+		let itemTpl = view.getTpl("/admin/views/snippets/pages.types.item");
 
 		let result = await db.collection("pageTypes").find({}).toArray();
 		if(result){

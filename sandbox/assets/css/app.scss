@@ -30,4 +30,16 @@ input, select, textarea, button{
 	padding: 0 5%;
 }
 
+#view {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+#content {
+	flex: 1;
+}
+
 @import "content/home";
+@import "../../modules/header/assets/header";
+@import "../../modules/footer/assets/footer";

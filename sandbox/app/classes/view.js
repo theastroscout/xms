@@ -37,13 +37,14 @@ var view = {
 		let currentPage, content;
 		let params = [];
 
-		let tpl = view.getTpl("/default");
+		let tpl = view.getTpl("/views/default");
 
 		let lang = i18n.getPageLang(url);
 		let clearURL = url.replace(new RegExp(`^/${lang}`),"");
 		let urlChunks = clearURL.split("/");
 
 		let pageData = {
+			site: conf.project,
 			lang: {
 				name: lang
 			}
@@ -72,12 +73,11 @@ var view = {
 			currentPage = await admin.control.getCurrentPage(clearURL);
 
 			if(currentPage){
-				pageData.site = conf.project;
 				pageData.assets = view.getAssets(true);
 				pageData.seo = currentPage.seo;
 				pageData.title = currentPage.title;
 				pageData.menu = currentPage.menu;
-				tpl = view.getTpl("/../admin/views/default");
+				tpl = view.getTpl("/admin/views/default");
 
 				pageData.content = view.getTpl(currentPage.tpl);
 
@@ -173,7 +173,7 @@ var view = {
 	*/
 	tpls: {},
 	getTpl: (path) => {
-		let fullPath = workDir+"/views"+path+".html";
+		let fullPath = workDir+path+".html";
 
 		if(view.tpls[fullPath] === undefined || DEV){
 			if(fs.existsSync(fullPath)){
@@ -205,7 +205,7 @@ var view = {
 			if(moduleItem){
 				tpl = tpl.replace(`{{${moduleName}}}`, moduleItem);
 			} else {
-				let moduleTpl = view.getTpl(`/modules/${moduleName}`);
+				let moduleTpl = view.getTpl(`/views/modules/${moduleName}`);
 				if(moduleTpl !== false){
 					tpl = tpl.replace(`{{${moduleName}}}`,moduleTpl);
 				}
