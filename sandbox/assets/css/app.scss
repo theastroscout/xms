@@ -22,3 +22,12 @@ input, select, textarea, button{
 	font-family: $font;
 	font-size: 15px;
 }
+
+.width {
+	margin: auto;
+	max-width: 1280px;
+	box-sizing: border-box;
+	padding: 0 5%;
+}
+
+@import "content/home";

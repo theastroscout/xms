@@ -3,6 +3,20 @@ var admin = {
 		admin.data = require("../../../data/admin");
 	},
 	methods: {
+		base: async (payload) => {
+			switch(payload.data.type) {
+				case "sprites":
+					await admin.createSprites();
+					payload.result.msg = "Sprite created successfully to public/ui.svg";
+					break;
+				case "deploy":
+					payload.result.msg = "Production rebuild & launch successfully";
+					break;
+			}
+
+			payload.result.state = true;
+			ws.send(payload);
+		},
 		addPage: async (payload) => {
 			let pageName = utils.validate.str(payload.data.name);
 
@@ -232,6 +246,39 @@ var admin = {
 			}
 		}
 		return true;
+	},
+	createSprites: () => {
+		return new Promise((resolve) => {
+			let spriter = new SVGSpriter({
+				mode: {
+					view: true
+				},
+				shape: {
+					spacing: {
+						padding: 0
+					}
+				}
+			});
+			let path = "img/ui.src";
+			fs.readdirSync(path, {withFileTypes: true}).forEach(dirent => {
+				if(dirent.isFile()){
+					let file = fs.readFileSync(path+"/"+dirent.name);
+					spriter.add(path+"/"+dirent.name, null, file);
+				}
+
+				spriter.compile((error, result) => {
+					let svg = result.view.sprite.contents.toString();
+					
+					let sizes = svg.match(/svg width="(\d+)" height="(\d+)"/);
+					let size = Math.max(parseInt(sizes[1],10),parseInt(sizes[2],10));
+					svg = svg.replace(/svg width="(\d+)" height="(\d+)"/,`svg width="${size}" height="${size}"`);
+
+					fs.writeFileSync("sandbox/public/ui.svg", svg);
+
+					resolve(true);
+				});
+			});
+		});
 	}
 };
 admin.control = require("./admin.control");

@@ -1,15 +1,9 @@
 <!doctype html>
 <html lang="{lang/name}">
-{{head}}
+{{../../admin/views/modules/head}}
 <body>
 	<div id="view">
-		<div id="aside">
-			<a href="/admin" class="logo" title="youmake">
-				<span class="n">{site/name}</span>
-				<span class="d">{site/desc}</span>
-			</a>
-			{menu}
-		</div>
+		{{../../admin/views/modules/aside}}
 		<div id="content">
 			<h1>{title}</h1>
 			{content}

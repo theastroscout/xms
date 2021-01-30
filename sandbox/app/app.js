@@ -15,6 +15,8 @@ global.ws = require("./classes/ws");
 global.admin = require("./classes/admin");
 global.view = require("./classes/view");
 
+global.modules = require("./classes/modules");
+
 var app = {
 	init: async () => {
 		let assets = await db.collection("settings").findOne({name:"assets"});
@@ -22,6 +24,8 @@ var app = {
 
 		let pageTypes = await db.collection("pageTypes").find({}).toArray();
 		conf.pageTypes = pageTypes;
+
+		await modules.init();
 		
 		process.on("message", app.message.get);
 

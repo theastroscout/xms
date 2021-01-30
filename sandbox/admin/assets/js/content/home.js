@@ -1,5 +1,5 @@
 content.home = {
 	init: () => {
-		$("#home>.manage>.list>.item>.go").hover();
+		$("#home>.manage>.list>.item>.go").click(admin.baseGo);
 	}
-}
+};

@@ -35,7 +35,8 @@ let control = {
 
 			let sub;
 			if(link === "/admin/pages"){
-				sub = `<div class="sub"><a href="/admin/pages/types">Page Types</a><a href="/admin/pages">In English</a><a href="/admin/pages/ru">По русски</a><a href="/admin/pages/de">Auf Deutsch</a></div>`;
+				// sub = `<div class="sub"><a href="/admin/pages/types">Page Types</a><a href="/admin/pages">In English</a><a href="/admin/pages/ru">По русски</a><a href="/admin/pages/de">Auf Deutsch</a></div>`;
+				sub = false;
 			} else {
 				sub = false;
 			}
@@ -68,8 +69,8 @@ let control = {
 		}));
 
 		list = [];
-		list.push(view.parseValues(itemTpl,{name:"Sandbox", link: `https://${conf.sys.host}`, target:'target="_blank"', active: false}));
-		list.push(view.parseValues(itemTpl,{name:"Production", link: `https://${prodConf.sys.host}`, target:'target="_blank"', active: false}));
+		list.push(view.parseValues(itemTpl,{name:"Sandbox", link: `https://${conf.sys.host}`, target:'target="_blank"', active: false, sub: false}));
+		list.push(view.parseValues(itemTpl,{name:"Production", link: `https://${prodConf.sys.host}`, target:'target="_blank"', active: false, sub: false}));
 
 		blocks.push(view.parseValues(blockTpl,{
 			name: "Source",
