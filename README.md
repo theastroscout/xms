@@ -7,15 +7,41 @@ Lightweight CMS powered by Node.js & Nginx
 1. [MongoDB](https://www.mongodb.com/)
 2. [Node.js](https://nodejs.org/) & [npm](https://www.npmjs.com/)
 
-## Installation
+<br/>
+
+# Installation
+
+## A. With current repository
 ```
 # Clone repository to your directory
 git clone https://github.com/hqdaemon/xms
+```
 
-# Go to your catalog
-cd xms
+## B. With your repository
 
-# Install all dependencies
+### On Github.com
+1. Create a new empty repository on Github
+
+### On Local
+2. Clone your repository
+```
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO
+```
+
+3. Setup remote upstream to fetch @hqdaemon/xms
+```
+cd YOUR_REPO
+git remote add upstream https://github.com/hqdaemon/xms
+```
+
+4. Pull from @hqdaemon/xms
+```
+git pull upstream master
+```
+
+### Install all dependencies
+```
+cd YOUR_DIR
 npm install
 ```
 
@@ -32,8 +58,13 @@ npm run restore
 
 ## Update to the New Version
 ```
+# With current repository
 git pull
+
+# With your repository
+git pull upstream master
 ```
+
 
 ## Usage
 1. Control your web site: https://sandbox.yourdomain.com/admin
