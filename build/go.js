@@ -44,12 +44,14 @@ var go = {
 			let prodServerConf = nginxServerConf.replace(/DOMAIN_NAME/g,domainName);
 				prodServerConf = prodServerConf.replace(/PORT/g,prodPort);
 				prodServerConf = prodServerConf.replace(/ROOT_PATH/g,rootPath);
+				prodServerConf = prodServerConf.replace(/DOMAIN_TYPE/g,"prod");
 			fs.writeFileSync("nginx/sites-enabled/"+domainName,prodServerConf);
 
 			// Sandbox Nginx
 			let sandboxServerConf = nginxServerConf.replace(/DOMAIN_NAME/g,sandboxDomainName);
 				sandboxServerConf = sandboxServerConf.replace(/PORT/g,devPort);
 				sandboxServerConf = sandboxServerConf.replace(/ROOT_PATH/g,rootPath);
+				sandboxServerConf = sandboxServerConf.replace(/DOMAIN_TYPE/g,"sandbox");
 			fs.writeFileSync("nginx/sites-enabled/"+sandboxDomainName,sandboxServerConf);
 
 			// Img Nginx
