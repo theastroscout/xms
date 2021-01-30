@@ -1,3 +1,4 @@
+const {execSync} = require("child_process");
 const fs = require("fs");
 const chalk = require("chalk");
 const readline = require("readline").createInterface({
@@ -59,6 +60,26 @@ var go = {
 			imgServerConf = imgServerConf.replace(/DOMAIN_NAME/g,imgDomainName);
 			imgServerConf = imgServerConf.replace(/ROOT_PATH/g,rootPath);
 			fs.writeFileSync("nginx/sites-enabled/"+imgDomainName,imgServerConf);
+
+
+			// Favicon
+			let FAVICON_URL = "https://"+imgDomainName+"/favicon/v1";
+
+			let headModule = fs.readFileSync("build/src/sandbox/views/modules/head.html").toString();
+			headModule = headModule.replace(/FAVICON_URL/g,FAVICON_URL);
+			fs.writeFileSync("sandbox/views/modules/head.html",headModule);
+
+			
+			execSync("cp -a build/src/img/favicon/. img/favicon");
+
+			let browserconfig = fs.readFileSync("img/favicon/v1/browserconfig.xml").toString();
+			browserconfig = browserconfig.replace(/FAVICON_URL/g, FAVICON_URL);
+			fs.writeFileSync("img/favicon/v1/browserconfig.xml",browserconfig);
+			
+			let webmanifest = fs.readFileSync("img/favicon/v1/site.webmanifest").toString();
+			webmanifest = webmanifest.replace(/FAVICON_URL/g, FAVICON_URL);
+			fs.writeFileSync("img/favicon/v1/site.webmanifest",webmanifest);
+
 
 			// Write Conf files
 			fs.writeFileSync("conf/dev.json",devConf);
