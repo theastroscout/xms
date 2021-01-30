@@ -3,6 +3,10 @@ Lightweight CMS powered by Node.js & Nginx
 
 <br/>
 
+## Requirements
+1. [MongoDB](https://www.mongodb.com/)
+2. [Node.js](https://nodejs.org/) & [npm](https://www.npmjs.com/)
+
 ## Installation
 ```
 # Clone repository to your directory
@@ -26,10 +30,15 @@ npm run build # Setup your website
 npm run restore
 ```
 
+## Update to the New Version
+```
+git pull
+```
+
 ## Usage
 1. Control your web site: https://sandbox.yourdomain.com/admin
 2. Testing your web site: https://sandbox.yourdomain.com
-3. Store images - img directory & https://img.yourdomain.com
+3. Store images - img directory of https://img.yourdomain.com
 4. Minified & Optimized Production - https://yourdomain.com
 
 ## Structure
