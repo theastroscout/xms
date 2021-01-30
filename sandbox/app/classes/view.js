@@ -64,7 +64,7 @@ var view = {
 				pageData.seo = currentPage.seo;
 				pageData.title = currentPage.title;
 				pageData.menu = currentPage.menu;
-				tpl = view.getTpl("/admin/default");
+				tpl = view.getTpl("/../admin/views/default");
 
 				pageData.content = view.getTpl(currentPage.tpl);
 
@@ -167,6 +167,9 @@ var view = {
 
 	*/
 	parseModules: (tpl) => {
+		if(!tpl){
+			return tpl;
+		}
 		let modules = tpl.match(/\{\{([^}]*)\}\}/g);
 		if(!modules){
 			return tpl;
@@ -183,6 +186,9 @@ var view = {
 		return tpl;
 	},
 	parseValues: (tpl,values,prefix="") => {
+		if(!tpl){
+			return tpl;
+		}
 		for(var i in values){
 			let item = values[i];
 			if(typeof item === "object"){
