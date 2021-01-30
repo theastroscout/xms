@@ -1,0 +1,22 @@
+[
+	{
+		"createTime": "",
+		"updateTime": "",
+		"typeID": "",
+		"langID": "",
+		"menu": true,
+		"default": true,
+		"position": 0,
+		"url": "home",
+		"fullURL": "/home",
+		"hashID": "4858dab5b4ac16ad2b7d274698c2532a",
+		"seo": {
+			"title": "Home",
+			"description": "Description Example",
+			"keywords": "keywords example"
+		},
+		"name": "Home",
+		"h1": "Home H1",
+		"content": "Home content"
+	}
+]

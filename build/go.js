@@ -185,6 +185,18 @@ ${go.currentStep+1}. Sandbox DB name. Press Enter to use ${chalk.bold(dbName)} o
 				devConf = devConf.replace(/DB_NAME/g,dbName);
 				go.next();
 			});
+		},
+		setIPRestrict: () => {
+			readline.question(`
+${go.currentStep+1}. Set Restrict by IP for sandbox access
+You can set several splitted by comma: `, input => {
+				let ipAccess = input || false;
+				if(ipAccess){
+					ipAccess = "["+ipAccess.split(",").map(el => `"${el}"`).join(",")+"]";
+				}
+				devConf = devConf.replace(/\"IP_ACCESS\"/g,ipAccess);
+				go.next();
+			});
 		}
 	}
 };

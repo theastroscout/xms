@@ -5,14 +5,9 @@ var i18n = {
 		i18n.default = conf.assets.i18n.default;
 		let resp = await db.collection("i18n").find({}).toArray();
 		for(let item of resp){
-			i18n.list[item.name] = Object.assign(item, require(`../../../data/i18n.${item.name}.json`));
+			i18n.list[item.name] = item;
 			i18n.ids[item._id] = item.name;
 		}
-		/*
-		i18n.list.en = require("../../../data/i18n.en.json");
-		i18n.list.ru = require("../../../data/i18n.ru.json");
-		i18n.list.de = require("../../../data/i18n.de.json");
-		*/
 	},
 	getLang: (str) => {
 		if(str === undefined){
