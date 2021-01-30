@@ -81,6 +81,19 @@ npm run restore
 3. Store images - img directory of https://img.yourdomain.com
 4. Minified & Optimized Production - https://yourdomain.com
 
+## Launch
+1. Go to folder with your project
+2. Create Screen
+```
+screen -S YourScreenName
+```
+3. Launch Sandbox
+```
+# Maybe you will need to change init file permissions (sudo chmod u+x init)
+./init
+
+```
+
 ## Structure
 - build
 	- src
