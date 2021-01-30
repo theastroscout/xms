@@ -103,6 +103,36 @@ screen -dr YOUR_SCREEN_NAME
 screen -XS YOUR_SCREEN_NAME quit
 ```
 
+## Modules
+Put your module into ```/sandbox/modules/``` directory.
+
+### Module Structure
+sandbox > modules > yourCustomModule
+- app.js # Head of the module
+- assets # To store module styles and script
+- views # To store module templates
+
+### Module ```app.js``` structure
+```js
+var app = {
+	get: (currentPage) => {
+		let result = "Module resulting HTML code";
+		/*
+		Do something with currentPage or DB.
+		You have access to all global classes from here. E.g. view, db and i18n.
+		*/
+		return result;
+	}
+};
+module.exports = app;
+```
+
+### Call your new module
+Call module by putting next code to your template.
+```
+{{moduleName}}
+```
+
 ## Structure
 - build
 	- src

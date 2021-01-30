@@ -128,8 +128,13 @@ var view = {
 			pageData.assets = view.getAssets();
 			currentPage = await db.collection("pages").findOne({hashID:md5(url)});
 			if(currentPage){
+				pageData.seo = currentPage.seo;
 				let pageType = view.pageTypes.get(currentPage.typeID);
 				pageData.content = view.getTpl(pageType.tpl);
+				if(currentPage.content){
+					let content = marked(currentPage.content);
+					pageData.content = view.parseValues(pageData.content,{content:content});
+				}
 			}
 		}
 
@@ -142,6 +147,7 @@ var view = {
 		}
 
 
+		pageData.content = view.parseModules(pageData.content, currentPage);
 		tpl = view.parseModules(tpl, currentPage);
 		output.layout = view.parseValues(tpl,pageData);
 		return output;
@@ -203,6 +209,7 @@ var view = {
 			
 			let moduleItem = modules.get(moduleName, currentPage);
 			if(moduleItem){
+				moduleItem = view.parseModules(moduleItem, currentPage);
 				tpl = tpl.replace(`{{${moduleName}}}`, moduleItem);
 			} else {
 				let moduleTpl = view.getTpl(`/views/modules/${moduleName}`);

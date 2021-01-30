@@ -17,6 +17,6 @@
 		},
 		"name": "Home",
 		"h1": "Home H1",
-		"content": "Home content"
+		"content": "There is the page content.\nYou can use **markdown** syntax it's really handy.\nMore about Markdown read [there](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)"
 	}
 ]
