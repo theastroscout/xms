@@ -5,6 +5,10 @@
 /sandbox/admin/views/modules/head.html
 /sandbox/views/modules/head.html
 /img/favicon
+/img/content
+/img/ext
+/img/files
+/img/ui
 note
 init
 restart
