@@ -1,0 +1,18 @@
+#header {
+	>.wrap {
+		>.logo {
+			text-decoration: none;
+			color: $black;
+
+			>.n {
+				display: block;
+				font-size: 26px;
+				font-weight: bold;
+			}
+			>.d {
+				display: block;
+				font-size: 12px;
+			}
+		}
+	}
+}

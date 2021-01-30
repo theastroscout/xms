@@ -1,8 +1,9 @@
 var app = {
 	get: (currentPage) => {
-		let tpl = view.getTpl("/modules/footer/views/footer");
+		let tpl = view.getTpl("/modules/header/views/header");
 		let data = {
-			copy: `&copy; ${conf.project.name}`
+			name: conf.project.name,
+			desc: conf.project.desc
 		};
 		tpl = view.parseValues(tpl,data);
 		return tpl;
