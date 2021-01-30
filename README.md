@@ -1,5 +1,5 @@
 # XMS
-Lightweight CMS powered by Node.js & Nginx
+Lightweight CMS powered by Node.js, MongoDB & Nginx
 
 <br/>
 
@@ -11,13 +11,19 @@ Lightweight CMS powered by Node.js & Nginx
 
 # Installation
 
-## A. With current repository
+## 1.A. With current repository
 ```
 # Clone repository to your directory
 git clone https://github.com/hqdaemon/xms
+
+# Go to the directory
+cd xms
+
+# Update to the New Version
+git pull
 ```
 
-## B. With your repository
+## 1.B. With your repository
 
 ### On Github.com
 1. Create a new empty repository on Github
@@ -39,37 +45,37 @@ git remote add upstream https://github.com/hqdaemon/xms
 git pull upstream master
 ```
 
-### Install all dependencies
+5. Update to the New Version
+```
+git pull upstream master
+
+# Or Forced update from the upstream (@hqdaemon/xms)
+git reset --hard upstream/master
+```
+
+## 2. Install all dependencies
 ```
 cd YOUR_DIR
 npm install
 ```
 
-## Build
+## 3. Build
 Run build command and follow instructions
 ```
-npm run build # Setup your website
+npm run build
 ```
 
-## Restore to Default
+## 4. Restore XMS Settings to Default
 ```
 npm run restore
 ```
 
-## Update to the New Version
-```
-# With current repository
-git pull
+<br/>
+<br/>
 
-# Or With your repository
-git pull upstream master
+# Usage
 
-# Forced update from the upstream (@hqdaemon/xms)
-git reset --hard upstream/master
-```
-
-
-## Usage
+## Common
 1. Control your web site: https://sandbox.yourdomain.com/admin
 2. Testing your web site: https://sandbox.yourdomain.com
 3. Store images - img directory of https://img.yourdomain.com
