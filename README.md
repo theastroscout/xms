@@ -121,6 +121,11 @@ screen -XS YOUR_SCREEN_NAME quit
 - node_modules
 - prod # Production version. Create with Deploy method in Control Panel
 - sandbox # Sandbox version
+	- admin
+		- assets
+			- css # Style
+			- js # JavaScrip files
+		- views # Control panel templates
 	- app
 		- classes
 			- admin.control.js
