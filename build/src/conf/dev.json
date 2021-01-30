@@ -1,5 +1,9 @@
 {
 	"name": "Dev",
+	"project": {
+		"name": "PROJECT_NAME",
+		"desc": "PROJECT_DESC"
+	},
 	"sys": {
 		"root": "ROOT_PATH",
 		"host": "FULL_DOMAIN_NAME",
