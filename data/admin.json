@@ -4,31 +4,31 @@
 		"/admin": {
 			"name": "Home",
 			"title": "Control Panel",
-			"tpl": "/admin/content/home"
+			"tpl": "/../admin/views/content/home"
 		},
 		"/admin/pages": {
 			"name": "Pages",
 			"title": "Pages",
-			"tpl": "/admin/content/pages"
+			"tpl": "/..//admin/views/content/pages"
 		},
 		"/admin/pages/types": {
 			"parentID": "/admin/pages",
 			"name": "Page Types",
 			"title": "Page Types",
-			"tpl": "/admin/content/pages.types",
+			"tpl": "/../admin/views/content/pages.types",
 			"inMenu": false
 		},
 		"/admin/pages/page": {
 			"parentID": "/admin/pages",
 			"name": "Page",
 			"title": "Page",
-			"tpl": "/admin/content/pages.item",
+			"tpl": "/../admin/views/content/pages.item",
 			"inMenu": false
 		},
 		"/admin/i18n": {
 			"name": "i18n",
 			"title": "i18n",
-			"tpl": "/admin/content/i18n"
+			"tpl": "/../admin/views/content/i18n"
 		}
 	}
 }
