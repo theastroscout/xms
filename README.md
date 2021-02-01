@@ -117,13 +117,41 @@ sandbox > modules > YOUR_CUSTOME_MODULE
 ### Module's ```app.js``` structure
 ```js
 var app = {
-	get: (currentPage) => {
+	get: async (currentPage) => {
 		let result = "Module resulting HTML code";
 		/*
+
 		Do something with currentPage or DB.
 		You have access to all global classes from here. E.g. view, db and i18n.
+
 		*/
 		return result;
+	},
+	methods: {
+		/*
+
+		Put your methods that could be execute from websockets
+
+		*/
+		default: async (payload) => {
+			/*
+			payload = {
+				module: "YourModuleName",
+				method: "YourMethodName",
+				data: {
+					Object
+				},
+				result: {
+					module: "YourModuleName",
+					method: "YourMethodName"
+					This is an object that respond to websocket
+				}
+			}
+			*/
+			payload.result.state = "Result state";
+			payload.result.msg = "Message output";
+			ws.send(payload);
+		}
 	}
 };
 module.exports = app;
