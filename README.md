@@ -139,7 +139,7 @@ var app = {
 				module: "YourModuleName",
 				method: "YourMethodName",
 				data: {
-					Object
+					Received Object
 				},
 				result: {
 					module: "YourModuleName",
