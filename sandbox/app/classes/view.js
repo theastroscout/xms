@@ -119,6 +119,7 @@ var view = {
 
 					case "/admin/i18n":
 						contentData = {
+							lang: currentLang,
 							languages: admin.control.getLanguages(clearURL, currentLang),
 							list: await admin.control.i18n.get(currentLang)
 						}

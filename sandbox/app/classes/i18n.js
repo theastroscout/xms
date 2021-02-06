@@ -9,18 +9,25 @@ var i18n = {
 			i18n.ids[item._id] = item.name;
 		}
 	},
+	refresh: async (langName) => {
+		let langID = i18n.getLangID(langName);
+		let lang = await db.collection("i18n").findOne({_id:langID});
+		i18n.list[lang.name] = lang;
+		i18n.ids[lang._id] = lang.name;
+	},
 	getLangObj: (lang) => {
 		lang = i18n.getLang(lang);
 		return i18n.list[lang];
 	},
 	getLang: (str) => {
-		if(str === undefined){
+		if(str === undefined || !str || str === null){
 			return i18n.default;
 		}
 		str = str.toLowerCase();
 		return (i18n.list[str] === undefined)?i18n.default:str;
 	},
 	getLangID: (lang) => {
+		lang = i18n.getLang(lang);
 		return i18n.list[lang]._id;
 	},
 	getPrefix: (lang) => {

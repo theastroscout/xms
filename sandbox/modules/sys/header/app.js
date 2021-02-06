@@ -1,6 +1,6 @@
 var app = {
 	get: (currentPage) => {
-		let tpl = view.getTpl("/modules/header/views/header");
+		let tpl = view.getTpl("/modules/sys/header/views/header");
 		let data = {
 			name: conf.project.name,
 			desc: conf.project.desc

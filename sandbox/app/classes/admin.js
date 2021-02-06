@@ -248,10 +248,15 @@ var admin = {
 					}
 				}
 			}
-			console.log(fields);
+
+
+			let langID = i18n.getLangID(payload.data.lang);
+			db.collection("i18n").replaceOne({_id:langID},fields);
 			payload.result.state = true;
 			payload.result.msg = "Dictionary saved successfully";
 			ws.send(payload);
+
+			app.message.send({method:"refresh-i18n",lang:i18n.getLang(payload.data.lang)});
 		}
 	},
 	refreshURL: async (targetID) => {
