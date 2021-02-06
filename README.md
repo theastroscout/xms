@@ -119,17 +119,18 @@ If you need override sys methods just create folder with the same name in custom
 ### Module's ```app.js``` structure
 ```js
 var app = {
-	get: (currentPage) => {
+	get: async (currentPage) => {
 		let result = "Module resulting HTML code";
 		/*
+
 		Do something with currentPage or DB.
 		You have access to all global classes from here. E.g. view, db and i18n.
+
 		*/
 		return result;
 	},
 	methods: {
 		/*
-
 		Place here your methods that you can evoke from Frontend by
 		ws.send({
 			module: "YOUR_MODULE_NAME",
@@ -141,7 +142,23 @@ var app = {
 
 		*/
 		exampleCustomMethod: async (payload) => {
-			// Do something brilliant
+			/*
+			payload = {
+				module: "YourModuleName",
+				method: "YourMethodName",
+				data: {
+					Received Object
+				},
+				result: {
+					module: "YourModuleName",
+					method: "YourMethodName"
+					This is an object that respond to websocket
+				}
+			}
+			*/
+			payload.result.state = "Result state";
+			payload.result.msg = "Message output";
+			ws.send(payload);
 		}
 	}
 };
