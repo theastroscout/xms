@@ -25,11 +25,12 @@ var master = {
 		console.log(`Master go with ${master.threads} workers started.\ntop -p ${master.PIDs.join(",")}`);
 	},
 	message: (payload) => {
+		// console.log("Master incoming message", payload);
 		for(let i in cluster.workers){
 			let worker = cluster.workers[i];
-			if(worker.process.pid !== payload.pid){
+			// if(worker.process.pid !== payload.pid){
 				worker.send(payload);
-			}
+			// }
 		}
 	},
 	db: {

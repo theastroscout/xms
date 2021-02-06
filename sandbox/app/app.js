@@ -17,7 +17,7 @@ global.view = require("./classes/view");
 
 global.modules = require("./classes/modules");
 
-var app = {
+global.app = {
 	init: async () => {
 		let assets = await db.collection("settings").findOne({name:"assets"});
 		conf.assets = Object.assign(conf.assets, assets);
@@ -35,6 +35,9 @@ var app = {
 	message: {
 		get: (payload) => {
 			switch(payload.method) {
+				case "refresh-i18n":
+					i18n.refresh(payload.lang);
+					break;
 				default:
 					console.log("Incoming message from master",payload);
 					break;

@@ -18,7 +18,7 @@ var modules = {
 				modules.list[moduleName] = item;
 			};
 		});
-	}
+	},
 	get: (name, currentPage) => {
 		if(modules.list[name] !== undefined){
 			return modules.list[name].app.get(currentPage);
