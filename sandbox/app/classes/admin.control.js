@@ -194,26 +194,28 @@ let control = {
 		get: async (lang) => {
 			control.i18n.tpl = view.getTpl("/admin/views/snippets/i18n.item");
 			let dict = i18n.getLangObj(lang);
-			let list = control.i18n.list(dict);
+			let list = control.i18n.list(lang, dict);
 			return list;
 		},
-		list: (dict) => {
+		list: (path, dict) => {
 			let list = [];
 			for(let name of Object.keys(dict)){
 				if(name.match(/id$/)){
 					continue;
 				}
+				let itemPath = path+"/"+name;
 				let value = dict[name];
 				let subList = false;
 				let endPoint = "endPoint";
 				if(typeof value === "object"){
-					subList = control.i18n.list(value);
+					subList = control.i18n.list(itemPath, value);
 					endPoint = "";
 				} else {
 					subList = (value.length < 120)?`<input type="text" value="${value}"/>`:`<textarea>${value}</textarea>`;
 				}
 
 				let tpl = view.parseValues(control.i18n.tpl,{
+					id: itemPath,
 					endPoint: endPoint,
 					name: name,
 					value: value,

@@ -121,26 +121,10 @@
 			position: fixed;
 			right: 0;
 			bottom: 0;
-			left: 260px;
+			left: 320px;
 			background: $white;
 			>.wrap {
 				padding: 20px;
-
-				>button {
-					padding: 12px 20px;
-					border-radius: 3px;
-					border: 0;
-					background: $darkBlue;
-					color: $white;
-					cursor: pointer;
-					transition: background .5s, color .5s;
-
-					&.hover {
-						background: $white;
-						color: $black;
-						transition: background .2s, color .2s;
-					}
-				}
 			}
 		}
 	}
