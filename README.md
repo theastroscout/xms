@@ -106,13 +106,15 @@ screen -XS YOUR_SCREEN_NAME quit
 <br/>
 
 ## Modules
-Put your module into ```/sandbox/modules/YOUR_CUSTOME_MODULE/``` directory.
+Put your module into ```/sandbox/modules/custom/YOUR_CUSTOME_MODULE/``` directory.
 
 ### Module Structure
-sandbox > modules > YOUR_CUSTOME_MODULE
+sandbox > modules > custom > YOUR_CUSTOME_MODULE
 - app.js # Head of the module
 - assets # To store module styles and script
 - views # To store module templates
+
+If you need override sys methods just create folder with the same name in custom directory.
 
 ### Module's ```app.js``` structure
 ```js
@@ -124,6 +126,23 @@ var app = {
 		You have access to all global classes from here. E.g. view, db and i18n.
 		*/
 		return result;
+	},
+	methods: {
+		/*
+
+		Place here your methods that you can evoke from Frontend by
+		ws.send({
+			module: "YOUR_MODULE_NAME",
+			method: "YOUR_MODULE_METHOD",
+			data: {
+				// Your data
+			}
+		})
+
+		*/
+		exampleCustomMethod: async (payload) => {
+			// Do something brilliant
+		}
 	}
 };
 module.exports = app;
@@ -181,6 +200,9 @@ Call module by putting next code to your template.
 		- dev  # FrontEnd of the Web Site
 			- css # Style files
 			- js # JavaScript files
+	- modules
+		- sys # System modules, overwritten with the update
+		- custom # Place here your custmo modules
 	- public # Folder with external access from http, e.g. https://youdomain.com/ui.svg
 		- app.css # Composed and minified styles after deploying
 		- app.js # Composed and minified scripts after deploying

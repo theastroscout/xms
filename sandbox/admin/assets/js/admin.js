@@ -25,6 +25,9 @@ var admin = {
 		},
 		base: (payload) => {
 			notify.show(payload);
+		},
+		savei18n: (payload) => {
+			notify.show(payload);
 		}
 	},
 	baseGo(e){

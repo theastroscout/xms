@@ -1,7 +1,11 @@
 var modules = {
 	list: {},
 	init: async () => {
-		let modulesPath = workDir+"/modules";
+		modules.load(workDir+"/modules/sys");
+		modules.load(workDir+"/modules/custom");
+		console.log(modules.list);
+	},
+	load: async (modulesPath) => {
 		fs.readdirSync(modulesPath, {withFileTypes: true}).forEach(dirent => {
 			if(dirent.isDirectory()){
 				let moduleName = dirent.name;
@@ -14,9 +18,7 @@ var modules = {
 				modules.list[moduleName] = item;
 			};
 		});
-
-		console.log(modules.list);
-	},
+	}
 	get: (name, currentPage) => {
 		if(modules.list[name] !== undefined){
 			return modules.list[name].app.get(currentPage);

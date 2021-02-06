@@ -224,6 +224,34 @@ var admin = {
 			payload.result.state = true;
 			payload.result.msg = "Page saved successfully";
 			ws.send(payload);
+		},
+		savei18n: async (payload) => {
+			let fields = {};
+			for(let index in payload.data.fields){
+				let value = payload.data.fields[index];
+				let path = index.split("/").splice(1);
+
+				let section = fields;
+				for(let i=0,l=path.length;i<l;i++){
+					let p = path[i];
+					if(i+1 === l){
+						section[p] = value || "";
+					} else {
+						if(typeof section[p] === "undefined"){
+							if(isNaN(parseInt(path[i+1],10))){
+								section[p] = {};
+							} else {
+								section[p] = [];
+							}
+						}
+						section = section[p];
+					}
+				}
+			}
+			console.log(fields);
+			payload.result.state = true;
+			payload.result.msg = "Dictionary saved successfully";
+			ws.send(payload);
 		}
 	},
 	refreshURL: async (targetID) => {

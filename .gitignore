@@ -4,6 +4,7 @@
 /sandbox/app/custom
 /sandbox/admin/views/modules/head.html
 /sandbox/views/modules/head.html
+/sandbox/modules/custom
 /img/favicon
 /img/content
 /img/ext
@@ -13,6 +14,6 @@ note
 init
 restart
 .DS_Store
-sftp-config.json
 *.sublime-project
 *.sublime-workspace
+xfs-config.json
