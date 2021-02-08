@@ -31,6 +31,9 @@ var utils = {
 			}
 			return str.trim();
 		}
+	},
+	copyObj: function(obj){
+		return JSON.parse(JSON.stringify(obj));
 	}
 };
 module.exports = utils;

@@ -39,7 +39,7 @@ var admin = {
 				type: t.getAttr("data-type")
 			}
 		};
-		ws.req(post);
+		api.req(post);
 
 	},
 	addPage(e){
@@ -56,7 +56,7 @@ var admin = {
 		if(item.length){
 			post.data.parentID = item.getAttr("data-id");
 		}
-		ws.req(post);
+		api.req(post);
 		e.preventDefault();
 		e.stopPropagation();
 	},

@@ -192,10 +192,25 @@ let control = {
 	},
 	i18n: {
 		get: async (lang) => {
+
+			let dict = utils.copyObj(i18n.getLangObj(lang));
+				delete dict._id;
+			return JSON.stringify(dict, null, "\t");
+			/*
 			control.i18n.tpl = view.getTpl("/admin/views/snippets/i18n.item");
 			let dict = i18n.getLangObj(lang);
 			let list = control.i18n.list(lang, dict);
 			return list;
+			*/
+
+			// return JSON.stringify(dict);
+			/*
+			control.i18n.tpl = view.getTpl("/admin/views/snippets/i18n.item");
+			let dict = i18n.getLangObj(lang);
+			return 
+			let list = control.i18n.list(lang, dict);
+			return list;
+			*/
 		},
 		list: (path, dict) => {
 			let list = [];
@@ -210,9 +225,12 @@ let control = {
 				if(typeof value === "object"){
 					subList = control.i18n.list(itemPath, value);
 					endPoint = "";
-				} else {
+					value = false;
+				}
+				/* else {
 					subList = (value.length < 120)?`<input type="text" value="${value}"/>`:`<textarea>${value}</textarea>`;
 				}
+				*/
 
 				let tpl = view.parseValues(control.i18n.tpl,{
 					id: itemPath,

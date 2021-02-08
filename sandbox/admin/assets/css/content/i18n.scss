@@ -46,6 +46,15 @@
 	}
 
 	>form {
+		padding: 20px;
+		textarea {
+			max-width: 620px;
+			min-height: 70vh;
+		}
+	}
+
+	/*
+	>form {
 		margin-top: 10px;
 		max-width: 780px;
 
@@ -170,4 +179,5 @@
 			}
 		}
 	}
+	*/
 }

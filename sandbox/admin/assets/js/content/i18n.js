@@ -31,6 +31,7 @@ content.i18n = {
 		}
 	},
 	go(e){
+		/*
 		let post = {
 			class: "admin",
 			method: "savei18n",
@@ -44,7 +45,18 @@ content.i18n = {
 			post.data.fields[t.getAttr("data-id")] = t.find(">input,>textarea").val();
 		});
 
-		ws.req(post);
+		api.req(post);
+		*/
+
+		let post = {
+			class: "admin",
+			method: "savei18n",
+			data: {
+				lang: $("#i18n").getAttr("data-lang"),
+				fields: $("#i18n>form>textarea").val()
+			}
+		};
+		api.req(post);
 		
 		e.preventDefault();
 		e.stopPropagation();
@@ -55,6 +67,9 @@ content.i18n = {
 		let item = t.parent(".item");
 		if(type === "remove"){
 			item.slideUp("remove");
+		} else {
+			item.removeClass("endPoint");
+			item.find(">input").remove();
 		}
 	},
 	showAddForm(e){
@@ -75,8 +90,16 @@ content.i18n = {
 		let form = $(this);
 		let nodeName = form.find("input").val().trim().toLowerCase();
 		let nodeID = $("#i18n").getAttr("data-lang")+"/"+nodeName;
-		console.log("Add Node:", nodeName)
-		$("#i18n>form>.list").append(`<div class="item endPoint" data-id="${nodeID}">
+		// console.log("Add Node:", nodeName)
+		$("#i18n>form>.list").append(content.i18n.getNode(nodeID,nodeName));
+		e.preventDefault();
+		e.stopPropagation();
+		let createdEl = $(`#i18n>form>.list>.item[data-id="${nodeID}"]`);
+		createdEl.find(">.info>.fn>.btn").hover().click(content.i18n.fn);
+		createdEl.get(0).scrollIntoView({behavior: "smooth"});
+	},
+	getNode: (nodeID,nodeName) => {
+		return `<div class="item endPoint" data-id="${nodeID}">
 			<div class="info">
 				<div class="i"></div>
 				<div class="n">${nodeName}</div>
@@ -86,11 +109,6 @@ content.i18n = {
 				</div>
 			</div>
 			<input type="text" value="">
-		</div>`);
-		e.preventDefault();
-		e.stopPropagation();
-		let createdEl = $(`#i18n>form>.list>.item[data-id="${nodeID}"]`);
-		createdEl.find(">.info>.fn>.btn").hover().click(content.i18n.fn);
-		createdEl.get(0).scrollIntoView({behavior: "smooth"});
+		</div>`
 	}
 };
