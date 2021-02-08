@@ -94,7 +94,7 @@ var view = {
 						let pages = await admin.control.getPages(currentLang);
 						pageData.title += ` (${pages.count})`;
 						contentData = {
-							lang: lang,
+							lang: currentLang,
 							languages: admin.control.getLanguages(clearURL, currentLang),
 							pages: pages
 						};
@@ -121,7 +121,7 @@ var view = {
 						contentData = {
 							lang: currentLang,
 							languages: admin.control.getLanguages(clearURL, currentLang),
-							list: await admin.control.i18n.get(currentLang)
+							data: await admin.control.i18n.get(currentLang)
 						}
 						break;
 				}
@@ -136,6 +136,7 @@ var view = {
 			Content
 
 			*/
+			console.log("URL", url);
 			pageData.assets = view.getAssets();
 			currentPage = await db.collection("pages").findOne({hashID:md5(url)});
 			if(currentPage){

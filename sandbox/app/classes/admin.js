@@ -226,6 +226,9 @@ var admin = {
 			ws.send(payload);
 		},
 		savei18n: async (payload) => {
+			let data = JSON.parse(payload.data);
+			console.log(data.fields);
+			/*
 			let fields = {};
 			for(let index in payload.data.fields){
 				let value = payload.data.fields[index];
@@ -257,6 +260,7 @@ var admin = {
 			ws.send(payload);
 
 			app.message.send({method:"refresh-i18n",lang:i18n.getLang(payload.data.lang)});
+			*/
 		}
 	},
 	refreshURL: async (targetID) => {

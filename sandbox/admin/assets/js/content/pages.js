@@ -101,7 +101,7 @@ content.pages = {
 							position: position
 						}
 					};
-					ws.req(post);
+					api.req(post);
 					break;
 			}
 		}

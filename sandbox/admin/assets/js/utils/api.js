@@ -1,21 +1,21 @@
-var ws = {
+var api = {
 	attempts: 0,
 	online: false,
 	init: () => {
-		ws.attempts++;
-		ws.obj = new WebSocket(`wss://${location.host}`);
-		ws.obj.onopen = ws.events;
-		ws.obj.onclose = ws.events;
-		ws.obj.onerror = ws.events;
-		ws.obj.onmessage = ws.resp;
+		api.attempts++;
+		api.obj = new WebSocket(`wss://${location.host}`);
+		api.obj.onopen = api.events;
+		api.obj.onclose = api.events;
+		api.obj.onerror = api.events;
+		api.obj.onmessage = api.resp;
 	},
 	events(e){
 		// error, close & open
 		switch(e.type){
 			case "open":
-				ws.attempts = 0;
-				ws.online = true;
-				ws.req({
+				api.attempts = 0;
+				api.online = true;
+				api.req({
 					class: "handshake",
 					method: "hi",
 					data:{
@@ -23,20 +23,20 @@ var ws = {
 						l: navigator.language
 					}
 				});
-				ws.tasker.purge();
+				api.tasker.purge();
 				break;
 
 			case "error":
-				ws.online = false;
-				ws.obj.close();
+				api.online = false;
+				api.obj.close();
 				break;
 
 			case "close":
-				ws.online = false;
-				if(ws.attempts < 10){
-					setTimeout(ws.init, 1000);
+				api.online = false;
+				if(api.attempts < 10){
+					setTimeout(api.init, 1000);
 				} else {
-					setTimeout(ws.init, 10000);
+					setTimeout(api.init, 10000);
 				}
 				break;
 		}
@@ -44,19 +44,19 @@ var ws = {
 	tasker: {
 		list: [],
 		purge: () => {
-			let l = ws.tasker.length
+			let l = api.tasker.length
 			while (l--) {
-				let data = ws.tasker.splice(i, 1);
-				ws.req(data);
+				let data = api.tasker.splice(i, 1);
+				api.req(data);
 			}
 		}
 	},
 	req: (data) => {
-		if(ws.obj && ws.online){
+		if(api.obj && api.online){
 			log("Request:",data);
-			ws.obj.send(JSON.stringify(data));
+			api.obj.send(JSON.stringify(data));
 		} else {
-			ws.tasker.list.push(data);
+			api.tasker.list.push(data);
 		}
 	},
 	resp: (e) => {

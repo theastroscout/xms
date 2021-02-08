@@ -28,7 +28,7 @@ content.page = {
 
 		post.data.fields.content = $("#page>form>.content>textarea").val();
 
-		ws.req(post);
+		api.req(post);
 		e.preventDefault();
 		e.stopPropagation();
 	},
@@ -43,6 +43,6 @@ content.page = {
 			}
 		};
 		post.data.values[t.getAttr("data-type")] = ui.switch(t);
-		ws.req(post)
+		api.req(post)
 	}
 };

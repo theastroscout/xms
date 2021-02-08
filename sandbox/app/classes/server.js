@@ -70,11 +70,18 @@ var server = {
 			let lang = i18n.getLangFromHeader(req.headers["accept-language"]);
 			res.cookie("lang", lang, conf.cookie);
 			if(lang !== pageLang){
-				res.redirect("/"+i18n.getPrefix(lang)+url);
+				let redirectURL = i18n.getPrefix(lang) + ((url === "/home")?"/":url);
+				res.redirect(redirectURL);
 				return false;
 			}
 		} else if(cookie.lang !== pageLang){
 			res.cookie("lang", pageLang, conf.cookie);
+		}
+
+		prefix = i18n.getPrefix(pageLang);
+		let reg = new RegExp("^"+prefix);
+		if(url.replace(reg,"") === "/"){
+			url += "home";
 		}
 
 		let page = await view.get(url);
