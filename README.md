@@ -176,6 +176,21 @@ Call module by putting next code to your template.
 ```
 
 
+## View module
+If you want work with template on global level add module View with getPageData() method in ```/sandbox/modules/custom/view```
+```js
+var app = {
+	get: async (currentPage) => {
+
+	},
+	getPageData: async (currentPage) => {
+		let data = {};
+		return data;
+	}
+}
+```
+
+
 ## SSL
 We recommend using certbot to obtain SSL certificates
 ```
