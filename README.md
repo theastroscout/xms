@@ -64,6 +64,10 @@ npm install
 Run build command and follow instructions
 ```
 npm run build
+
+# or
+
+npm run rebuild # If you already have Configuration file at conf/data.json
 ```
 
 ## 4. Restore XMS Settings to Default
@@ -77,13 +81,13 @@ npm run restore
 # Usage
 1. Control your web site: https://sandbox.yourdomain.com/admin
 2. Testing your web site: https://sandbox.yourdomain.com
-3. Store images - img directory of https://img.yourdomain.com
+3. Store images - /img/ directory of https://img.yourdomain.com
 4. Minified & Optimized Production - https://yourdomain.com
 
 <br/>
 
 ## Launch
-1. Go to folder with your project
+1. Go to the folder with your project
 2. Create Screen
 ```
 screen -S YOUR_SCREEN_NAME
