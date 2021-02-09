@@ -218,7 +218,7 @@ var view = {
 		for(let moduleName of modulesList){
 			moduleName = moduleName.replace(/\{\{([^}]*)\}\}/,"$1");
 			
-			let moduleItem = modules.get(moduleName, currentPage);
+			let moduleItem = await modules.get(moduleName, currentPage);
 			if(moduleItem){
 				moduleItem = view.parseModules(moduleItem, currentPage);
 				tpl = tpl.replace(`{{${moduleName}}}`, moduleItem);
