@@ -34,6 +34,17 @@ var utils = {
 	},
 	copyObj: function(obj){
 		return JSON.parse(JSON.stringify(obj));
+	},
+	getFilesList: (dir) => {
+		let files = [];
+		fs.readdirSync(dir).forEach(file => {
+			if (fs.statSync(dir+file).isDirectory()){
+				files = files.concat(utils.getFilesList(dir+file+"/"));
+			} else {
+				files.push(dir+file);
+			}
+		});
+		return files;
 	}
 };
 module.exports = utils;

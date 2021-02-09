@@ -23,6 +23,9 @@ var admin = {
 				location.reload();
 			}
 		},
+		setPageType: (payload) => {
+			notify.show(payload);
+		},
 		base: (payload) => {
 			notify.show(payload);
 		},

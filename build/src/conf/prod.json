@@ -28,9 +28,6 @@
 		}
 	},
 	"assets": {
-		"i18n": {
-			"default": "en"
-		},
 		"web": {
 			"css": [
 				"/app.css"

@@ -5,6 +5,9 @@ content.page = {
 		}
 		$('#page>form>.settings>.fields>.item').hover().click(content.page.changeSettings);
 		$("#page>form").on("submit", content.page.edit);
+
+		$("#page>form>.types>.tit").click(content.page.showTypes);
+		$("#page>form>.types>.list>.item").hover().click(content.page.setType);
 	},
 	edit(e){
 		let post = {
@@ -44,5 +47,31 @@ content.page = {
 		};
 		post.data.values[t.getAttr("data-type")] = ui.switch(t);
 		api.req(post)
+	},
+	showTypes(e){
+		let block = $("#page>form>.types");
+		let items = block.find(">.list>.item:not(.active)");
+		if(block.hasClass("opened")){
+			block.removeClass("opened");
+			items.slideUp();
+		} else {
+			block.addClass("opened");
+			items.slideDown();
+		}
+	},
+	setType(e){
+		let t = $(this);
+		if(t.hasClass("active")){
+			return false;
+		}
+		let post = {
+			class: "admin",
+			method: "setPageType",
+			data: {
+				pageID: $("#page").getAttr("data-id"),
+				typeID: t.getAttr("data-id")
+			}
+		};
+		api.req(post);
 	}
 };

@@ -47,7 +47,9 @@
 
 	>form {
 		padding: 20px;
-		textarea {
+		> textarea {
+			margin: 2px 0;
+			display: block;
 			max-width: 620px;
 			min-height: 70vh;
 		}

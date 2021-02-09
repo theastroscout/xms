@@ -132,7 +132,7 @@ var app = {
 	methods: {
 		/*
 		Place here your methods that you can evoke from Frontend by
-		ws.send({
+		api.send({
 			module: "YOUR_MODULE_NAME",
 			method: "YOUR_MODULE_METHOD",
 			data: {
@@ -158,7 +158,7 @@ var app = {
 			*/
 			payload.result.state = "Result state";
 			payload.result.msg = "Message output";
-			ws.send(payload);
+			api.send(payload);
 		}
 	}
 };
@@ -191,6 +191,13 @@ Call module by putting next code to your template.
 - nginx # Nginx Configuration Example
 - node_modules
 - prod # Production version. Create with Deploy method in Control Panel
+	- app # System
+	- modules # Your and Systems modules
+	- public # Public folder
+		- app.css # Minified styles
+		- app.js # Minified scripts
+		- ui.svg # UI sprites
+	- views # Minified Templates
 - sandbox # Sandbox version
 	- admin
 		- assets
@@ -205,7 +212,7 @@ Call module by putting next code to your template.
 			- server.js
 			- view.js
 			- view.pages.js
-			- ws.js
+			- api.js
 		- app.js # Worker
 		- init.js # App Launcher
 		- master.js # Master
