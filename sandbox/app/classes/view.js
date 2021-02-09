@@ -158,8 +158,8 @@ var view = {
 		}
 
 
-		pageData.content = view.parseModules(pageData.content, currentPage);
-		tpl = view.parseModules(tpl, currentPage);
+		pageData.content = await view.parseModules(pageData.content, currentPage);
+		tpl = await view.parseModules(tpl, currentPage);
 		output.layout = view.parseValues(tpl,pageData);
 		return output;
 	},
@@ -206,7 +206,7 @@ var view = {
 	Parse
 
 	*/
-	parseModules: (tpl, currentPage) => {
+	parseModules: async (tpl, currentPage) => {
 		if(!tpl){
 			return tpl;
 		}
@@ -220,7 +220,7 @@ var view = {
 			
 			let moduleItem = await modules.get(moduleName, currentPage);
 			if(moduleItem){
-				moduleItem = view.parseModules(moduleItem, currentPage);
+				moduleItem = await view.parseModules(moduleItem, currentPage);
 				tpl = tpl.replace(`{{${moduleName}}}`, moduleItem);
 			} else {
 				let moduleTpl = view.getTpl(`/views/modules/${moduleName}`);
