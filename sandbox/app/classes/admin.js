@@ -11,7 +11,12 @@ var admin = {
 					payload.result.msg = "Sprite created successfully to public/ui.svg";
 					break;
 				case "deploy":
+					await admin.deploy();
 					payload.result.msg = "Production rebuild & launch successfully";
+					break;
+				case "refreshURLs":
+					await admin.refreshURLs();
+					payload.result.msg = "Page URLs refreshed";
 					break;
 			}
 
@@ -225,9 +230,35 @@ var admin = {
 			payload.result.msg = "Page saved successfully";
 			ws.send(payload);
 		},
+		setPageType: async (payload) => {
+			let pageID = new mongodb.ObjectID(payload.data.pageID);
+			let typeID = new mongodb.ObjectID(payload.data.typeID);
+			db.collection("pages").updateOne({_id:pageID},{$set: {typeID:typeID}});
+
+			payload.result.state = true;
+			payload.result.msg = "Page Type changed successfully";
+			ws.send(payload);
+		},
 		savei18n: async (payload) => {
-			let data = JSON.parse(payload.data);
-			console.log(data.fields);
+			let data;
+			try {
+				data = JSON.parse(payload.data.fields)
+			} catch (e){
+				data = false;
+			}
+			if(data === false){
+				payload.result.state = false;
+				payload.result.msg = "Data was corrupted and can't be saved";
+				ws.send(payload);
+				return false;
+			}
+			let langID = i18n.getLangID(payload.data.lang);
+			db.collection("i18n").replaceOne({_id:langID},data);
+			payload.result.state = true;
+			payload.result.msg = "Dictionary saved successfully";
+			ws.send(payload);
+
+			app.message.send({method:"refresh-i18n",lang:i18n.getLang(payload.data.lang)});
 			/*
 			let fields = {};
 			for(let index in payload.data.fields){
@@ -262,6 +293,13 @@ var admin = {
 			app.message.send({method:"refresh-i18n",lang:i18n.getLang(payload.data.lang)});
 			*/
 		}
+	},
+	refreshURLs: async(payload) => {
+		let pages = await db.collection("pages").find({}).toArray();
+		for(let page of pages){
+			await admin.refreshURL(page._id);
+		}
+		return true;
 	},
 	refreshURL: async (targetID) => {
 		let pages = await db.collection("pages");
@@ -318,6 +356,41 @@ var admin = {
 				resolve(true);
 			});
 		});
+	},
+	deploy: async () => {
+		if (!fs.existsSync("prod")) {
+			fs.mkdirSync("prod");
+		}
+
+		// Refresh Sprites
+		await admin.createSprites();
+
+		minify("sandbox/assets/js/app.js", {to: "sandbox/public/app.js"});
+		minify("sandbox/assets/css/app.scss", {to: "sandbox/public/app.css"});
+
+		execSync("rsync -avc --delete sandbox/public/ prod/public/");
+		execSync("rsync -avc --delete sandbox/app/ prod/app/");
+		execSync("rsync -avc --delete sandbox/modules/ prod/modules/");
+		execSync("rsync -avc --delete sandbox/views/ prod/views/");
+
+
+		let tpls = utils.getFilesList(`${conf.sys.root}/prod/views/`);
+		for(let i=0,l=tpls.length;i<l;i++){
+			let tpl = tpls[i];
+			await minify(tpl,{to:tpl});
+		}
+
+
+		for(let moduleID in modules.list){
+			let moduleItem = modules.list[moduleID];
+			let path = moduleItem.path.replace("sandbox","prod")+"/views/";
+			let tpls = utils.getFilesList(path);
+			for(let i=0,l=tpls.length;i<l;i++){
+				let tpl = tpls[i];
+				await minify(tpl,{to:tpl});
+			}
+		}
+		
 	}
 };
 admin.control = require("./admin.control");

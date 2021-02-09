@@ -136,7 +136,6 @@ var view = {
 			Content
 
 			*/
-			console.log("URL", url);
 			pageData.assets = view.getAssets();
 			currentPage = await db.collection("pages").findOne({hashID:md5(url)});
 			if(currentPage){

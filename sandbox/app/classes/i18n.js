@@ -2,11 +2,14 @@ var i18n = {
 	list: {},
 	ids: {},
 	init: async () => {
-		i18n.default = conf.assets.i18n.default;
 		let resp = await db.collection("i18n").find({}).toArray();
 		for(let item of resp){
 			i18n.list[item.name] = item;
 			i18n.ids[item._id] = item.name;
+			if(item.default === true){
+				i18n.default = item.name;
+				i18n.defaultID = item._id.toString();
+			}
 		}
 	},
 	refresh: async (langName) => {
@@ -14,6 +17,10 @@ var i18n = {
 		let lang = await db.collection("i18n").findOne({_id:langID});
 		i18n.list[lang.name] = lang;
 		i18n.ids[lang._id] = lang.name;
+		if(lang.default === true){
+			i18n.default = lang.name;
+			i18n.defaultID = lang._id.toString();
+		}
 	},
 	getLangObj: (lang) => {
 		lang = i18n.getLang(lang);
@@ -37,7 +44,7 @@ var i18n = {
 		} else {
 			obj = i18n.list[lang];
 		}
-		return (obj.prefix)?"/"+obj.prefix:"";
+		return (obj._id.toString() !== i18n.defaultID)?"/"+obj.prefix:"";
 	},
 	getLangFromHeader: (str) => {
 		if(str === undefined || str === null){

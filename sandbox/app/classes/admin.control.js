@@ -150,6 +150,20 @@ let control = {
 			return false;
 		}
 
+		let pageTypes = [];
+		let pageTypeTpl = view.getTpl("/admin/views/snippets/page.types.item");
+
+		for(let i in view.pageTypes.list){
+			let item = view.pageTypes.list[i];
+			let pageTypeData = {
+				active: (item._id.toString() === page.typeID.toString())?"active":"",
+				id: item._id.toString(),
+				name: item.name,
+				desc: item.desc
+			};
+			pageTypes.push(view.parseValues(pageTypeTpl,pageTypeData));
+		}
+
 		let output = {
 			id: page._id.toString(),
 			name: page.name,
@@ -163,6 +177,7 @@ let control = {
 			},
 			menu: (page.menu)?"selected":"",
 			default: (page.default)?"selected":"",
+			pageTypes: pageTypes.join(""),
 			content: page.content || false
 		};
 

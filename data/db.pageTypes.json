@@ -1,11 +1,13 @@
 [
 	{
 		"name": "Content Page",
+		"desc": "Default pagetype for simple page",
 		"tpl": "/views/content/default",
 		"default": true
 	},
 	{
 		"name": "Home Page",
+		"desc": "Page type for default home page of the site",
 		"tpl": "/views/content/home"
 	}
 ]

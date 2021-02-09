@@ -28,6 +28,9 @@ global.hqDB = require("@hqdaemon/db");
 
 global.SVGSpriter = require("svg-sprite");
 
+const {exec, execSync} = require("child_process");
+global.execSync = execSync;
+
 async function init(){
 	global.mongodb = await hqDB({type:"mongo"});
 	global.mongo = mongodb.client;

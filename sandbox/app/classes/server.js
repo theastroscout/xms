@@ -51,7 +51,8 @@ var server = {
 			}
 		}
 
-		// Fix /en/ prefix
+		// Fix Default Language Prefix
+		/*
 		let isEn = url.match(/^\/en/);
 		if(isEn){
 			let redirectURL = url.replace(/^\/en/,"");
@@ -61,6 +62,7 @@ var server = {
 			res.redirect(redirectURL);
 			return false;
 		}
+		*/
 
 		// Cookie
 		let cookie = utils.getCookie(req.headers.cookie);
@@ -77,7 +79,7 @@ var server = {
 		} else if(cookie.lang !== pageLang){
 			res.cookie("lang", pageLang, conf.cookie);
 		}
-
+		
 		prefix = i18n.getPrefix(pageLang);
 		let reg = new RegExp("^"+prefix);
 		if(url.replace(reg,"") === "/"){
