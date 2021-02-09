@@ -25,6 +25,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build/restore & node build/go",
+    "rebuild": "node build/rebuild",
     "restore": "node build/restore"
   },
   "repository": {

@@ -4,6 +4,7 @@
 		"fullName": "English",
 		"switchName": "In English",
 		"prefix": "",
+		"default": true,
 		"pages": {
 			"notfound": {
 				"name": "Page Not Found",
