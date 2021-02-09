@@ -157,6 +157,10 @@ var view = {
 			output.state = true;
 		}
 
+		if(modules.view !== undefined){
+			pageData = Object.assign(pageData, modules.view.getPageData(currentPage));
+		}
+
 
 		pageData.content = await view.parseModules(pageData.content, currentPage);
 		tpl = await view.parseModules(tpl, currentPage);
