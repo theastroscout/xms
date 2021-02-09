@@ -175,6 +175,13 @@ Call module by putting next code to your template.
 {{YOUR_CUSTOME_MODULE}}
 ```
 
+
+## SSL
+We recommend using certbot to obtain SSL certificates
+```
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+```
+
 <br/>
 <br/>
 

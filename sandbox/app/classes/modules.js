@@ -1,11 +1,14 @@
 var modules = {
 	list: {},
 	init: async () => {
-		modules.load(workDir+"/modules/sys");
-		modules.load(workDir+"/modules/custom");
+		await modules.load(workDir+"/modules/sys");
+		await modules.load(workDir+"/modules/custom");
 		console.log(modules.list);
 	},
 	load: async (modulesPath) => {
+		if(!fs.existsSync(modulesPath)){
+			return false;
+		}
 		fs.readdirSync(modulesPath, {withFileTypes: true}).forEach(dirent => {
 			if(dirent.isDirectory()){
 				let moduleName = dirent.name;

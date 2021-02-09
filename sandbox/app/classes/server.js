@@ -42,6 +42,7 @@ var server = {
 				} else {
 					file = await minify(url.replace(/^\//,""));
 				}
+
 				if(file){
 					let header = (ext === "js")?"text/javascript":"text/css";
 					res.setHeader("Content-Type", header);
