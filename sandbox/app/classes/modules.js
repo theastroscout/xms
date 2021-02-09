@@ -22,9 +22,9 @@ var modules = {
 			};
 		});
 	},
-	get: (name, currentPage) => {
+	get: async (name, currentPage) => {
 		if(modules.list[name] !== undefined){
-			return modules.list[name].app.get(currentPage);
+			return await modules.list[name].app.get(currentPage);
 		}
 		return false;
 	}
