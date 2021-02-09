@@ -4,11 +4,12 @@ var restore = {
 		files: [
 			"init",
 			"restart",
+			"conf/dev.json",
+			"conf/prod.json",
 			"sandbox/admin/views/modules/head.html",
 			"sandbox/views/modules/head.html"
 		],
 		dirs: [
-			"conf",
 			"nginx",
 			"img/favicon"
 		]

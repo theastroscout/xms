@@ -10,9 +10,13 @@ var app = {
 			return false;
 		}
 
-		let conf = JSON.parse(fs.readFileSync(confPath));
-		
+		fs.mkdirSync("sandbox/views", {recursive: true});
+		fs.mkdirSync("sandbox/views/content", {recursive: true});
+		fs.mkdirSync("sandbox/views/modules", {recursive: true});
+		fs.mkdirSync("sandbox/modules", {recursive: true});
 		fs.mkdirSync("nginx/sites-enabled", {recursive: true});
+
+		let conf = JSON.parse(fs.readFileSync(confPath));
 
 		// Sandbox shell
 		let initFile = fs.readFileSync("build/src/init").toString();
