@@ -35,19 +35,19 @@
 	"assets": {
 		"web": {
 			"css": [
-				"/assets/dev/css/app.scss"
+				"/assets/css/app.scss"
 			],
 			"js": [
-				"/assets/dev/js/app.js",
-				"/assets/admin/js/admin.js"
+				"/assets/js/app.js",
+				"/admin/assets/js/admin.js"
 			]
 		},
 		"admin": {
 			"css": [
-				"/assets/admin/css/app.scss"
+				"/admin/assets/css/app.scss"
 			],
 			"js": [
-				"/assets/admin/js/app.js"
+				"/admin/assets/js/app.js"
 			]
 		},
 		"imgs": {
