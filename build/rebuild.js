@@ -10,6 +10,8 @@ var app = {
 			return false;
 		}
 
+		fs.mkdirSync("sandbox/assets/js", {recursive: true});
+		fs.mkdirSync("sandbox/assets/css", {recursive: true});
 		fs.mkdirSync("sandbox/views/content", {recursive: true});
 		fs.mkdirSync("sandbox/views/modules", {recursive: true});
 		fs.mkdirSync("sandbox/modules/sys", {recursive: true});
@@ -66,12 +68,13 @@ var app = {
 		headAdminModule = headAdminModule.replace(/FAVICON_URL/g,FAVICON_URL);
 		fs.writeFileSync("sandbox/admin/views/modules/head.html",headAdminModule);
 
+		/*
 		let headModule = fs.readFileSync("build/src/sandbox/views/modules/head.html").toString();
 		headModule = headModule.replace(/FAVICON_URL/g,FAVICON_URL);
 		fs.writeFileSync("sandbox/views/modules/head.html",headModule);
 
-		
 		execSync("cp -a build/src/img/favicon/. img/favicon");
+
 
 		let browserconfig = fs.readFileSync("img/favicon/v1/browserconfig.xml").toString();
 		browserconfig = browserconfig.replace(/FAVICON_URL/g, FAVICON_URL);
@@ -80,6 +83,7 @@ var app = {
 		let webmanifest = fs.readFileSync("img/favicon/v1/site.webmanifest").toString();
 		webmanifest = webmanifest.replace(/FAVICON_URL/g, FAVICON_URL);
 		fs.writeFileSync("img/favicon/v1/site.webmanifest",webmanifest);
+		*/
 
 
 		// Dev Conf
