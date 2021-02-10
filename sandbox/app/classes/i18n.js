@@ -78,18 +78,18 @@ var i18n = {
 
 		try {
 			value = i18n.list[lang];
-			for(var i in chunks){
-				value = value[chunks[i]];
+			for(var c of chunks){
+				value = value[c];
 			}
 		} catch(e){
 			// Continue regardless errors
 		}
 
-		if(value === false){
+		if(value === undefined && i18n.default !== lang){
 			try{
 				value = i18n.list[i18n.default];
-				for(var i in chunks){
-					value = value[chunks[i]];
+				for(var c of chunks){
+					value = value[c];
 				}
 			} catch(e){}
 
