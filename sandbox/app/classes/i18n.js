@@ -30,6 +30,13 @@ var i18n = {
 		if(str === undefined || !str || str === null){
 			return i18n.default;
 		}
+		if(typeof str === "object"){
+			str = str.toString();
+			return (i18n.ids[str] !== undefined)?i18n.ids[str]:i18n.default;
+		} else if(i18n.ids[str] !== undefined){
+			return i18n.ids[str];
+		}
+		
 		str = str.toLowerCase();
 		return (i18n.list[str] === undefined)?i18n.default:str;
 	},
@@ -62,6 +69,59 @@ var i18n = {
 			return i18n.default;
 		}
 		return i18n.getLang(prefix[1]);
+	},
+	get: (path, lang, getObject=false) => {
+		lang = i18n.getLang(lang);
+
+		let value = false;
+		let chunks = path.split("/");
+
+		try {
+			value = i18n.list[lang];
+			for(var i in chunks){
+				value = value[chunks[i]];
+			}
+		} catch(e){
+			// Continue regardless errors
+		}
+
+		if(value === false){
+			try{
+				value = i18n.list[i18n.default];
+				for(var i in chunks){
+					value = value[chunks[i]];
+				}
+			} catch(e){}
+
+			if(value === false){
+				value = path;
+			}
+		}
+		if(typeof value !== "string"){
+			if(getObject && typeof value === "object"){
+				return utils.copyObj(value);
+			}
+			return false;
+		} else if(typeof value === "string" && value.match(/^marked/)){
+			value = value.replace(/^marked/,"");
+			value = marked(value);
+		}
+		return value;
+	},
+	translate: (tpl, langID) => {
+		if(tpl === false){
+			return tpl;
+		}
+		let translate = tpl.match(/\{i18n\/([^}]+)\}/g);
+		if(translate){
+			for(let t of translate){
+				let v = i18n.get(t.replace(/\{i18n\/([^}]+)\}/,"$1"), langID);
+				if(v !== false){
+					tpl = tpl.replace(t, v);
+				}
+			}
+		}
+		return tpl;
 	}
 };
 i18n.init();
