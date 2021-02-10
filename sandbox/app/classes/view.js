@@ -157,8 +157,8 @@ var view = {
 			output.state = true;
 		}
 
-		if(modules.list.view !== undefined && typeof modules.list.view.app.getPageData === "function"){
-			pageData = Object.assign(pageData, await modules.list.view.app.getPageData(currentPage) || {});
+		if(modules.list.views !== undefined && typeof modules.list.views.app.getPageData === "function"){
+			pageData = Object.assign(pageData, await modules.list.views.app.getPageData(currentPage) || {});
 		}
 
 
