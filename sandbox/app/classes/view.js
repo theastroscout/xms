@@ -161,7 +161,6 @@ var view = {
 			pageData = Object.assign(pageData, await modules.list.view.app.getPageData(currentPage) || {});
 		}
 
-
 		pageData.content = await view.parseModules(pageData.content, currentPage);
 		tpl = await view.parseModules(tpl, currentPage);
 		output.layout = view.parseValues(tpl,pageData);
@@ -216,6 +215,7 @@ var view = {
 		}
 		let modulesList = tpl.match(/\{\{([^}]*)\}\}/g);
 		if(!modulesList){
+			tpl = i18n.translate(tpl, currentPage.langID);
 			return tpl;
 		}
 
@@ -233,6 +233,8 @@ var view = {
 				}
 			}
 		}
+
+		tpl = i18n.translate(tpl, currentPage.langID);
 
 		return tpl;
 	},
