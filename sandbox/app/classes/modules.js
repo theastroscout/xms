@@ -27,6 +27,12 @@ var modules = {
 			return await modules.list[name].app.get(currentPage, cookies);
 		}
 		return false;
+	},
+	call: async (moduleName, methodName, data) => {
+		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName][methodName] === "function"){
+			return await modules.list[moduleName][methodName](data);
+		}
+		return false;
 	}
 };
 module.exports = modules;
