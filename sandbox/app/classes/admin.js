@@ -21,7 +21,7 @@ var admin = {
 			}
 
 			payload.result.state = true;
-			ws.send(payload);
+			api.send(payload);
 		},
 		addPage: async (payload) => {
 			let pageName = utils.validate.str(payload.data.name);
@@ -29,7 +29,7 @@ var admin = {
 			if(pageName === false){
 				payload.result.state = false;
 				payload.result.msg = "Please Fill in Name field.";
-				ws.send(payload);
+				api.send(payload);
 				return false;
 			}
 
@@ -79,7 +79,7 @@ var admin = {
 
 			payload.result.state = true;
 			payload.result.link = `/admin/pages/${lang}/${result.insertedId}`;
-			ws.send(payload);
+			api.send(payload);
 		},
 		editPage: async (payload) => {
 			let pages = await db.collection("pages");
@@ -97,7 +97,7 @@ var admin = {
 				if(i === "name" && !v){
 					payload.result.state = false;
 					payload.result.msg = "Page must have a name";
-					ws.send(payload);
+					api.send(payload);
 					return false;
 				} else if(i === "url"){
 					if(!v){
@@ -122,7 +122,7 @@ var admin = {
 			let result = await pages.updateOne({_id:page._id},{$set:updated});
 			payload.result.state = true;
 			payload.result.msg = "Page saved successfully";
-			ws.send(payload);
+			api.send(payload);
 		},
 		changePageSettings: async (payload) => {
 			let pages = await db.collection("pages");
@@ -142,13 +142,13 @@ var admin = {
 
 			payload.result.state = true;
 			payload.result.msg = "Page saved successfully";
-			ws.send(payload);
+			api.send(payload);
 		},
 		setPageOrder: async (payload) => {
 			if(payload.data.targetID === payload.data.parentID){
 				payload.result.state = false;
 				payload.result.msg = "Page cannot be ordered by itself.";
-				ws.send(payload);
+				api.send(payload);
 				return false;
 			}
 			let position,
@@ -163,7 +163,7 @@ var admin = {
 			if(!parentPage){
 				payload.result.state = false;
 				payload.result.msg = "Parent page not found. Please refresh this page.";
-				ws.send(payload);
+				api.send(payload);
 				return false;
 			}
 
@@ -172,7 +172,7 @@ var admin = {
 			if(!targetPage){
 				payload.result.state = false;
 				payload.result.msg = "Target page not found. Please refresh this page.";
-				ws.send(payload);
+				api.send(payload);
 				return false;
 			}
 
@@ -228,7 +228,7 @@ var admin = {
 
 			payload.result.state = true;
 			payload.result.msg = "Page saved successfully";
-			ws.send(payload);
+			api.send(payload);
 		},
 		setPageType: async (payload) => {
 			let pageID = new mongodb.ObjectID(payload.data.pageID);
@@ -237,7 +237,7 @@ var admin = {
 
 			payload.result.state = true;
 			payload.result.msg = "Page Type changed successfully";
-			ws.send(payload);
+			api.send(payload);
 		},
 		savei18n: async (payload) => {
 			let data;
@@ -249,14 +249,14 @@ var admin = {
 			if(data === false){
 				payload.result.state = false;
 				payload.result.msg = "Data was corrupted and can't be saved";
-				ws.send(payload);
+				api.send(payload);
 				return false;
 			}
 			let langID = i18n.getLangID(payload.data.lang);
 			db.collection("i18n").replaceOne({_id:langID},data);
 			payload.result.state = true;
 			payload.result.msg = "Dictionary saved successfully";
-			ws.send(payload);
+			api.send(payload);
 
 			app.message.send({method:"refresh-i18n",lang:i18n.getLang(payload.data.lang)});
 			/*
@@ -288,7 +288,7 @@ var admin = {
 			db.collection("i18n").replaceOne({_id:langID},fields);
 			payload.result.state = true;
 			payload.result.msg = "Dictionary saved successfully";
-			ws.send(payload);
+			api.send(payload);
 
 			app.message.send({method:"refresh-i18n",lang:i18n.getLang(payload.data.lang)});
 			*/
