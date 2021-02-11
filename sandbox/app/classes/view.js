@@ -77,7 +77,7 @@ var view = {
 			currentPage = await admin.control.getCurrentPage(clearURL);
 
 			if(currentPage){
-				pageData.assets = view.getAssets(true);
+				currentPage.isAdmin = true;
 				pageData.seo = currentPage.seo;
 				pageData.title = currentPage.title;
 				pageData.menu = currentPage.menu;
@@ -127,16 +127,14 @@ var view = {
 				}
 
 				pageData.content = view.parseValues(pageData.content,contentData);
-			} else {
-				pageData.assets = view.getAssets();
 			}
+
 		} else {
 			/*
 
 			Content
 
 			*/
-			pageData.assets = view.getAssets();
 			currentPage = await db.collection("pages").findOne({hashID:md5(url)});
 			if(currentPage){
 				pageData.seo = currentPage.seo;
@@ -152,6 +150,8 @@ var view = {
 					langID: i18n.getLangID(lang)
 				};
 			}
+
+			
 		}
 
 		if(pageData.content === undefined){
@@ -163,6 +163,7 @@ var view = {
 		}
 
 		currentPage.cookies = cookies;
+		pageData.assets = await view.getAssets(currentPage);
 
 		if(modules.list.view !== undefined && typeof modules.list.view.app.getPageData === "function"){
 			pageData = Object.assign(pageData, await modules.list.view.app.getPageData(currentPage) || {});
@@ -178,13 +179,13 @@ var view = {
 	Get Assets
 
 	*/
-	getAssets: (isAdmin) => {
+	getAssets: async (currentPage) => {
 		let i;
 		let data = {
 			css: "",
 			js: ""
 		};
-		let assets = (isAdmin === undefined)?conf.assets.web:conf.assets.admin;
+		let assets = (currentPage.isAdmin === undefined)?conf.assets.web:conf.assets.admin;
 
 		if(modules.list.view !== undefined && typeof modules.list.view.app.getAssets === "function"){
 			let custom = await modules.list.view.app.getAssets(currentPage);
