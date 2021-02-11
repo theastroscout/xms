@@ -185,6 +185,13 @@ var view = {
 			js: ""
 		};
 		let assets = (isAdmin === undefined)?conf.assets.web:conf.assets.admin;
+
+		if(modules.list.view !== undefined && typeof modules.list.view.app.getAssets === "function"){
+			let custom = await modules.list.view.app.getAssets(currentPage);
+			assets.js = [...assets.js, ...custom.js];
+			assets.css = [...assets.css, ...custom.css];
+		}
+
 		for(i of assets.css){
 			data.css += `<link rel="stylesheet" type="text/css" href="${i}" />`;
 		}
