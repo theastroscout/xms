@@ -28,7 +28,8 @@ var api = {
 			id: socket.id,
 			ip: ip,
 			obj: socket,
-			lang: lang
+			lang: lang,
+			cookies: cookies
 		};
 
 		socket.on("message", api.message);
@@ -53,7 +54,13 @@ var api = {
 			return false;
 		}
 
-		payload.socketID = this.id;
+		let socketID = this.id;
+		let socket = api.list[socketID];
+		payload.socketID = socketID;
+		payload.ip = socket.ip;
+		payload.lang = socket.lang;
+		payload.xu = socket.cookies.xu;
+
 		payload.result = {
 			method: payload.method
 		};
