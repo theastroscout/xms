@@ -16,8 +16,8 @@ var ws = {
 	connection: async (socket, req) => {
 		let ip = req.headers["x-real-ip"];
 
-		let cookie = utils.getCookie(req.headers.cookie);
-		let lang = cookie.lang;
+		let cookies = utils.getCookies(req.headers.cookie);
+		let lang = cookies.lang;
 		if(lang === undefined){
 			lang = i18n.getLangFromHeader(req.headers["accept-language"]);
 		}
