@@ -28,7 +28,7 @@ var view = {
 	init: async () => {
 		view.pageTypes.init();
 	},
-	get: async (url) => {
+	get: async (url, cookies) => {
 		let output = {
 			redirect: false,
 			layout: "Not Found"
@@ -146,6 +146,11 @@ var view = {
 					let content = marked(currentPage.content);
 					pageData.content = view.parseValues(pageData.content,{content:content});
 				}
+			} else {
+				// Not Found
+				currentPage = {
+					langID: i18n.getLangID(lang)
+				};
 			}
 		}
 
@@ -158,11 +163,11 @@ var view = {
 		}
 
 		if(modules.list.view !== undefined && typeof modules.list.view.app.getPageData === "function"){
-			pageData = Object.assign(pageData, await modules.list.view.app.getPageData(currentPage) || {});
+			pageData = Object.assign(pageData, await modules.list.view.app.getPageData(currentPage, cookies) || {});
 		}
 
-		pageData.content = await view.parseModules(pageData.content, currentPage);
-		tpl = await view.parseModules(tpl, currentPage);
+		pageData.content = await view.parseModules(pageData.content, currentPage, cookies);
+		tpl = await view.parseModules(tpl, currentPage, cookies);
 		output.layout = view.parseValues(tpl,pageData);
 		return output;
 	},
@@ -209,7 +214,7 @@ var view = {
 	Parse
 
 	*/
-	parseModules: async (tpl, currentPage) => {
+	parseModules: async (tpl, currentPage, cookies) => {
 		if(!tpl){
 			return tpl;
 		}
@@ -222,7 +227,7 @@ var view = {
 		for(let moduleName of modulesList){
 			moduleName = moduleName.replace(/\{\{([^}]*)\}\}/,"$1");
 			
-			let moduleItem = await modules.get(moduleName, currentPage);
+			let moduleItem = await modules.get(moduleName, currentPage, cookies);
 			if(moduleItem){
 				moduleItem = await view.parseModules(moduleItem, currentPage);
 				tpl = tpl.replace(`{{${moduleName}}}`, moduleItem);

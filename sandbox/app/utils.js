@@ -1,22 +1,22 @@
 var utils = {
 	getUniqueID: () => {
-		return utils.hashChunk() + '-' + utils.hashChunk() + utils.hashChunk() + '-' + utils.hashChunk();
+		return utils.hashChunk() + '-' + utils.hashChunk() + utils.hashChunk();
 	},
 	hashChunk: () => {
-		return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+		return Math.floor((1 + Math.random()) * 0x1000000).toString(16).substring(1);
 	},
-	getCookie: (str) => {
+	getCookies: (str) => {
 		if(str === undefined || str === null){
 			return {};
 		}
 
-		let cookie = {};
+		let cookies = {};
 		let chunks = str.split("; ");
 		for(var item of chunks){
 			item = item.split("=");
-			cookie[item[0]] = item[1];
+			cookies[item[0]] = item[1];
 		}
-		return cookie;
+		return cookies;
 	},
 	strToURL: (str) => {
 		str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");

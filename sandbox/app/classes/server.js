@@ -66,10 +66,10 @@ var server = {
 		*/
 
 		// Cookie
-		let cookie = utils.getCookie(req.headers.cookie);
+		let cookies = utils.getCookies(req.headers.cookie);
 		let pageLang = i18n.getPageLang(url);
 
-		if(!cookie.lang){
+		if(!cookies.lang){
 			let lang = i18n.getLangFromHeader(req.headers["accept-language"]);
 			res.cookie("lang", lang, conf.cookie);
 			if(lang !== pageLang){
@@ -77,8 +77,13 @@ var server = {
 				res.redirect(redirectURL);
 				return false;
 			}
-		} else if(cookie.lang !== pageLang){
+		} else if(cookies.lang !== pageLang){
 			res.cookie("lang", pageLang, conf.cookie);
+		}
+
+		if(cookies.xu === undefined){
+			cookies.xu = utils.getUniqueID();
+			res.cookie("xu", cookies.xu, conf.cookie);
 		}
 		
 		prefix = i18n.getPrefix(pageLang);
@@ -87,7 +92,7 @@ var server = {
 			url += "home";
 		}
 
-		let page = await view.get(url);
+		let page = await view.get(url, cookies);
 		if(page.state === false){
 			res.status(404);
 		} else if(page.redirect){
