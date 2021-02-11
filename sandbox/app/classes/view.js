@@ -185,7 +185,7 @@ var view = {
 			css: "",
 			js: ""
 		};
-		let assets = (currentPage.isAdmin === undefined)?conf.assets.web:conf.assets.admin;
+		let assets = utils.copyObj((currentPage.isAdmin === undefined)?conf.assets.web:conf.assets.admin);
 
 		if(modules.list.view !== undefined && typeof modules.list.view.app.getAssets === "function"){
 			let custom = await modules.list.view.app.getAssets(currentPage);
