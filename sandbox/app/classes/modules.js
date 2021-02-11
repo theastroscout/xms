@@ -28,9 +28,15 @@ var modules = {
 		}
 		return false;
 	},
+	getInstance: (moduleName) => {
+		if(modules.list[moduleName] !== undefined){
+			return modules.list[moduleName].app;
+		}
+		return false;
+	},
 	call: async (moduleName, methodName, data) => {
-		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName][methodName] === "function"){
-			return await modules.list[moduleName][methodName](data);
+		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName].app[methodName] === "function"){
+			return await modules.list[moduleName][methodName].app(data);
 		}
 		return false;
 	}
