@@ -36,7 +36,7 @@ var modules = {
 	},
 	call: async (moduleName, methodName, data) => {
 		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName].app[methodName] === "function"){
-			return await modules.list[moduleName][methodName].app(data);
+			return await modules.list[moduleName].app[methodName](data);
 		}
 		return false;
 	}
