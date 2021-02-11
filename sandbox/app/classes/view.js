@@ -162,12 +162,14 @@ var view = {
 			output.state = true;
 		}
 
+		currentPage.cookies = cookies;
+
 		if(modules.list.view !== undefined && typeof modules.list.view.app.getPageData === "function"){
-			pageData = Object.assign(pageData, await modules.list.view.app.getPageData(currentPage, cookies) || {});
+			pageData = Object.assign(pageData, await modules.list.view.app.getPageData(currentPage) || {});
 		}
 
-		pageData.content = await view.parseModules(pageData.content, currentPage, cookies);
-		tpl = await view.parseModules(tpl, currentPage, cookies);
+		pageData.content = await view.parseModules(pageData.content, currentPage);
+		tpl = await view.parseModules(tpl, currentPage);
 		output.layout = view.parseValues(tpl,pageData);
 		return output;
 	},
@@ -214,7 +216,7 @@ var view = {
 	Parse
 
 	*/
-	parseModules: async (tpl, currentPage, cookies) => {
+	parseModules: async (tpl, currentPage) => {
 		if(!tpl){
 			return tpl;
 		}
@@ -227,7 +229,7 @@ var view = {
 		for(let moduleName of modulesList){
 			moduleName = moduleName.replace(/\{\{([^}]*)\}\}/,"$1");
 			
-			let moduleItem = await modules.get(moduleName, currentPage, cookies);
+			let moduleItem = await modules.get(moduleName, currentPage);
 			if(moduleItem){
 				moduleItem = await view.parseModules(moduleItem, currentPage);
 				tpl = tpl.replace(`{{${moduleName}}}`, moduleItem);
