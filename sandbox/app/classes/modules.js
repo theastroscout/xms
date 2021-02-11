@@ -34,6 +34,12 @@ var modules = {
 		}
 		return false;
 	},
+	getMethod: (moduleName, methodName) => {
+		if(modules.list[moduleName] !== undefined && modules.list[moduleName].app.methods !== undefined && typeof modules.list[moduleName].app.methods[methodName] === "function"){
+			return modules.list[moduleName].app.methods[methodName];
+		}
+		return false;
+	},
 	call: async (moduleName, methodName, data) => {
 		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName].app[methodName] === "function"){
 			return await modules.list[moduleName].app[methodName](data);

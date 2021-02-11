@@ -10,7 +10,7 @@ global.httpsServer = https.createServer(credentials, exp);
 
 // Classes
 global.server = require("./classes/server");
-global.ws = require("./classes/ws");
+global.api = require("./classes/api");
 
 global.admin = require("./classes/admin");
 global.view = require("./classes/view");
@@ -30,7 +30,7 @@ global.app = {
 		process.on("message", app.message.get);
 
 		server.init();
-		ws.init();
+		api.init();
 	},
 	message: {
 		get: (payload) => {
