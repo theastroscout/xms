@@ -152,8 +152,10 @@ var view = {
 						let r = url.match(new RegExp(re.in));
 						if(r !== null){
 							customPageData = await re.out(url, r);
-							pageData.seo = customPageData.seo;
-							pageData.content = customPageData.content;
+							if(customPageData){
+								pageData.seo = customPageData.seo;
+								pageData.content = customPageData.content;
+							}
 							break;
 						}
 					}
