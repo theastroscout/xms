@@ -146,9 +146,24 @@ var view = {
 				}
 			} else {
 				// Not Found
-				currentPage = {
-					langID: i18n.getLangID(lang)
-				};
+				let rules = modules.getRules();
+				if(rules){
+					for(let re of rules){
+						let r = url.match(new RegExp(re.in));
+						if(r !== null){
+							customPageData = await re.out(url, r);
+							pageData.seo = customPageData.seo;
+							pageData.content = customPageData.content;
+							break;
+						}
+					}
+				}
+
+				if(currentPage === null || currentPage === undefined){
+					currentPage = {
+						langID: i18n.getLangID(lang)
+					};
+				}
 			}
 
 			
@@ -165,8 +180,8 @@ var view = {
 		currentPage.cookies = cookies;
 		pageData.assets = await view.getAssets(currentPage);
 
-		if(modules.list.view !== undefined && typeof modules.list.view.app.getPageData === "function"){
-			pageData = Object.assign(pageData, await modules.list.view.app.getPageData(currentPage) || {});
+		if(modules.list.view !== undefined && typeof modules.list.view.getPageData === "function"){
+			pageData = Object.assign(pageData, await modules.list.view.getPageData(currentPage) || {});
 		}
 
 		pageData.content = await view.parseModules(pageData.content, currentPage);
@@ -187,8 +202,8 @@ var view = {
 		};
 		let assets = utils.copyObj((currentPage.isAdmin === undefined)?conf.assets.web:conf.assets.admin);
 
-		if(modules.list.view !== undefined && typeof modules.list.view.app.getAssets === "function"){
-			let custom = await modules.list.view.app.getAssets(currentPage);
+		if(modules.list.view !== undefined && typeof modules.list.view.getAssets === "function"){
+			let custom = await modules.list.view.getAssets(currentPage);
 			assets.js = [...assets.js, ...custom.js];
 			assets.css = [...assets.css, ...custom.css];
 		}

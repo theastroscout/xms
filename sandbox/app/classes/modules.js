@@ -3,7 +3,7 @@ var modules = {
 	init: async () => {
 		await modules.load(workDir+"/modules/sys");
 		await modules.load(workDir+"/modules/custom");
-		console.log(modules.list);
+		console.log("Loaded modules:",Object.keys(modules.list));
 	},
 	load: async (modulesPath) => {
 		if(!fs.existsSync(modulesPath)){
@@ -13,36 +13,40 @@ var modules = {
 			if(dirent.isDirectory()){
 				let moduleName = dirent.name;
 				let modulePath = modulesPath+"/"+moduleName;
-				let item = {
-					name: moduleName,
-					path: modulePath,
-					app: require(modulePath+"/app.js")
-				};
+				let item = require(modulePath+"/app.js");
+					item._name = moduleName;
+					item._path = modulePath;
 				modules.list[moduleName] = item;
 			};
 		});
 	},
 	get: async (name, currentPage, cookies) => {
 		if(modules.list[name] !== undefined){
-			return await modules.list[name].app.get(currentPage, cookies);
+			return await modules.list[name].get(currentPage, cookies);
 		}
 		return false;
 	},
 	getInstance: (moduleName) => {
 		if(modules.list[moduleName] !== undefined){
-			return modules.list[moduleName].app;
+			return modules.list[moduleName];
 		}
 		return false;
 	},
 	getMethod: (moduleName, methodName) => {
-		if(modules.list[moduleName] !== undefined && modules.list[moduleName].app.methods !== undefined && typeof modules.list[moduleName].app.methods[methodName] === "function"){
-			return modules.list[moduleName].app.methods[methodName];
+		if(modules.list[moduleName] !== undefined && modules.list[moduleName].methods !== undefined && typeof modules.list[moduleName].methods[methodName] === "function"){
+			return modules.list[moduleName].methods[methodName];
 		}
 		return false;
 	},
 	call: async (moduleName, methodName, data) => {
-		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName].app[methodName] === "function"){
-			return await modules.list[moduleName].app[methodName](data);
+		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName][methodName] === "function"){
+			return await modules.list[moduleName][methodName](data);
+		}
+		return false;
+	},
+	getRules: () => {
+		if(modules.list.view.rules !== undefined){
+			return modules.list.view.rules;
 		}
 		return false;
 	}
