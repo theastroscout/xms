@@ -186,13 +186,34 @@ var app = {
 	getPageData: async (currentPage) => {
 		let data = {};
 		return data;
-	}
+	},
+	rules: [
+		// If the page is not found the array mapping is up to the first match
+		{
+			in: "^/?(.{2})?/news/(.+)", // Matching url with expression
+			out: modules.list.YOUR_MODULE.YOUR_METHOD // Calling the async method if matched
+			/*
+			YOUR_MODULE.YOUR_METHOD = async (url, match) => {
+				let pageData = {
+					name: "",
+					seo: {
+						title: "",
+						description: "",
+						keywords: ""
+					},
+					content: ""
+				};
+				return pageData;
+			}
+			*/
+		}
+	]
 }
 ```
 
 
 ## SSL
-We recommend using certbot to obtain SSL certificates
+We recommend using **certbot** to obtain SSL certificates
 ```
 sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 ```
