@@ -1,6 +1,15 @@
 var utils = {
-	getUniqueID: () => {
-		return utils.hashChunk() + '-' + utils.hashChunk() + utils.hashChunk();
+	getUniqueID: (mask) => {
+		let hash = utils.hashChunk() + utils.hashChunk() + utils.hashChunk();
+		if(mask){
+			let n=0;
+			hash = hash.split("").map(v => {
+				v = (mask[n] && mask[n]!=="x")?mask[n]+v:v
+				n++;
+				return v;
+			}).join("");
+		}
+		return hash;
 	},
 	hashChunk: () => {
 		return Math.floor((1 + Math.random()) * 0x1000000).toString(16).substring(1);
