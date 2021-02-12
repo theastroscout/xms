@@ -45,6 +45,19 @@ var utils = {
 			}
 		});
 		return files;
+	},
+	strCut: (str, length=180, trail, dots="...") => {
+		if(!str){
+			return false;
+		}
+
+		str = marked(str).replace(/<[^>]*>?/gm, "");
+		if(str.length > length){
+			str = str.substr(0, length);
+			str = str.substr(0, Math.min(str.length, str.lastIndexOf(" ")));
+			str += dots;
+		}
+		return str;
 	}
 };
 module.exports = utils;
