@@ -82,7 +82,7 @@ var server = {
 		}
 
 		if(cookies.xu === undefined){
-			cookies.xu = utils.getUniqueID();
+			cookies.xu = utils.getUniqueID("xxxx-");
 			res.cookie("xu", cookies.xu, conf.cookie);
 		}
 		
