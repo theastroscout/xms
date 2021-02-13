@@ -144,7 +144,10 @@ var view = {
 					
 					currentPage.rewriteParams = rewriteParams;
 					currentPage.cookies = cookies;
-					pageData = await modules.list[pageType.module].getPage(currentPage);
+					let modulePage = await modules.list[pageType.module].getPage(currentPage);
+					if(modulePage !== false){
+						pageData = modulePage;
+					}
 				} else {
 					pageData.seo = currentPage.seo;
 					pageData.content = view.getTpl(pageType.tpl);
