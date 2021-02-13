@@ -138,7 +138,12 @@ var view = {
 			currentPage = await db.collection("pages").findOne({hashID:md5(url)});
 			if(currentPage){
 				let pageType = view.pageTypes.get(currentPage.typeID);
-				if(pageType.module !== undefined && modules.list[pageType.module] !== undefined && typeof modules.list[pageType.module].getPage === "function"){
+				if(pageType.module !== undefined
+					&& modules.list[pageType.module] !== undefined
+					&& typeof modules.list[pageType.module].getPage === "function"){
+					
+					currentPage.rewriteParams = rewriteParams;
+					currentPage.cookies = cookies;
 					pageData = await modules.list[pageType.module].getPage(currentPage);
 				} else {
 					pageData.seo = currentPage.seo;
