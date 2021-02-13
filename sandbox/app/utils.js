@@ -11,6 +11,24 @@ var utils = {
 		}
 		return hash;
 	},
+	getNumberedID: function(limit){
+		var code = '';
+			limit = (typeof limit != 'undefined')?limit:4;
+		for(var i=0;i<4;i++){
+			code += utils.randomInteger(1,9);
+		}
+		code += ((new Date()).getTime()-1100006165769-parseInt(code)).toString().substr(-5);
+		return code.toString();
+	},
+	randomInteger: function(min, max) {
+		let seed = Math.random();
+		let rand = Math.sin(seed) * 10000;
+			rand = rand - Math.floor(rand);
+
+			rand = min + rand * (max - min)
+			rand = Math.round(rand);
+		return rand;
+	},
 	hashChunk: () => {
 		return Math.floor((1 + Math.random()) * 0x1000000).toString(16).substring(1);
 	},
