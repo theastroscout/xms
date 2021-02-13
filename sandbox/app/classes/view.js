@@ -29,7 +29,6 @@ var view = {
 		view.pageTypes.init();
 	},
 	get: async (url, cookies, rewriteParams) => {
-		console.log(url, cookies, rewriteParams);
 		let output = {
 			redirect: false,
 			layout: "Not Found"
@@ -185,6 +184,7 @@ var view = {
 			output.state = true;
 		}
 
+		currentPage.rewriteParams = rewriteParams;
 		currentPage.cookies = cookies;
 		pageData.assets = await view.getAssets(currentPage);
 
