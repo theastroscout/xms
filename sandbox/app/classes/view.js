@@ -28,7 +28,8 @@ var view = {
 	init: async () => {
 		view.pageTypes.init();
 	},
-	get: async (url, cookies) => {
+	get: async (url, cookies, rewriteParams) => {
+		console.log(url, cookies, rewriteParams);
 		let output = {
 			redirect: false,
 			layout: "Not Found"
@@ -151,10 +152,15 @@ var view = {
 					for(let re of rules){
 						let r = url.match(new RegExp(re.in));
 						if(r !== null){
-							customPageData = await re.out(url, r);
-							if(customPageData){
-								pageData.seo = customPageData.seo;
-								pageData.content = customPageData.content;
+							if(typeof re.out === "string"){
+								let newURL = url.replace(new RegExp(re.in),re.out);
+								return await view.get(newURL,cookies,r);
+							} else {
+								customPageData = await re.out(url, r);
+								if(customPageData){
+									pageData.seo = customPageData.seo;
+									pageData.content = customPageData.content;
+								}
 							}
 							break;
 						}
