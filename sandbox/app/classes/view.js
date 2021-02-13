@@ -137,12 +137,16 @@ var view = {
 			*/
 			currentPage = await db.collection("pages").findOne({hashID:md5(url)});
 			if(currentPage){
-				pageData.seo = currentPage.seo;
 				let pageType = view.pageTypes.get(currentPage.typeID);
-				pageData.content = view.getTpl(pageType.tpl);
-				if(currentPage.content){
-					let content = marked(currentPage.content);
-					pageData.content = view.parseValues(pageData.content,{content:content});
+				if(pageType.module !== undefined && modules.list[pageType.module] !== undefined && typeof modules.list[pageType.module].getPage === "function"){
+					pageData = await modules.list[pageType.module].getPage(currentPage);
+				} else {
+					pageData.seo = currentPage.seo;
+					pageData.content = view.getTpl(pageType.tpl);
+					if(currentPage.content){
+						let content = marked(currentPage.content);
+						pageData.content = view.parseValues(pageData.content,{content:content});
+					}
 				}
 			} else {
 				// Not Found
