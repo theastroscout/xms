@@ -2,14 +2,20 @@ var utils = {
 	getUniqueID: (mask) => {
 		let hash = utils.hashChunk() + utils.hashChunk() + utils.hashChunk();
 		if(typeof mask === "string"){
+			hash = utils.mask(mask,hash);
+		}
+		return hash;
+	},
+	mask: (mask,str) => {
+		if(typeof mask === "string" && typeof str === "string"){
 			let n=0;
-			hash = hash.split("").map(v => {
+			str = str.split("").map(v => {
 				v = (mask[n] && mask[n]!=="x")?mask[n]+v:v
 				n++;
 				return v;
 			}).join("");
 		}
-		return hash;
+		return str;
 	},
 	getNumberedID: function(limit){
 		var code = '';
