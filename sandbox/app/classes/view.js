@@ -277,7 +277,6 @@ var view = {
 				moduleItem = await view.parseModules(moduleItem, currentPage);
 				tpl = tpl.replace(`{{${moduleName}}}`, moduleItem);
 			} else {
-				console.log(moduleName)
 				let moduleTpl = view.getTpl(moduleName);
 				if(moduleTpl !== false){
 					tpl = tpl.replace(`{{${moduleName}}}`,moduleTpl);

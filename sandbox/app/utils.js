@@ -1,7 +1,7 @@
 var utils = {
 	getUniqueID: (mask) => {
 		let hash = utils.hashChunk() + utils.hashChunk() + utils.hashChunk();
-		if(mask){
+		if(typeof mask === "string"){
 			let n=0;
 			hash = hash.split("").map(v => {
 				v = (mask[n] && mask[n]!=="x")?mask[n]+v:v
