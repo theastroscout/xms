@@ -312,7 +312,7 @@ var view = {
 			return tpl;
 		}
 		let values = tpl.match(/\{([^}]*)\}/g);
-		if(values === null){{
+		if(values === null){
 			return tpl;
 		}
 		for(let value of values){
