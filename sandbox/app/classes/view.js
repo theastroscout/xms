@@ -316,7 +316,7 @@ var view = {
 			return tpl;
 		}
 		for(let value of values){
-			tpl = tpl.replace(`{${value}}`,"");
+			tpl = tpl.replace(`${value}`,"");
 		}
 		return tpl;
 	}
