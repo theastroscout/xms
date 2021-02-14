@@ -306,6 +306,19 @@ var view = {
 		}
 
 		return tpl;
+	},
+	clearValues: (tpl) => {
+		if(typeof tpl !== "string"){
+			return tpl;
+		}
+		let values = tpl.match(/\{([^}]*)\}/g);
+		if(values === null){{
+			return tpl;
+		}
+		for(let value of values){
+			tpl = tpl.replace(`{${value}}`,"");
+		}
+		return tpl;
 	}
 };
 view.pages = require("./view.pages");
