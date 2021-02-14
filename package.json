@@ -7,7 +7,7 @@
     "@hqdaemon/db": "^1.0.1",
     "@hqdaemon/jscompose": "^1.0.5",
     "@hqdaemon/minify": "^1.0.6",
-    "@hqdaemon/qx": "^1.0.4",
+    "@hqdaemon/qx": "^1.0.6",
     "@hqdaemon/translit": "^1.0.0",
     "body-parser": "^1.19.0",
     "chalk": "^4.1.0",
