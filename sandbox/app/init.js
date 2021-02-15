@@ -14,12 +14,10 @@ global.fs = require("fs");
 global.md5 = require("md5");
 global.moment = require("moment-timezone");
 
-global.marked = require("marked").setOptions({
-	breaks: true,
-	headerIds: false
-});
 
 global.utils = require("./utils");
+global.marked = utils.marked;
+
 global.translit = require("@hqdaemon/translit");
 
 global.jscompose = require("@hqdaemon/jscompose");

@@ -1,4 +1,15 @@
+let markedLib = require("marked").setOptions({
+	breaks: true,
+	headerIds: false
+});
 var utils = {
+	marked: (str) => {
+		if(typeof str !== "string" || !str.length){
+			return str;
+		}
+
+		return markedLib(str);
+	},
 	getUniqueID: (mask) => {
 		let hash = utils.hashChunk() + utils.hashChunk() + utils.hashChunk();
 		if(typeof mask === "string"){
