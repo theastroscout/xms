@@ -51,10 +51,15 @@ var modules = {
 		return false;
 	},
 	getFileRules: () => {
-		if(modules.list.view.fileRules !== undefined){
+		if(modules.list.view !== undefined && typeof modules.list.view.fileRules === "object"){
 			return modules.list.view.fileRules;
 		}
 		return false;
+	},
+	request: (req, cookies) => {
+		if(modules.list.view !== undefined && typeof modules.list.view.request === "function"){
+			modules.list.view.request(req, cookies);
+		}
 	}
 };
 module.exports = modules;

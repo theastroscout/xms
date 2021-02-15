@@ -63,19 +63,6 @@ var server = {
 			}
 		}
 
-		// Fix Default Language Prefix
-		/*
-		let isEn = url.match(/^\/en/);
-		if(isEn){
-			let redirectURL = url.replace(/^\/en/,"");
-			if(redirectURL === ""){
-				redirectURL = "/"
-			}
-			res.redirect(redirectURL);
-			return false;
-		}
-		*/
-
 		// Cookie
 		let cookies = utils.getCookies(req.headers.cookie);
 		let pageLang = i18n.getPageLang(url);
@@ -96,6 +83,8 @@ var server = {
 			cookies.xu = utils.getUniqueID("xxxx-");
 			res.cookie("xu", cookies.xu, conf.cookie);
 		}
+
+		modules.request(req, cookies);
 		
 		prefix = i18n.getPrefix(pageLang);
 		let reg = new RegExp("^"+prefix);

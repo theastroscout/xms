@@ -22,7 +22,7 @@ var api = {
 			lang = i18n.getLangFromHeader(req.headers["accept-language"]);
 		}
 
-		socket.id = utils.getUniqueID("xxxx-");
+		socket.id = utils.getUniqueID("xxxxx-");
 
 		api.list[socket.id] = {
 			id: socket.id,
