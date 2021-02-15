@@ -210,10 +210,10 @@ var app = {
 	],
 	fileRules: [
 		{
-			in: "/app.js",
+			in: "^/libs/(.+)",
 			out: modules.list.YOUR_MODULE.YOUR_METHOD
 			/*
-			YOUR_MODULE.YOUR_METHOD = async (url, res) => {
+			YOUR_MODULE.YOUR_METHOD = async (url, matches, res) => {
 				let file = "SOME FILE";
 				let header = "text/plain";
 				res.setHeader("Content-Type", header);
