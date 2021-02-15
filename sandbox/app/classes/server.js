@@ -88,8 +88,8 @@ var server = {
 		
 		prefix = i18n.getPrefix(pageLang);
 		let reg = new RegExp("^"+prefix);
-		if(url.replace(reg,"") === "/"){
-			url += "home";
+		if(url.replace(reg,"") === ""){
+			url += "/home";
 		}
 
 		let page = await view.get(url, cookies);
