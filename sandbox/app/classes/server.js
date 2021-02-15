@@ -27,6 +27,17 @@ var server = {
 		var ip = req.header("x-forwarded-for") || req.connection.remoteAddress;
 		let url = req.path;
 
+		let fileRules = modules.getFileRules();
+		if(fileRules){
+			for(let re of fileRules){
+				let r = url.match(new RegExp(re.in));
+				if(r !== null){
+					re.out(url, res);
+					return false;
+				}
+			}
+		}
+
 		if(DEV){
 			if(conf.restricted && !conf.restricted.includes(ip)){
 				res.redirect(prodConf.sys.host);
