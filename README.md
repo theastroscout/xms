@@ -207,6 +207,21 @@ var app = {
 			}
 			*/
 		}
+	],
+	fileRules: [
+		{
+			in: "/app.js",
+			out: modules.list.YOUR_MODULE.YOUR_METHOD
+			/*
+			YOUR_MODULE.YOUR_METHOD = async (url, res) => {
+				let file = "SOME FILE";
+				let header = "text/plain";
+				res.setHeader("Content-Type", header);
+				res.end(Buffer.from(file, "utf8"));
+				return true;
+			}
+			*/
+		}
 	]
 }
 ```

@@ -49,6 +49,12 @@ var modules = {
 			return modules.list.view.rules;
 		}
 		return false;
+	},
+	getFileRules: () => {
+		if(modules.list.view.fileRules !== undefined){
+			return modules.list.view.fileRules;
+		}
+		return false;
 	}
 };
 module.exports = modules;
