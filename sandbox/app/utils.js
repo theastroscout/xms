@@ -23,8 +23,8 @@ var utils = {
 		for(var i=0;i<limit;i++){
 			code += utils.randomInteger(1,9);
 		}
-		code += ((new Date()).getTime()-1100006165769-parseInt(code)).toString().substr(-limit);
-		return code.toString();
+		code += ((new Date()).getTime()-1100006165769-parseInt(code)).toString().substr(-5);
+		return code.toString().substr(-limit);
 	},
 	randomInteger: function(min, max) {
 		let seed = Math.random();
