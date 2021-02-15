@@ -13,6 +13,7 @@ if(DEV){
 global.fs = require("fs");
 global.md5 = require("md5");
 global.moment = require("moment-timezone");
+global.useragent = require("express-useragent");
 
 
 global.utils = require("./utils");
