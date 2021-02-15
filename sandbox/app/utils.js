@@ -19,11 +19,11 @@ var utils = {
 	},
 	getNumberedID: function(limit){
 		var code = '';
-			limit = (typeof limit != 'undefined')?limit:4;
+			limit = (limit !== undefined)?limit:4;
 		for(var i=0;i<limit;i++){
 			code += utils.randomInteger(1,9);
 		}
-		code += ((new Date()).getTime()-1100006165769-parseInt(code)).toString().substr(-5);
+		code += ((new Date()).getTime()-1100006165769-parseInt(code)).toString().substr(-limit);
 		return code.toString();
 	},
 	randomInteger: function(min, max) {
