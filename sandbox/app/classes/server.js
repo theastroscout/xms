@@ -32,7 +32,7 @@ var server = {
 			for(let re of fileRules){
 				let r = url.match(new RegExp(re.in));
 				if(r !== null){
-					re.out(url, res);
+					re.out(url, r, res);
 					return false;
 				}
 			}
