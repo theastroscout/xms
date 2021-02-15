@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@hqdaemon/db": "^1.0.1",
-    "@hqdaemon/jscompose": "^1.0.5",
+    "@hqdaemon/jscompose": "^1.0.6",
     "@hqdaemon/minify": "^1.0.6",
     "@hqdaemon/qx": "^1.0.6",
     "@hqdaemon/translit": "^1.0.0",
@@ -14,12 +14,12 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "geoip-lite": "^1.4.2",
-    "marked": "^1.2.8",
+    "marked": "^1.2.9",
     "md5": "^2.3.0",
-    "moment-timezone": "^0.5.32",
+    "moment-timezone": "^0.5.33",
     "sharp": "^0.27.1",
     "svg-sprite": "^1.5.0",
-    "ws": "^7.4.2"
+    "ws": "^7.4.3"
   },
   "devDependencies": {},
   "scripts": {

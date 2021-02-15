@@ -28,7 +28,7 @@ var server = {
 		let url = req.path;
 
 		let fileRules = modules.getFileRules();
-		if(fileRules){
+		if(fileRules !== false){
 			for(let re of fileRules){
 				let r = url.match(new RegExp(re.in));
 				if(r !== null){
