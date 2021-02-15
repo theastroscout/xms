@@ -222,7 +222,10 @@ var app = {
 			}
 			*/
 		}
-	]
+	],
+	request: async (req, cookies) => {
+		// req is Entire Request Object
+	}
 }
 ```
 
