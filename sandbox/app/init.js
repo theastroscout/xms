@@ -26,6 +26,7 @@ global.minify = require("@hqdaemon/minify");
 global.hqDB = require("@hqdaemon/db");
 
 global.SVGSpriter = require("svg-sprite");
+global.sharp = require("sharp");
 
 const {exec, execSync} = require("child_process");
 global.execSync = execSync;
