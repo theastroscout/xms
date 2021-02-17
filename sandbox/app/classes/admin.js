@@ -365,8 +365,8 @@ var admin = {
 		// Refresh Sprites
 		await admin.createSprites();
 
-		minify("sandbox/assets/js/app.js", {to: "sandbox/public/app.js"});
-		minify("sandbox/assets/css/app.scss", {to: "sandbox/public/app.css"});
+		await minify("sandbox/assets/js/app.js", {to: "sandbox/public/app.js"});
+		await minify("sandbox/assets/css/app.scss", {to: "sandbox/public/app.css"});
 
 		let css = fs.readFileSync("sandbox/public/app.css").toString();
 			css = css.replace(/\/ui.svg/g,`/ui.svg?${conf.assets.ui}`);
