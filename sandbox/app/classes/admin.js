@@ -402,10 +402,10 @@ var admin = {
 		await db.collection("settings").updateOne({name:"assets"}, {$inc: {ver:1}});
 
 		// Drop and Clone Collection
-		admin.cloneCollection("i18n");
-		admin.cloneCollection("pageTypes");
-		admin.cloneCollection("pages");
-		admin.cloneCollection("settings");
+		await admin.cloneCollection("i18n");
+		await admin.cloneCollection("pageTypes");
+		await admin.cloneCollection("pages");
+		await admin.cloneCollection("settings");
 
 		// Then star Production Screen
 		execSync("./restart");		
