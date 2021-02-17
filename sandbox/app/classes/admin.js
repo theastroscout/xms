@@ -372,6 +372,9 @@ var admin = {
 			css = css.replace(/\/ui.svg/g,`/ui.svg?${conf.assets.ui}`);
 		fs.writeFileSync("sandbox/public/app.css", css, "utf8");
 
+		// Call Deploy module if exists
+		await modules.deploy();
+
 		execSync("rsync -avc --delete sandbox/public/ prod/public/");
 		execSync("rsync -avc --delete sandbox/app/ prod/app/");
 		execSync("rsync -avc --delete sandbox/modules/ prod/modules/");
@@ -403,9 +406,6 @@ var admin = {
 		admin.cloneCollection("pageTypes");
 		admin.cloneCollection("pages");
 		admin.cloneCollection("settings");
-
-		// Call Deploy module if exists
-		await modules.deploy();
 
 		// Then star Production Screen
 		execSync("./restart");		
