@@ -28,6 +28,8 @@ global.hqDB = require("@hqdaemon/db");
 global.SVGSpriter = require("svg-sprite");
 global.sharp = require("sharp");
 
+global.nodemailer = require("nodemailer");
+
 const {exec, execSync} = require("child_process");
 global.execSync = execSync;
 
