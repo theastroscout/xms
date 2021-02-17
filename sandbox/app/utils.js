@@ -66,7 +66,7 @@ var utils = {
 		str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 		str = str.toLowerCase();
 		str = translit(str);
-		return str.replace(/[^a-z0-9 —]/g, "").trim().replace(/\s+/g,"-");
+		return str.replace(/[^a-z0-9 -]/g, "").trim().replace(/\s+/g,"-");
 	},
 	validate: {
 		str: (str) => {
