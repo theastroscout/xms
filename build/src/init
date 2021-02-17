@@ -1,4 +1,3 @@
 #!/bin/bash
-export DEV=1
 export NODE_PATH=ROOT_PATH/node_modules
-node sandbox/app/init.js
+node sandbox/app/init.js DEV

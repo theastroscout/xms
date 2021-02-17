@@ -2,7 +2,8 @@
 
 const cluster = require("cluster");
 
-global.DEV = process.env.DEV;
+let argv = process.argv;
+global.DEV = argv && argv[2] === "DEV";
 var confPath = (DEV)?"dev":"prod";
 global.conf = require(`../../conf/${confPath}`);
 global.workDir = conf.sys.root+"/"+((DEV)?"sandbox":"prod");
@@ -36,7 +37,10 @@ global.execSync = execSync;
 async function init(){
 	global.mongodb = await hqDB({type:"mongo"});
 	global.mongo = mongodb.client;
-	global.db = await mongo.db(conf.sys.db.name)
+	global.db = await mongo.db(conf.sys.db.name);
+	if(DEV){
+		global.prodDB = await mongo.db(prodConf.sys.db.name);
+	}
 	if (cluster.isMaster) {
 		let master = require("./master");
 	} else {

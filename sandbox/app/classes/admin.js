@@ -1,5 +1,5 @@
 var admin = {
-	init: () => {
+	init: async () => {
 		admin.data = require("../../../data/admin");
 	},
 	methods: {
@@ -368,6 +368,10 @@ var admin = {
 		minify("sandbox/assets/js/app.js", {to: "sandbox/public/app.js"});
 		minify("sandbox/assets/css/app.scss", {to: "sandbox/public/app.css"});
 
+		let css = fs.readFileSync("sandbox/public/app.css").toString();
+			css = css.replace(/\/ui.svg/g,`/ui.svg?${conf.assets.ui}`);
+		fs.writeFileSync("sandbox/public/app.css", css, "utf8");
+
 		execSync("rsync -avc --delete sandbox/public/ prod/public/");
 		execSync("rsync -avc --delete sandbox/app/ prod/app/");
 		execSync("rsync -avc --delete sandbox/modules/ prod/modules/");
@@ -375,22 +379,45 @@ var admin = {
 
 
 		let tpls = utils.getFilesList(`${conf.sys.root}/prod/views/`);
-		for(let i=0,l=tpls.length;i<l;i++){
-			let tpl = tpls[i];
+		// for(let i=0,l=tpls.length;i<l;i++){
+		for(let tpl of tpls){
+			// let tpl = tpls[i];
 			await minify(tpl,{to:tpl});
 		}
 
 
 		for(let moduleID in modules.list){
 			let moduleItem = modules.list[moduleID];
-			let path = moduleItem.path.replace("sandbox","prod")+"/views/";
+			let path = moduleItem._path.replace("sandbox","prod")+"/views/";
 			let tpls = utils.getFilesList(path);
-			for(let i=0,l=tpls.length;i<l;i++){
-				let tpl = tpls[i];
+			for(let tpl of tpls){
 				await minify(tpl,{to:tpl});
 			}
 		}
-		
+
+		// Update Production Version
+		await db.collection("settings").updateOne({name:"assets"}, {$inc: {ver:1}});
+
+		// Drop and Clone Collection
+		admin.cloneCollection("i18n");
+		admin.cloneCollection("pageTypes");
+		admin.cloneCollection("pages");
+		admin.cloneCollection("settings");
+
+		// Call Deploy module if exists
+		await modules.deploy();
+
+		// Then star Production Screen
+		execSync("./restart");		
+	},
+	cloneCollection: async (collectionName) => {
+		let collection = await prodDB.listCollections({name:collectionName}).toArray();
+		if(collection.length){
+			prodDB.collection(collectionName).drop();
+		}
+
+		let documents = await db.collection(collectionName).find({}).toArray();
+		await prodDB.collection(collectionName).insertMany(documents);
 	}
 };
 admin.control = require("./admin.control");

@@ -60,6 +60,12 @@ var modules = {
 		if(modules.list.view !== undefined && typeof modules.list.view.request === "function"){
 			modules.list.view.request(req, cookies);
 		}
+	},
+	deploy: async () => {
+		if(modules.list.deploy !== undefined && typeof modules.list.deploy.build === "function"){
+			await modules.list.deploy.build();
+		}
+		return true;
 	}
 };
 module.exports = modules;

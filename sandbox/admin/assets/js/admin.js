@@ -70,7 +70,6 @@ var admin = {
 			method: "saveTypes",
 			data: {}
 		};
-		console.log(post);
 		e.preventDefault();
 		e.stopPropagation();
 	}
