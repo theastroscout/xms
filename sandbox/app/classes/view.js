@@ -227,11 +227,12 @@ var view = {
 			assets.css = [...assets.css, ...custom.css];
 		}
 
+		let uiPostfix = (DEV)?"":"?"+conf.assets.ui;
 		for(i of assets.css){
-			data.css += `<link rel="stylesheet" type="text/css" href="${i}" />`;
+			data.css += `<link rel="stylesheet" type="text/css" href="${i+uiPostfix}" />`;
 		}
 		for(i of assets.js){
-			data.js += `<script src="${i}"></script>`;
+			data.js += `<script src="${i+uiPostfix}"></script>`;
 		}
 		return data;
 	},
