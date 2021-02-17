@@ -236,6 +236,27 @@ We recommend using **certbot** to obtain SSL certificates
 sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 ```
 
+## Nodemailer
+Use nodemailer from global to send emails
+```js
+let notify = nodemailer.createTransport({
+	host: "smtp.domain",
+	port: 465,
+	secure: true,
+		auth: {
+			user: "USER_NAME",
+			pass: "PASSWORD"
+		}
+});
+let mail = await notify.sendMail({
+	from: '"YOUR_APP_NAME" <name@domain.com>',
+	to: "Recipients",
+	subject: "Subject",
+	html: "Message"
+});
+console.log("Message sent: %s", mail.messageId);
+```
+
 <br/>
 <br/>
 
