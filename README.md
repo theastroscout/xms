@@ -175,6 +175,7 @@ Call module by putting next code to your template.
 {{YOUR_CUSTOME_MODULE}}
 ```
 
+<br/>
 
 ## View module
 If you want work with template on global level add module View with getPageData() method in ```/sandbox/modules/custom/view```
@@ -229,12 +230,15 @@ var app = {
 }
 ```
 
+<br/>
 
 ## SSL
 We recommend using **certbot** to obtain SSL certificates
 ```
 sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 ```
+
+<br/>
 
 ## Nodemailer
 Use nodemailer from global to send emails
@@ -256,6 +260,28 @@ let mail = await notify.sendMail({
 });
 console.log("Message sent: %s", mail.messageId);
 ```
+
+<br/>
+
+## Deploy module
+If you want to do something while deploying add module Deploy with build() method in ```/sandbox/modules/custom/deploy```
+```js
+var app = {
+	build: async (currentPage) => {
+		/*
+
+		Do what you want
+		Don't forget you can use the Production DB through prodDB global variable
+	
+		Use next method to clone entire collection to the Production DB
+		admin.cloneCollection("COLLECTION_NAME");
+
+		*/
+		return true;
+	}
+}
+```
+
 
 <br/>
 <br/>

@@ -81,6 +81,9 @@ var utils = {
 	},
 	getFilesList: (dir) => {
 		let files = [];
+		if(!fs.existsSync(dir)){
+			return [];
+		}
 		fs.readdirSync(dir).forEach(file => {
 			if (fs.statSync(dir+file).isDirectory()){
 				files = files.concat(utils.getFilesList(dir+file+"/"));

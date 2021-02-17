@@ -27,6 +27,7 @@
 			}
 		}
 	},
+	"imgs": "IMG_PATH",
 	"assets": {
 		"web": {
 			"css": [

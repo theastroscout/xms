@@ -90,7 +90,6 @@ content.i18n = {
 		let form = $(this);
 		let nodeName = form.find("input").val().trim().toLowerCase();
 		let nodeID = $("#i18n").getAttr("data-lang")+"/"+nodeName;
-		// console.log("Add Node:", nodeName)
 		$("#i18n>form>.list").append(content.i18n.getNode(nodeID,nodeName));
 		e.preventDefault();
 		e.stopPropagation();
