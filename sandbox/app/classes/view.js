@@ -160,7 +160,10 @@ var view = {
 					}
 				}
 				*/
-				if(pageType.tpl !== undefined){
+				if(pageData.tpl !== undefined){
+					tpl = pageData.tpl;
+					delete pageData.tpl;
+				} else if(pageType.tpl !== undefined){
 					tpl = pageType.tpl;
 				}
 			} else {
@@ -178,6 +181,10 @@ var view = {
 								if(customPageData){
 									pageData.seo = customPageData.seo;
 									pageData.content = customPageData.content;
+									if(pageData.tpl !== undefined){
+										tpl = pageData.tpl;
+										delete pageData.tpl;
+									}
 								}
 							}
 							break;
