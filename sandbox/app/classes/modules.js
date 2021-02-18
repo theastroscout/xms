@@ -45,7 +45,7 @@ var modules = {
 		return false;
 	},
 	getRules: () => {
-		if(modules.list.view.rules !== undefined){
+		if(modules.list.view !== undefined && modules.list.view.rules !== undefined){
 			return modules.list.view.rules;
 		}
 		return false;
