@@ -67,11 +67,11 @@ var server = {
 		let cookies = utils.getCookies(req.headers.cookie);
 		let pageLang = i18n.getPageLang(url);
 
-		if(!cookies.lang){
-			let lang = i18n.getLangFromHeader(req.headers["accept-language"]);
-			res.cookie("lang", lang, conf.cookie);
-			cookies.lang = lang;
+		if(cookies.lang === undefined){
+			res.cookie("lang", pageLang, conf.cookie);
+			cookies.lang = pageLang;
 			/*
+			let lang = i18n.getLangFromHeader(req.headers["accept-language"]);
 			if(lang !== pageLang){
 				console.log("Prefix", i18n.getPrefix(lang));
 				console.log("URL", url);
