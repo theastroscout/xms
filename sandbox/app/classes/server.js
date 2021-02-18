@@ -71,7 +71,9 @@ var server = {
 			let lang = i18n.getLangFromHeader(req.headers["accept-language"]);
 			res.cookie("lang", lang, conf.cookie);
 			if(lang !== pageLang){
-				let redirectURL = i18n.getPrefix(lang) + ((url === "/home")?"/":url);
+				console.log("Prefix", i18n.getPrefix(lang));
+				console.log("URL", url);
+				let redirectURL = i18n.getPrefix(lang) + ((url === "/home")?"":url);
 				res.redirect(redirectURL);
 				return false;
 			}
