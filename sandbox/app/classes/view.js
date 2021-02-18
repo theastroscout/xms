@@ -36,7 +36,7 @@ var view = {
 		let currentPage, content;
 		let params = [];
 
-		let tpl = view.getTpl("/views/default");
+		let tpl = "/views/default";
 
 		let lang = i18n.getPageLang(url);
 		let clearURL = url.replace(new RegExp(`^/${lang}`),"");
@@ -80,7 +80,7 @@ var view = {
 				pageData.seo = currentPage.seo;
 				pageData.title = currentPage.title;
 				pageData.menu = currentPage.menu;
-				tpl = view.getTpl("/admin/views/default");
+				tpl = "/admin/views/default";
 
 				pageData.content = view.getTpl(currentPage.tpl);
 
@@ -149,11 +149,19 @@ var view = {
 					}
 				} else {
 					pageData.seo = currentPage.seo;
+					pageData.content = marked(currentPage.content);
+				}
+				/* else {
+					pageData.seo = currentPage.seo;
 					pageData.content = view.getTpl(pageType.tpl);
 					if(currentPage.content){
 						let content = marked(currentPage.content);
 						pageData.content = view.parseValues(pageData.content,{content:content});
 					}
+				}
+				*/
+				if(pageType.tpl !== undefined){
+					tpl = pageType.tpl;
 				}
 			} else {
 				// Not Found
@@ -204,6 +212,7 @@ var view = {
 		}
 
 		pageData.content = await view.parseModules(pageData.content, currentPage);
+		tpl = view.getTpl(tpl);
 		tpl = await view.parseModules(tpl, currentPage);
 		output.layout = view.parseValues(tpl,pageData);
 		return output;
