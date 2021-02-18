@@ -70,6 +70,8 @@ var server = {
 		if(!cookies.lang){
 			let lang = i18n.getLangFromHeader(req.headers["accept-language"]);
 			res.cookie("lang", lang, conf.cookie);
+			cookies.lang = lang;
+			/*
 			if(lang !== pageLang){
 				console.log("Prefix", i18n.getPrefix(lang));
 				console.log("URL", url);
@@ -77,7 +79,9 @@ var server = {
 				res.redirect(redirectURL);
 				return false;
 			}
+			*/
 		} else if(cookies.lang !== pageLang){
+			cookies.lang = pageLang;
 			res.cookie("lang", pageLang, conf.cookie);
 		}
 
