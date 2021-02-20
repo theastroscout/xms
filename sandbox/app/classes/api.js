@@ -29,8 +29,9 @@ var api = {
 			obj: socket,
 			lang: lang,
 			cookies: cookies,
+			url: req.url,
 			params: utils.getURLParams(req.url)
-		}
+		};
 		api.list[socket.id] = socketObj;
 		modules.connect(socketObj);
 
