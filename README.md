@@ -235,7 +235,8 @@ var app = {
 			ip: (string) IP,
 			obj: (object) WebSocket Object,
 			lang: (string) Language,
-			cookies: (object) Cookies
+			cookies: (object) Cookies,
+			params: (object) // new WebSocket("wss://example.com?param1=value1&param2=value2");
 		}
 		*/
 	},

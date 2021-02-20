@@ -62,6 +62,23 @@ var utils = {
 		}
 		return cookies;
 	},
+	getURLParams: (str) => {
+		if(str === undefined || str === null){
+			return {};
+		}
+		str = str.match(/([^?]*)\??(.*)/)[2];
+		if(!str.length){
+			return {};
+		}
+
+		let params = {};
+		let chunks = str.split("&");
+		for(var item of chunks){
+			item = item.split("=");
+			params[item[0]] = item[1];
+		}
+		return params;
+	},
 	strToURL: (str) => {
 		str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 		str = str.toLowerCase();
