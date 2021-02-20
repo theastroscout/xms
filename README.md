@@ -226,6 +226,21 @@ var app = {
 	],
 	request: async (req, cookies) => {
 		// req is Entire Request Object
+	},
+	connect: async (socketObj) => {
+		/*
+		Fired when user connects to the API. See api.js
+		socketObj = JSON {
+			id: (string) socketID,
+			ip: (string) IP,
+			obj: (object) WebSocket Object,
+			lang: (string) Language,
+			cookies: (object) Cookies
+		}
+		*/
+	},
+	disconnect: async (socketID) => {
+		// Fired when user closes connection, e.g. closes browser tab.
 	}
 }
 ```
