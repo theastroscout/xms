@@ -40,7 +40,7 @@ var server = {
 
 		if(DEV){
 			if(conf.sys.restricted && !conf.sys.restricted.includes(ip)){
-				res.redirect(prodConf.sys.host);
+				res.redirect("https://"+prodConf.sys.host);
 				return false;
 			}
 
