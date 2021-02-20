@@ -3,7 +3,7 @@ var api = {
 	online: false,
 	init: () => {
 		api.attempts++;
-		api.obj = new WebSocket(`wss://${location.host}`);
+		api.obj = new WebSocket(`wss://${location.host+location.pathname+location.search}`);
 		api.obj.onopen = api.events;
 		api.obj.onclose = api.events;
 		api.obj.onerror = api.events;
