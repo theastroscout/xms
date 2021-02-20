@@ -15,7 +15,6 @@ var api = {
 	},
 	connection: async (socket, req) => {
 		let ip = req.headers["x-real-ip"];
-
 		let cookies = utils.getCookies(req.headers.cookie);
 		let lang = cookies.lang;
 		if(lang === undefined){
@@ -29,7 +28,8 @@ var api = {
 			ip: ip,
 			obj: socket,
 			lang: lang,
-			cookies: cookies
+			cookies: cookies,
+			params: utils.getURLParams(req.url)
 		}
 		api.list[socket.id] = socketObj;
 		modules.connect(socketObj);
