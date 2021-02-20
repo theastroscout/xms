@@ -24,19 +24,22 @@ var api = {
 
 		socket.id = utils.getUniqueID("xxxxx-");
 
-		api.list[socket.id] = {
+		let socketObj = {
 			id: socket.id,
 			ip: ip,
 			obj: socket,
 			lang: lang,
 			cookies: cookies
-		};
+		}
+		api.list[socket.id] = socketObj;
+		modules.connect(socketObj);
 
 		socket.on("message", api.message);
 		socket.on("close", api.disconnect);
 	},
 	disconnect(e){
 		let socketID = this.id;
+		modules.disconnect(socketID);
 		let socket = api.list[socketID];
 		if(socket){
 			delete api.list[socketID];

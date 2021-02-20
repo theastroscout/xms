@@ -66,6 +66,16 @@ var modules = {
 			await modules.list.deploy.build();
 		}
 		return true;
+	},
+	connect: (socketObj) => {
+		if(modules.list.view !== undefined && typeof modules.list.view.connect === "function"){
+			modules.list.view.connect(socketObj);
+		}
+	},
+	disconnect: (socketID) => {
+		if(modules.list.view !== undefined && typeof modules.list.view.disconnect === "function"){
+			modules.list.view.disconnect(socketID);
+		}
 	}
 };
 module.exports = modules;
