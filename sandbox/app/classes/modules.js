@@ -76,6 +76,12 @@ var modules = {
 		if(modules.list.view !== undefined && typeof modules.list.view.disconnect === "function"){
 			modules.list.view.disconnect(socketID);
 		}
+	},
+	getNotFound: async () => {
+		if(modules.list.view !== undefined && typeof modules.list.view.getNotFound === "function"){
+			return await modules.list.view.getNotFound();
+		}
+		return false;
 	}
 };
 module.exports = modules;

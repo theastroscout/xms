@@ -243,6 +243,9 @@ var app = {
 	},
 	disconnect: async (socketID) => {
 		// Fired when user closes connection, e.g. closes browser tab.
+	},
+	getNotFound: async () => {
+		// Return Custom Not Found Page
 	}
 }
 ```

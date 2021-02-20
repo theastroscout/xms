@@ -205,7 +205,16 @@ var view = {
 		if(pageData.content === undefined){
 			// Not Found
 			output.state = false;
-			pageData.content = "Not Found";
+			let notFound = await modules.getNotFound();
+			if(notFound){
+				pageData = notFound;
+				if(pageData.tpl !== undefined){
+					tpl = pageData.tpl;
+					delete pageData.tpl;
+				}
+			} else {
+				pageData.content = "Not Found";
+			}
 		} else {
 			output.state = true;
 		}
