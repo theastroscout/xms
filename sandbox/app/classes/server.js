@@ -39,7 +39,7 @@ var server = {
 		}
 
 		if(DEV){
-			if(conf.restricted && !conf.restricted.includes(ip)){
+			if(conf.sys.restricted && !conf.sys.restricted.includes(ip)){
 				res.redirect(prodConf.sys.host);
 				return false;
 			}
