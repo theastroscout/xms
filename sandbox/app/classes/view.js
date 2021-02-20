@@ -205,7 +205,7 @@ var view = {
 		if(pageData.content === undefined){
 			// Not Found
 			output.state = false;
-			let notFound = await modules.getNotFound();
+			let notFound = await modules.getNotFound(url,cookies);
 			if(notFound){
 				pageData = notFound;
 				if(pageData.tpl !== undefined){

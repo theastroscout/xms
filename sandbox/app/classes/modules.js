@@ -77,9 +77,9 @@ var modules = {
 			modules.list.view.disconnect(socketID);
 		}
 	},
-	getNotFound: async () => {
+	getNotFound: async (url,cookies) => {
 		if(modules.list.view !== undefined && typeof modules.list.view.getNotFound === "function"){
-			return await modules.list.view.getNotFound();
+			return await modules.list.view.getNotFound(url,cookies);
 		}
 		return false;
 	}
