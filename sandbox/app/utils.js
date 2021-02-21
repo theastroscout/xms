@@ -133,6 +133,14 @@ var utils = {
 	},
 	plural: (n, forms) => {
 		return n%10==1&&n%100!=11?forms[0]:(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?forms[1]:forms[2]);
-	}
+	},
+	arraySum: function(array){
+		return array.reduce((a, b) => a + b, 0);
+	},
+	median: function(arr){
+		const mid = Math.floor(arr.length / 2),
+		nums = arr.sort((a, b) => a - b);
+		return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+	},
 };
 module.exports = utils;
