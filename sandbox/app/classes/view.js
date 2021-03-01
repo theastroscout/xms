@@ -220,6 +220,7 @@ var view = {
 		}
 
 		currentPage.rewriteParams = rewriteParams;
+		currentPage.lang = i18n.getLang(currentPage.langID);
 		currentPage.cookies = cookies;
 		pageData.assets = await view.getAssets(currentPage);
 
