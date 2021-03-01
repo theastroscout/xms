@@ -136,6 +136,7 @@ var view = {
 			*/
 			currentPage = await db.collection("pages").findOne({hashID:md5(url)});
 			if(currentPage){
+				currentPage.lang = lang;
 				let pageType = view.pageTypes.get(currentPage.typeID);
 				if(pageType.module !== undefined
 					&& modules.list[pageType.module] !== undefined
@@ -194,6 +195,7 @@ var view = {
 
 				if(currentPage === null || currentPage === undefined){
 					currentPage = {
+						lang: lang,
 						langID: i18n.getLangID(lang)
 					};
 				}
@@ -220,7 +222,6 @@ var view = {
 		}
 
 		currentPage.rewriteParams = rewriteParams;
-		currentPage.lang = i18n.getLang(currentPage.langID);
 		currentPage.cookies = cookies;
 		pageData.assets = await view.getAssets(currentPage);
 
