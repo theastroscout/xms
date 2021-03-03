@@ -13,6 +13,7 @@ global.server = require("./classes/server");
 global.api = require("./classes/api");
 
 global.admin = require("./classes/admin");
+
 global.view = require("./classes/view");
 
 global.modules = require("./classes/modules");

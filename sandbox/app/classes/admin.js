@@ -235,6 +235,7 @@ var admin = {
 			let typeID = new mongodb.ObjectID(payload.data.typeID);
 			db.collection("pages").updateOne({_id:pageID},{$set: {typeID:typeID}});
 
+			payload.result.typeID = payload.data.typeID;
 			payload.result.state = true;
 			payload.result.msg = "Page Type changed successfully";
 			api.send(payload);

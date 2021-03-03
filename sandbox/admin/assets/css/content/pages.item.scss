@@ -128,8 +128,19 @@
 					padding: 10px 0;
 
 					>.n {
+						position: relative;
+						display: inline-block;
 						font-size: 16px;
 						font-weight: bold;
+
+						>.count {
+							position: absolute;
+							bottom: calc(100% - 8px);
+							left: calc(100% + 4px);
+							font-size: 10px;
+							font-weight: normal;
+							color: $gray50;
+						}
 					}
 
 					>.d {

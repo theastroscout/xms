@@ -1,18 +1,22 @@
 #aside {
 	flex: 0 0 300px;
 	padding: 10px;
-	background: $white;
+	background: $darkBlue;
 	text-align: right;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
 
 	>.logo {
 		display: block;
-		color: $black;
+		color: $white;
 		text-decoration: none;
 
 		>.n {
 			display: block;
-			font-size: 32px;
-			font-weight: bold;
+			font-size: 52px;
+			font-weight: normal;
 		}
 
 		>.d {
@@ -22,10 +26,16 @@
 	}
 
 	>.block {
-		padding: 20px 0;
+		margin: 10px 0;
+		box-sizing: border-box;
+		width: 100%;
+		max-width: 180px;
+		padding: 20px;
+		background: $darkestBlue;
+
 		>.n {
 			font-size: 12px;
-			color: $fadeBlue;
+			color: $lightYellow;
 		}
 
 		>.list {
@@ -34,7 +44,7 @@
 					display: block;
 					padding: 6px 0;
 					font-size: 16px;
-					color: $black;
+					color: $white;
 					text-decoration: none;
 					transition: opacity .5s;
 
@@ -43,8 +53,8 @@
 						transition: opacity .2s;
 					}
 					&.active {
+						color: $yellow;
 						opacity: 1;
-						font-weight: bold;
 					}
 				}
 
