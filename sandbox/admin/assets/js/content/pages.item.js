@@ -8,6 +8,17 @@ content.page = {
 
 		$("#page>form>.types>.tit").click(content.page.showTypes);
 		$("#page>form>.types>.list>.item").hover().click(content.page.setType);
+
+		$("#page>form>.block>.fields>label").each(label => {
+			label = $(label);
+			let n = label.find(">.n");
+			let input = label.find("input,textarea");
+			n.append(`<div class="count">${input.val().length}</div>`);
+			input.on("input",content.page.counter);
+		});
+	},
+	counter(e){
+		$(this).parent("label").find(">.n>.count").text(this.value.length);
 	},
 	edit(e){
 		let post = {

@@ -25,6 +25,12 @@ var admin = {
 		},
 		setPageType: (payload) => {
 			notify.show(payload);
+
+
+			$("#page>form>.types>.list>.item").setAttr("data-display","block"); // Need to Fix
+			$("#page>form>.types>.list>.item.active").removeClass("active");
+			$(`#page>form>.types>.list>.item[data-id="${payload.typeID}"]`).addClass("active");
+			content.page.showTypes();
 		},
 		base: (payload) => {
 			notify.show(payload);
