@@ -3,7 +3,7 @@ var modules = {
 	init: async () => {
 		await modules.load(workDir+"/modules/sys");
 		await modules.load(workDir+"/modules/custom");
-		console.log("Loaded modules:",Object.keys(modules.list));
+		// console.log("Loaded modules:",Object.keys(modules.list));
 	},
 	load: async (modulesPath) => {
 		if(!fs.existsSync(modulesPath)){
