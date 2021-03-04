@@ -24,7 +24,7 @@ var server = {
 		httpsServer.listen(conf.sys.port, () => {});
 	},
 	req: async (req,res) => {
-		var ip = req.header("x-forwarded-for") || req.connection.remoteAddress;
+		let ip = req.header("x-forwarded-for") || req.connection.remoteAddress;
 		let url = req.path;
 
 		let fileRules = modules.getFileRules();
