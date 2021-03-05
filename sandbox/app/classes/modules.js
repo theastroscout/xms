@@ -15,7 +15,7 @@ var modules = {
 				let moduleName = dirent.name;
 				if(moduleName === "sys"){
 					sysLoad = true;
-					continue;
+					return true;
 				}
 				let modulePath = modulesPath+"/"+moduleName;
 				let item = require(modulePath+"/app.js");
