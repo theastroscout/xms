@@ -96,9 +96,9 @@ var modules = {
 		}
 		return false;
 	},
-	masterCall: async (payload) => {
-		let moduleName = payload.module;
-		let methodName = payload.method;
+	masterCall: async (data) => {
+		let moduleName = data.module;
+		let methodName = data.method;
 		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName][methodName] === "function"){
 			return await modules.list[moduleName][methodName](data);
 		}
