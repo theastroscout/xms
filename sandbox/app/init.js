@@ -30,6 +30,7 @@ global.SVGSpriter = require("svg-sprite");
 global.sharp = require("sharp");
 
 global.nodemailer = require("nodemailer");
+global.geoip = require("geoip-lite");
 
 const {exec, execSync} = require("child_process");
 global.execSync = execSync;
