@@ -9,9 +9,14 @@ var modules = {
 		if(!fs.existsSync(modulesPath)){
 			return false;
 		}
+		let sysLoad = false;
 		fs.readdirSync(modulesPath, {withFileTypes: true}).forEach(dirent => {
 			if(dirent.isDirectory()){
 				let moduleName = dirent.name;
+				if(moduleName === "sys"){
+					sysLoad = true;
+					return true;
+				}
 				let modulePath = modulesPath+"/"+moduleName;
 				let item = require(modulePath+"/app.js");
 					item._name = moduleName;
@@ -19,6 +24,14 @@ var modules = {
 				modules.list[moduleName] = item;
 			};
 		});
+
+		if(sysLoad){
+			let modulePath = modulesPath+"/sys";
+			let item = require(modulePath+"/app");
+				item._name = "sys";
+				item._path = modulePath;
+			modules.list.sys = item;
+		}
 	},
 	get: async (name, currentPage, cookies) => {
 		if(modules.list[name] !== undefined){
@@ -51,8 +64,8 @@ var modules = {
 		return false;
 	},
 	getFileRules: () => {
-		if(modules.list.view !== undefined && typeof modules.list.view.fileRules === "object"){
-			return modules.list.view.fileRules;
+		if(modules.list.sys !== undefined && typeof modules.list.sys.fileRules === "object"){
+			return modules.list.sys.fileRules;
 		}
 		return false;
 	},
@@ -80,6 +93,14 @@ var modules = {
 	getNotFound: async (url,cookies) => {
 		if(modules.list.view !== undefined && typeof modules.list.view.getNotFound === "function"){
 			return await modules.list.view.getNotFound(url,cookies);
+		}
+		return false;
+	},
+	masterCall: async (data) => {
+		let moduleName = data.module;
+		let methodName = data.method;
+		if(modules.list[moduleName] !== undefined && typeof modules.list[moduleName][methodName] === "function"){
+			return await modules.list[moduleName][methodName](data);
 		}
 		return false;
 	}
