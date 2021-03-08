@@ -22,6 +22,16 @@ var master = {
 		}
 
 		console.log(`Master go with ${master.threads} workers started.\ntop -p ${master.PIDs.join(",")}`);
+
+		/*
+		let sysPath = workDir+"/modules/custom/sys/app.js";
+		if(fs.existsSync(sysPath)){
+			let sys = require(sysPath);
+			if(sys.launch !== undefined){
+				sys.launch();
+			}
+		}
+		*/
 	},
 	message: (payload) => {
 		// console.log("Master incoming message", payload);
