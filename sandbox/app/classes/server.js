@@ -92,10 +92,14 @@ var server = {
 
 		modules.request(req, cookies);
 		
-		prefix = i18n.getPrefix(pageLang);
-		let reg = new RegExp("^"+prefix);
-		if(url.replace(reg,"") === ""){
-			url += "/home";
+		if(url === "/"){
+			url = "/home";
+		} else {
+			let prefix = i18n.getPrefix(pageLang);
+			let reg = new RegExp("^"+prefix);
+			if(url.replace(reg,"") === ""){
+				url += "/home";
+			}
 		}
 
 		let page = await view.get(url, cookies);
