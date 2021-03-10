@@ -2,7 +2,7 @@ var view = {
 	pageTypes: {
 		list: {},
 		init: async () => {
-			let resp = await db.collection("pageTypes").find({}).toArray();
+			let resp = await db.collection("pageTypes").find({}).sort({name:1}).toArray();
 			for(let item of resp){
 				view.pageTypes.list[item._id] = item;
 				if(item.default){
