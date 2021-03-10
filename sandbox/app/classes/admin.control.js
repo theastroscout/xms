@@ -189,7 +189,7 @@ let control = {
 
 		let itemTpl = view.getTpl("/admin/views/snippets/pages.types.item");
 
-		let result = await db.collection("pageTypes").find({}).toArray();
+		let result = await db.collection("pageTypes").find({}).sort({name:1}).toArray();
 		if(result){
 			for(let type of result){
 				let itemData = {
