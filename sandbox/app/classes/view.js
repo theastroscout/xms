@@ -226,7 +226,7 @@ var view = {
 		pageData.assets = await view.getAssets(currentPage);
 
 		if(modules.list.view !== undefined && typeof modules.list.view.getPageData === "function"){
-			pageData = Object.assign(pageData, await modules.list.view.getPageData(currentPage) || {});
+			pageData = Object.assign(pageData, await modules.list.view.getPageData(currentPage, url) || {});
 		}
 
 		pageData.content = await view.parseModules(pageData.content, currentPage);
