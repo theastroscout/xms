@@ -40,7 +40,7 @@ global.app = {
 					i18n.refresh(payload.lang);
 					break;
 				default:
-					modules.masterCall(payload);
+					console.log("Incoming message from master",payload);
 					break;
 			}
 		},

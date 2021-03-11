@@ -147,6 +147,11 @@ var view = {
 					let modulePage = await modules.list[pageType.module].getPage(currentPage);
 					if(modulePage !== false){
 						pageData = modulePage;
+						if(pageData.redirect !== undefined){
+							return {
+								redirect: pageData.redirect
+							};
+						}
 					}
 				} else {
 					pageData.seo = currentPage.seo;
