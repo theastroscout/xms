@@ -45,14 +45,14 @@ var modules = {
 		return false;
 	},
 	getRules: () => {
-		if(modules.list.view !== undefined && modules.list.view.rules !== undefined){
-			return modules.list.view.rules;
+		if(modules.list.sys !== undefined && modules.list.sys.rules !== undefined){
+			return modules.list.sys.rules;
 		}
 		return false;
 	},
 	getFileRules: () => {
-		if(modules.list.view !== undefined && typeof modules.list.view.fileRules === "object"){
-			return modules.list.view.fileRules;
+		if(modules.list.sys !== undefined && typeof modules.list.sys.fileRules === "object"){
+			return modules.list.sys.fileRules;
 		}
 		return false;
 	},
