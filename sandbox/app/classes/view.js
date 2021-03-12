@@ -151,8 +151,8 @@ var view = {
 								redirect: modulePage.redirect
 							};
 						}
-						pageData = modulePage;
 						currentPage = modulePage;
+						pageData = modulePage;
 					}
 				} else {
 					pageData.seo = currentPage.seo;
