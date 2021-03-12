@@ -146,12 +146,13 @@ var view = {
 					currentPage.cookies = cookies;
 					let modulePage = await modules.list[pageType.module].getPage(currentPage);
 					if(modulePage !== false){
-						pageData = modulePage;
-						if(pageData.redirect !== undefined){
+						if(modulePage.redirect !== undefined){
 							return {
-								redirect: pageData.redirect
+								redirect: modulePage.redirect
 							};
 						}
+						pageData = modulePage;
+						currentPage = modulePage;
 					}
 				} else {
 					pageData.seo = currentPage.seo;
