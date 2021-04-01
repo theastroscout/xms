@@ -7,6 +7,8 @@ content.pages = {
 		$("#pages > .add > .wrap > form > .cancel").click(content.pages.showAddForm);
 		$("#pages > .add > .wrap > form").on("submit",admin.addPage);
 
+		$("#pages>.list .item>.page").hover();
+		$("#pages>.list .item>.page>a").hover();
 		$("#pages>.list .item>.page>.fn>.add").click(content.pages.add.show);
 
 		$("#pages>.list .item>.page").on("dragstart dragover dragleave drop", content.pages.drag.go);

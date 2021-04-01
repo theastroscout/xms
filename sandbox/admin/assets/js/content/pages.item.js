@@ -32,15 +32,19 @@ content.page = {
 		$("#page>form>.block").each((el) => {
 			let t = $(el);
 			let blockName = t.getAttr("data-type");
-			if(post.data.fields[blockName] === undefined){
-				post.data.fields[blockName] = {};
+			if(blockName){
+				if(post.data.fields[blockName] === undefined){
+					post.data.fields[blockName] = {};
+				}
+				t.find("input,textarea").each((input) => {
+					post.data.fields[blockName][input.name] = input.value;
+				});
 			}
-			t.find("input,textarea").each((input) => {
-				post.data.fields[blockName][input.name] = input.value;
-			});
 		});
 
 		post.data.fields.content = $("#page>form>.content>textarea").val();
+		
+		post.data.fields.img = $("#page>form>.img>input").val();
 
 		api.req(post);
 		e.preventDefault();

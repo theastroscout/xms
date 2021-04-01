@@ -56,14 +56,20 @@ var modules = {
 		}
 		return false;
 	},
+	langFix: () => {
+		if(modules.list.sys !== undefined && typeof modules.list.sys.langFix === "function"){
+			return modules.list.sys.langFix;
+		}
+		return false;
+	},
 	request: (req, cookies) => {
 		if(modules.list.view !== undefined && typeof modules.list.view.request === "function"){
 			modules.list.view.request(req, cookies);
 		}
 	},
 	deploy: async () => {
-		if(modules.list.deploy !== undefined && typeof modules.list.deploy.build === "function"){
-			await modules.list.deploy.build();
+		if(modules.list.sys !== undefined && typeof modules.list.sys.deploy === "function"){
+			await modules.list.sys.deploy();
 		}
 		return true;
 	},
