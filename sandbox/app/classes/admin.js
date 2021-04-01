@@ -89,7 +89,7 @@ var admin = {
 			if(page.parentID !== undefined){
 				parentPage = await db.collection("pages").findOne({_id:page.parentID});
 			}
-			let i,v,updated = {};
+			let i,v, updated = {}, unset = {};
 
 			// Common
 			for(i in payload.data.fields.common){
@@ -107,19 +107,28 @@ var admin = {
 					let fullURL = (parentPage)?parentPage.fullURL:prefix;
 					fullURL += "/"+v;
 					if(page.fullURL !== fullURL){
+						updated.url = v;
 						updated.fullURL = fullURL;
 						updated.hashID = md5(updated.fullURL);
 					}
+				} else if(!v){
+					unset[i] = "";
+				} else {
+					updated[i] = v;
 				}
-
-				updated[i] = v;
 			}
 
 			// SEO
 			updated.seo = payload.data.fields.seo;
 			updated.content = payload.data.fields.content;
+			updated.img = payload.data.fields.img;
 
-			let result = await pages.updateOne({_id:page._id},{$set:updated});
+			let result;
+			if(Object.keys(unset).length){
+				result = await pages.updateOne({_id:page._id},{$set:updated,$unset:unset});
+			} else {
+				result = await pages.updateOne({_id:page._id},{$set:updated});
+			}
 			payload.result.state = true;
 			payload.result.msg = "Page saved successfully";
 			api.send(payload);
@@ -392,8 +401,12 @@ var admin = {
 
 		for(let moduleID in modules.list){
 			let moduleItem = modules.list[moduleID];
+			if(moduleID === "sitemap"){
+				continue;
+			}
 			let path = moduleItem._path.replace("sandbox","prod")+"/views/";
 			let tpls = utils.getFilesList(path);
+			
 			for(let tpl of tpls){
 				await minify(tpl,{to:tpl});
 			}

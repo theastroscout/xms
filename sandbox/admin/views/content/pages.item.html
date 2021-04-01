@@ -1,6 +1,10 @@
 <div id="page" data-id="{id}">
 	<form novalidate="true">
 
+		<div class="block">
+			<a href="{fullURL}" target="_blank">View Page</a>
+		</div>
+
 		<!-- Settings -->
 
 		<div class="settings">
@@ -103,6 +107,18 @@
 				<div class="d"><b>Markdown syntax</b> <a href="https://freshvale.com/ref/https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">more</a>. The display on the site depends on the type of template.</div>
 			</div>
 			<textarea name="content">{content}</textarea>
+			<div class="fn">
+				<button type="submit" data-btn>Save</button>
+			</div>
+		</div>
+
+		<!-- Img -->
+
+		<div class="block img">
+			<div class="tit">
+				<div class="n">Image</div>
+			</div>
+			<input type="text" name="img" value="{img}" />
 			<div class="fn">
 				<button type="submit" data-btn>Save</button>
 			</div>

@@ -32,8 +32,10 @@ var server = {
 			for(let re of fileRules){
 				let r = url.match(new RegExp(re.in));
 				if(r !== null){
-					re.out(url, r, res);
-					return false;
+					let result = await re.out(url, r, res, req);
+					if(result === false){
+						return false;
+					}
 				}
 			}
 		}
@@ -60,6 +62,15 @@ var server = {
 					res.end(Buffer.from(file, "utf8"));
 					return false;
 				}
+			}
+		}
+
+
+		let langFix = modules.langFix();
+		if(langFix){
+			let result = await langFix(url, res, req);
+			if(result === false){
+				return false;
 			}
 		}
 

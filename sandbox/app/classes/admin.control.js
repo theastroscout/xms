@@ -129,7 +129,7 @@ let control = {
 				link: `/admin/pages/${item.lang}/${item.page._id}`,
 				name: item.page.name + ` (${item.page.position})`,
 				updateTime: updateTime,
-				fullURL: item.page.fullURL
+				fullURL: item.page.fullURL.replace("/home","") || "/"
 			};
 			if(Object.keys(item.pages).length){
 				data.subSwitch = '<div class="sub"><div class="i"></div></div>';
@@ -168,7 +168,7 @@ let control = {
 			name: page.name,
 			h1: page.h1 || false,
 			url: page.url,
-			fullURL: page.fullURL,
+			fullURL: page.fullURL.replace("/home","") || "/",
 			seo: {
 				title: page.seo.title || false,
 				description: page.seo.description || false,
@@ -177,7 +177,8 @@ let control = {
 			menu: (page.menu)?"selected":"",
 			default: (page.default)?"selected":"",
 			pageTypes: pageTypes.join(""),
-			content: page.content || false
+			content: page.content || false,
+			img: page.img || false
 		};
 
 		return output;
