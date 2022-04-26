@@ -1,6 +1,6 @@
 {
   "name": "@hqdaemon/xms",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight Multi Thread CMS powered with WebSockets, Node.js, MongoDB & Nginx.",
   "main": "index.js",
   "dependencies": {
