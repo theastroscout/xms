@@ -7,7 +7,6 @@ global.DEV = argv && argv[2] === "DEV";
 
 var confPath = (DEV)?"dev":"prod";
 global.conf = require(`../../conf/${confPath}`);
-conf.apps.smsaero.auth = "Basic " + Buffer.from(conf.apps.smsaero.email + ":" + conf.apps.smsaero.key).toString("base64");
 
 global.workDir = conf.sys.root+"/"+((DEV)?"sandbox":"prod");
 if(DEV){
