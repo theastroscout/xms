@@ -2,7 +2,7 @@ let markedLib = require("marked").setOptions({
 	breaks: true,
 	headerIds: false
 });
-var utils = {
+let utils = {
 	marked: (str) => {
 		if(typeof str !== "string" || !str.length){
 			return str;
@@ -110,7 +110,7 @@ var utils = {
 		});
 		return files;
 	},
-	strCut: (str, length=180, trail, dots="...") => {
+	strCut: (str, length=180, dots="...") => {
 		if(!str){
 			return false;
 		}
@@ -142,5 +142,125 @@ var utils = {
 		nums = arr.sort((a, b) => a - b);
 		return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
 	},
+	moveArray: (a, from, to) => {
+		let el = a.splice(from, 1)[0];
+		a.splice(to, 0, el);
+		return a;
+	}
 };
+
+/*
+
+Request
+
+*/
+
+global.request = (url, params, method="POST", auth=false) => {
+	return new Promise((resolve) => {
+		url = new URL(url);
+		const postData = JSON.stringify(params);
+
+		let options = {
+			hostname: url.hostname,
+			port: url.protocol==="https:"?443:80,
+			path: url.pathname,
+			method: method,
+			headers: {
+				"Content-Type": "application/json",
+				"Content-Length": Buffer.byteLength(postData)
+			}
+		};
+		if(auth){
+			options.headers.Authorization = auth;
+		}
+		if(method === "GET"){
+			let query = Object.entries(params).map(v => v.join("=")).join("&");
+			options.path += "?"+encodeURI(query);
+			delete options.headers["Content-Length"];
+		}
+
+		let driver = url.protocol==="https:"?https:http;
+		const req = driver.request(options, (res) => {
+			res.setEncoding("utf8");
+			let data = "";
+			res.on("data", (chunk) => {
+				data+=chunk;
+			});
+			res.on("end", () => {
+				resolve(data);
+			});
+		});
+
+		req.on("error", (e) => {
+			console.error(`problem with request: ${e.message}`);
+			console.log(url)
+			resolve(false);
+		});
+
+		if(method === "POST"){
+			req.write(postData);
+		}
+		req.end();
+	});
+};
+
+/*
+
+Object ID
+
+*/
+
+global.ObjectID = (id) => {
+	try {
+		id = new mongodb.ObjectID(id);
+	} catch (e){
+		id = false;
+	}
+	return id;
+}
+
+global.marked = utils.marked;
+
+global.translit = require("@hqdaemon/translit");
+
+global.jscompose = require("@hqdaemon/jscompose");
+global.minify = require("@hqdaemon/minify");
+global.hqDB = require("@hqdaemon/db");
+
+global.SVGSpriter = require("svg-sprite");
+global.sharp = require("sharp");
+
+global.nodemailer = require("nodemailer");
+global.geoip = require("geoip-lite");
+
+const {exec, execSync} = require("child_process");
+global.execSync = execSync;
+
+const {nanoid} = require("nanoid");
+global.nanoid = nanoid;
+
+global.fs = require("fs");
+global.md5 = require("md5");
+
+/*
+
+Time
+
+*/
+global.moment = require("moment-timezone");
+global.time = (time, locale="de", format=false, timeZone="Europe/Moscow") => {
+	time = moment.tz(time,timeZone);
+	let diff = Math.abs(time.diff(new Date())/1000/60/60/24);
+	time.locale(locale);
+	if(format === false){
+		format = "dddd, Do MMMM в H:mm";
+		time = diff > 9 ? time.format(format) : time.calendar();
+	} else {
+		time = time.format(format);
+	}
+	return time.charAt(0).toUpperCase() + time.slice(1);
+}
+
+global.useragent = require("express-useragent");
+
 module.exports = utils;

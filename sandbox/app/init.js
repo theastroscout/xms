@@ -4,36 +4,18 @@ const cluster = require("cluster");
 
 let argv = process.argv;
 global.DEV = argv && argv[2] === "DEV";
+
 var confPath = (DEV)?"dev":"prod";
 global.conf = require(`../../conf/${confPath}`);
+conf.apps.smsaero.auth = "Basic " + Buffer.from(conf.apps.smsaero.email + ":" + conf.apps.smsaero.key).toString("base64");
+
 global.workDir = conf.sys.root+"/"+((DEV)?"sandbox":"prod");
 if(DEV){
 	global.prodConf = require(`../../conf/prod`);
 }
 
-global.fs = require("fs");
-global.md5 = require("md5");
-global.moment = require("moment-timezone");
-global.useragent = require("express-useragent");
-
 
 global.utils = require("./utils");
-global.marked = utils.marked;
-
-global.translit = require("@hqdaemon/translit");
-
-global.jscompose = require("@hqdaemon/jscompose");
-global.minify = require("@hqdaemon/minify");
-global.hqDB = require("@hqdaemon/db");
-
-global.SVGSpriter = require("svg-sprite");
-global.sharp = require("sharp");
-
-global.nodemailer = require("nodemailer");
-global.geoip = require("geoip-lite");
-
-const {exec, execSync} = require("child_process");
-global.execSync = execSync;
 
 async function init(){
 	global.mongodb = await hqDB({type:"mongo"});
