@@ -81,16 +81,6 @@ var server = {
 		if(cookies.lang === undefined){
 			res.cookie("lang", pageLang, conf.cookie);
 			cookies.lang = pageLang;
-			/*
-			let lang = i18n.getLangFromHeader(req.headers["accept-language"]);
-			if(lang !== pageLang){
-				console.log("Prefix", i18n.getPrefix(lang));
-				console.log("URL", url);
-				let redirectURL = i18n.getPrefix(lang) + ((url === "/home")?"":url);
-				res.redirect(redirectURL);
-				return false;
-			}
-			*/
 		} else if(cookies.lang !== pageLang){
 			cookies.lang = pageLang;
 			res.cookie("lang", pageLang, conf.cookie);
@@ -103,24 +93,29 @@ var server = {
 
 		modules.request(req, cookies);
 		
-		if(url === "/"){
-			url = "/home";
-		} else {
-			let prefix = i18n.getPrefix(pageLang);
-			let reg = new RegExp("^"+prefix);
-			if(url.replace(reg,"") === ""){
-				url += "/home";
+		/*
+
+		Page
+
+		*/
+		let page = view.getTpl("/views/default");
+		let pageData = {
+			assets: {
+				css: "",
+				js: ""
 			}
+		};
+		let uiPostfix = DEV ? "" : "?" + conf.assets.ui;
+		for(i of conf.assets.web.css){
+			pageData.assets.css += `<link rel="stylesheet" type="text/css" href="${i+uiPostfix}" />`;
+		}
+		for(i of conf.assets.web.js){
+			pageData.assets.js += `<script src="${i+uiPostfix}"></script>`;
 		}
 
-		let page = await view.get(url, cookies);
-		if(page.state === false){
-			res.status(404);
-		} else if(page.redirect){
-			res.redirect(page.redirect);
-			return false;
-		}
-		res.send(page.layout);
+		page = view.parseValues(page, pageData);
+
+		res.send(page);
 	}
 };
 module.exports = server;
